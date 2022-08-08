@@ -5,6 +5,7 @@ import HomeHeader from "../Components/home_header";
 import Item from "../Assets/item.jpg";
 import Item2 from "../Assets/item2.jpg";
 import Item3 from "../Assets/item3.jpg";
+ 
 
 function HomePage() {
   return (
@@ -14,8 +15,8 @@ function HomePage() {
       </div>
       <div className="site-body-container">
         <div>
-          <HomeHeader/>
-         </div>
+          <HomeHeader />
+        </div>
         <div className="site-filter-wrapper clearfix">
           <center>
             <input
@@ -40,6 +41,7 @@ function HomePage() {
             }}
           >
             Just Arrived
+            
           </p>
           <hr style={{ marginBottom: "15px" }} />
 
@@ -70,7 +72,7 @@ function HomePage() {
           <Product
             pic={Item2}
             category="GARDENING and PLANTING"
-            item_name="Wooden Planter small"
+            item_name="Wooden Planter small "
             item_price="1500.00"
           />
           <Product
@@ -137,15 +139,17 @@ function Product(props) {
       />
       <div
         style={{
-          width: "190px",
+          width: "172px",
           margin: "auto",
-          marginTop: "3px",
+          paddingTop: "3px",
+          paddingBottom:"4px",
           marginBottom: "5px",
+          backgroundColor: "#e9ecef",
         }}
       >
         <p style={{ fontSize: "10px" }}>{props.category}</p>
         <p style={{ fontSize: "14px", fontWeight: "500" }}>{props.item_name}</p>
-        <p style={{ fontSize: "16px", fontWeight: "bold" }}>
+        <p style={{ fontSize: "15px", fontWeight: "500",marginTop:"5px" }}>
           Rs {props.item_price}{" "}
         </p>
       </div>

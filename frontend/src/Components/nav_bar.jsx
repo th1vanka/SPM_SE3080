@@ -11,7 +11,7 @@ function NavBar() {
           <div className="site-nav-links">HOME</div>
         </NavLink>
         <NavLink to="/item" className="site-nav-link">
-          <div className="site-nav-links">ITEM</div>
+          <div className="site-nav-links">PRODUCTS</div>
         </NavLink>
         <NavLink to="#" className="site-nav-link">
           <div className="site-nav-links">PAYMENT</div>
@@ -23,6 +23,7 @@ function NavBar() {
           <div className="site-nav-links">ABOUT US</div>
         </NavLink>
       </div>
+      
       {/* <div className="site-nav-profile">
         <div className="site-nav-profile-icon">
           <Profile />
