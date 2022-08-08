@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.clearfix {
+  overflow: auto;
+}
+.site-main-container {
+  width: 100%;
+}
+.site-body-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #feffff;
+}
+.site-filter-wrapper {
+  width: 50%;
+  height: 50px;
+  background-color: #ffffff;
+  margin: auto;
+  margin-top: -25px;
+  border: 1px solid #0d48a132;
+  border-radius: 5px 5px 0 0;
+}
+.site-filter-inputs{
+  width: 40%;
+  height: 28px;
+  margin-top: 10px;
+  padding-left: 10px;
+  padding-right: 5px;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid #0d48a132;
+}
+.site-filter-inputs.first{
+  margin-right: 30px;
+}
+.site-details-wrapper {
+  max-width: 80%;
+  /* background-color: rgb(242, 242, 242); */
+  margin: auto;
+  margin-top: 15px;
+}
+.product-container {
+  width: 25%;
+  float: left;
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.product-image {
+  cursor: pointer;
+}
+.product-image:hover {
+  box-shadow: 1px 3px 5px 2px #b1b1b1a9;
+ 
+}
+
+/* @media screen and (max-width: 1246px) {
+  .product-container {
+   width: 23.9%;
+  }
+}
+@media screen and (max-width: 1133px) {
+  .product-container {
+   width: 23.8%;
+  }
+}
+@media screen and (max-width: 1039px) {
+  .product-container {
+   width: 23.7%;
+  }
+}
+@media screen and (max-width: 960px) {
+  .product-container {
+   width: 28%;
+   margin: 15px;
+   
+  }
+} */
+
+.site-item-category-container{
+  width:100%;
+  height: 250px;
+  /* background-color: rgb(76, 76, 76); */
+  background-color:#0c4599;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+.site-item-category-wrapper{
+  width:75%;
+  margin: auto;
+  display: block;
+  
+}
+.site-item-category{
+  width:100%;
+  height:205px;
+  display: flex;
+  overflow-y: none;
+  overflow-x: scroll;
+    cursor: pointer
+}
+.site-item-category::-webkit-scrollbar {
+ height:10px;
+}
+.site-item-category::-webkit-scrollbar-track {
+  background: transparent; 
+}
+.site-item-category::-webkit-scrollbar-thumb {
+  background: #1976d2;
+  border-radius:5px;
+ 
+}

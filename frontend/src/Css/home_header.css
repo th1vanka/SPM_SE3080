@@ -1,0 +1,19 @@
+.site-body-header {
+  width: 100%;
+  height: 170px;
+  /* background-color: #0e4879; */
+  background-color:#0c4599
+}
+ 
+.site-body-header-icon-wrapper {
+  width: fit-content;
+  padding-top: 75px;
+  float: right;
+  margin-right: 40px;
+}
+.site-body-header-icon {
+  margin-right: 15px;
+  color: aliceblue;
+  z-index: 1;
+  cursor: pointer;
+}
