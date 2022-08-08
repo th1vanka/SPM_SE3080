@@ -13,8 +13,9 @@ function ItemPage() {
   const [active, setActive] = useState(true);
   const [active1, setActive1] = useState(false);
   const [active2, setActive2] = useState(false);
-  const[count,setCount]=useState(0)
+  const [status] = useState(true);
 
+  const[count,setCount]=useState(0)
   const disHandler = () => {
     setActive(true);
     setActive1(false);
@@ -104,14 +105,20 @@ function ItemPage() {
                 <div className="item-detail-question">
                   <p>Status</p>
                   <p>Stock</p>
-                  <p>Min Order Qty</p>
                   <p>Price FOB in USD</p>
+                  <p>Shipping Fee</p>
                 </div>
                 <div className="item-detail-answer">
-                  <p>Available</p>
+                  <p>
+                    {status ? (
+                      <p style={{ color: "green" }}>Available</p>
+                    ) : (
+                      <p style={{ color: "red" }}>Unavailable</p>
+                    )}
+                  </p>
                   <p>21 Items</p>
-                  <p>2 items</p>
-                  <p>20 USD</p>
+                  <p>$ 20</p>
+                  <p>$ 20</p>
                 </div>
               </div>
               <div className="item-cart-container">

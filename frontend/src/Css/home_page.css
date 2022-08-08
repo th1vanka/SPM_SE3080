@@ -102,7 +102,7 @@
     cursor: pointer
 }
 .site-item-category::-webkit-scrollbar {
- height:10px;
+ height:8px;
 }
 .site-item-category::-webkit-scrollbar-track {
   background: transparent; 

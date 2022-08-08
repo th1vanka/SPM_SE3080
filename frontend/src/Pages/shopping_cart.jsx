@@ -106,7 +106,7 @@ function ShoppingCart() {
             </div>
             <div className="shopping-cart-items-total-wrapper">
               <center>
-                <div>Summery</div>
+                <div style={{fontWeight:"500"}}>Summary</div>
               </center>
               <div className="shopping-cart-items-total-dis">
                 <div className="shopping-cart-items-total-dis-question">
