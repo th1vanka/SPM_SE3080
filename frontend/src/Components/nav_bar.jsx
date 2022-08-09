@@ -6,6 +6,7 @@ function NavBar() {
   return (
     <div className="site-nav-container">
       {/* <div className="site-nav-logo-wrapper"></div> */}
+      <div className="site-nav-logo-wrapper"></div>
       <div className="site-nav-links-wrapper">
         <NavLink to="/" className="site-nav-link">
           <div className="site-nav-links">HOME</div>
@@ -13,17 +14,10 @@ function NavBar() {
         <NavLink to="/item" className="site-nav-link">
           <div className="site-nav-links">PRODUCTS</div>
         </NavLink>
-        <NavLink to="#" className="site-nav-link">
-          <div className="site-nav-links">PAYMENT</div>
-        </NavLink>
-        <NavLink to="#" className="site-nav-link">
-          <div className="site-nav-links">CONTACT</div>
-        </NavLink>
-        <NavLink to="#" className="site-nav-link">
-          <div className="site-nav-links">ABOUT US</div>
-        </NavLink>
+         
       </div>
-      
+      <div className="site-nav-logo-wrapper"></div>
+
       {/* <div className="site-nav-profile">
         <div className="site-nav-profile-icon">
           <Profile />
