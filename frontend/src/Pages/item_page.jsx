@@ -15,7 +15,7 @@ function ItemPage() {
   const [active2, setActive2] = useState(false);
   const [status] = useState(true);
 
-  const[count,setCount]=useState(0)
+  const [count, setCount] = useState(0);
   const disHandler = () => {
     setActive(true);
     setActive1(false);
@@ -34,13 +34,12 @@ function ItemPage() {
   };
 
   const countAddHandler = () => {
-    setCount(count+1);
-  }
+    setCount(count + 1);
+  };
   const countRemoveHandler = () => {
     if (count === 0) {
       setCount(0);
-    }
-    else {
+    } else {
       setCount(count - 1);
     }
   };
@@ -156,10 +155,7 @@ function ItemPage() {
                     ADD TO
                   </p>
                   <ShoppingCartIcon
-                    style={{
-                      marginTop: "1px",
-                      color: "#0d47a1",
-                    }}
+                    className="cart-add-btn-icon"
                   />
                 </div>
               </div>
@@ -235,41 +231,14 @@ function ItemPage() {
                     date="2017-01-01"
                   />
                   <Review
-                    rate="2"
-                    name="Paryag Creation"
-                    review="Empty were the old houses, streets and shops. The windows were open, the stairs broken. Making it one very fine place for mice to run around, you can be sure!"
-                    date="2017-01-024"
-                  />
-                  <Review
                     rate="5"
                     name="Paryag Creation"
-                    review="you can be sure!"
-                    date="2017-04-01"
-                  />
-                  <Review
-                    rate="4"
-                    name="Paryag Creation"
                     review="Long ago in India there was an old deserted village. Empty were the old houses, streets and shops. The windows were open, the stairs broken. Making it one very fine place for mice to run around, you can be sure!"
                     date="2017-01-01"
                   />
-                  <Review
-                    rate="2"
-                    name="Paryag Creation"
-                    review="Empty were the old houses, streets and shops. The windows were open, the stairs broken. Making it one very fine place for mice to run around, you can be sure!"
-                    date="2017-01-024"
-                  />
-                  <Review
-                    rate="4"
-                    name="Paryag Creation"
-                    review="Long ago in India there was an old deserted village. Empty were the old houses, streets and shops. The windows were open, the stairs broken. Making it one very fine place for mice to run around, you can be sure!"
-                    date="2017-01-01"
-                  />
-                  <Review
-                    rate="2"
-                    name="Paryag Creation"
-                    review="Empty were the old houses, streets and shops. The windows were open, the stairs broken. Making it one very fine place for mice to run around, you can be sure!"
-                    date="2017-01-024"
-                  />
+                 
+
+                  <div className="client-review-component-container">hi</div>
                 </div>
               )}
             </div>

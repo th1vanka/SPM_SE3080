@@ -16,6 +16,7 @@ function HomeHeader() {
   const cartHandler = () => {
     navigate("/cart");
   };
+  
   return (
     <div className="site-body-header">
       <div className="site-body-header-details-wrapper">
@@ -34,7 +35,7 @@ function HomeHeader() {
             style={{
               paddingRight: "10px",
               fontSize: "13px",
-              marginTop: "3px",
+              marginTop: "5px",
             }}
           >
             Wish List
@@ -55,7 +56,7 @@ function HomeHeader() {
             style={{
               paddingRight: "10px",
               fontSize: "13px",
-              marginTop: "3px",
+              marginTop: "5px",
             }}
           >
             Payments
@@ -76,7 +77,7 @@ function HomeHeader() {
             style={{
               paddingRight: "10px",
               fontSize: "13px",
-              marginTop: "3px",
+              marginTop: "5px",
             }}
           >
             Orders
@@ -86,14 +87,15 @@ function HomeHeader() {
           <div
             style={{
               paddingRight: "10px",
-              marginTop: "3px",
+              marginTop: "2px",
             }}
           >
             <Flag
-              code={"AO"}
+              code={"sl"}
               fallback={<span>Unknown Country</span>}
               height="14"
-            />
+            />{" "}
+            <span style={{ fontSize: "13px" }}>Sri Lanka</span>
           </div>
         </div>
       </div>
@@ -105,9 +107,9 @@ function HomeHeader() {
           color="error"
         >
           <NotificationsIcon
-            style={{ color: "white" }}
+            style={{ color: "black" }}
             titleAccess="Notifications"
-            fontSize="small"
+            // fontSize="small"
           />
         </Badge>
         <Badge
@@ -115,19 +117,19 @@ function HomeHeader() {
           style={{ color: "white" }}
           className="site-body-header-icon"
           color="error"
+          onClick={cartHandler}
         >
           <ShoppingBasketIcon
-            style={{ color: "white", marginRight: "3px" }}
+            style={{ color: "black", marginRight: "3px" }}
             titleAccess="Shopping Cart"
-            onClick={cartHandler}
-            fontSize="small"
+            // fontSize="small"
           />
         </Badge>
         <Badge className="site-body-header-icon">
           <PersonIcon
-            style={{ color: "white" }}
+            style={{ color: "black" }}
             titleAccess="My Profile"
-            fontSize="small"
+            // fontSize="mediam"
           />
         </Badge>
       </div>

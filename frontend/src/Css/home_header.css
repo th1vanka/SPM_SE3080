@@ -1,17 +1,17 @@
 .site-body-header {
   width: 100%;
-  height: 170px;
-  /* background-color: #0e4879; */
-  background-color:#0c4599
+  height: 160px;
+  background-color: #f4f4f9;
+  /* background-color:#0c4599 */
 }
  .site-body-header-details-wrapper {
   width: fit-content;
-  padding-top: 67px;
+  padding-top: 70px;
   float: left;
   display: flex;
   margin-left: 30px;
   gap:10px;
-  color:white
+  color:rgb(0, 0, 0)
 }
 .site-body-header-icon-wrapper {
   width: fit-content;
@@ -21,7 +21,7 @@
 }
 .site-body-header-icon {
   margin-right: 15px;
-  color: aliceblue;
+  color: rgb(0, 0, 0);
   z-index: 1;
   cursor: pointer;
 }

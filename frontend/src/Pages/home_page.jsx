@@ -6,7 +6,6 @@ import Item from "../Assets/item.jpg";
 import Item2 from "../Assets/item2.jpg";
 import Item3 from "../Assets/item3.jpg";
  
-
 function HomePage() {
   return (
     <div className="site-main-container">
@@ -32,18 +31,18 @@ function HomePage() {
           </center>
         </div>
         <div className="site-details-wrapper clearfix">
-          <p
-            style={{
-              fontSize: "18px",
-              fontWeight: "500",
-              marginBottom: "5px",
-              marginTop: "10px",
-            }}
-          >
-            Just Arrived
-            
-          </p>
-          <hr style={{ marginBottom: "15px" }} />
+          <div className="site-details-cat-topic">
+            <p
+              style={{
+                fontSize: "18px",
+                fontWeight: "700",
+                marginBottom: "5px",
+              }}
+            >
+              Just Arrived
+            </p>
+            <hr style={{}} />
+          </div>
 
           <Product
             pic={Item}
@@ -118,8 +117,68 @@ function HomePage() {
               <Category name="Masks" />
               <Category name="Bathik" />
               <Category name="Foods" />
+              <Category name="Handicrafts" />
+              <Category name="Spices" />
+              <Category name="Cloths" />
+              <Category name="Masks" />
+              <Category name="Bathik" />
+              <Category name="Foods" />
+              <Category name="Bathik" />
+              <Category name="Foods" />
+              <Category name="Handicrafts" />
+              <Category name="Spices" />
+              <Category name="Cloths" />
+              <Category name="Masks" />
+              <Category name="Bathik" />
+              <Category name="Foods" />
+              <Category name="Bathik" />
+              <Category name="Foods" />
+              <Category name="Handicrafts" />
+              <Category name="Spices" />
+              <Category name="Cloths" />
+              <Category name="Masks" />
+              <Category name="Bathik" />
+              <Category name="Foods" />
             </div>
           </div>
+        </div>
+        <div className="site-details-wrapper clearfix">
+          <div className="site-details-cat-topic">
+            <p
+              style={{
+                fontSize: "18px",
+                fontWeight: "700",
+                marginBottom: "5px",
+              }}
+            >
+              Most Popular
+            </p>
+            <hr style={{}} />
+          </div>
+          <Product
+            pic={Item2}
+            category="GARDENING and PLANTING"
+            item_name="Wooden Planter small "
+            item_price="1500.00"
+          />
+          <Product
+            pic={Item}
+            category="GARDENING and PLANTING"
+            item_name="Wooden Planter small"
+            item_price="1500.00"
+          />
+          <Product
+            pic={Item2}
+            category="GARDENING and PLANTING"
+            item_name="Wooden Planter small"
+            item_price="1500.00"
+          />
+          <Product
+            pic={Item3}
+            category="GARDENING and PLANTING"
+            item_name="Wooden Planter small"
+            item_price="1500.00"
+          />
         </div>
       </div>
     </div>
@@ -142,14 +201,14 @@ function Product(props) {
           width: "172px",
           margin: "auto",
           paddingTop: "3px",
-          paddingBottom:"4px",
+          paddingBottom: "4px",
           marginBottom: "5px",
-          backgroundColor: "#e9ecef",
+          backgroundColor: "#ddddfa",
         }}
       >
         <p style={{ fontSize: "10px" }}>{props.category}</p>
         <p style={{ fontSize: "14px", fontWeight: "500" }}>{props.item_name}</p>
-        <p style={{ fontSize: "15px", fontWeight: "500",marginTop:"5px" }}>
+        <p style={{ fontSize: "15px", fontWeight: "500", marginTop: "5px" }}>
           Rs {props.item_price}{" "}
         </p>
       </div>
@@ -164,8 +223,8 @@ function Category(props) {
         src={Item}
         alt="Category"
         width="200px"
-        height="160px"
-        style={{ margin: "15px" }}
+        height="130px"
+        style={{ margin: "15px",borderRadius:"8px" }}
       />
       <div
         style={{
@@ -175,10 +234,10 @@ function Category(props) {
           fontSize: "19px",
           color: "white",
           fontWeight: "600",
-          marginTop: "-125px",
+          marginTop: "-112px",
           marginLeft: "15px",
           position: "relative",
-          opacity: 0.8,
+          opacity: 0.7,
           paddingTop: "12px",
         }}
       >
