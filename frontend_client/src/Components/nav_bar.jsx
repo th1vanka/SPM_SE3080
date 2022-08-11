@@ -1,6 +1,6 @@
 import React from 'react'
 import "../Css/nav_bar.css"
-import { NavLink } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 function NavBar() {
   return (
@@ -8,12 +8,12 @@ function NavBar() {
       {/* <div className="site-nav-logo-wrapper"></div> */}
       <div className="site-nav-logo-wrapper"></div>
       <div className="site-nav-links-wrapper">
-        <NavLink to="/" className="site-nav-link">
+        <Link to="/" className="site-nav-link">
           <div className="site-nav-links">HOME</div>
-        </NavLink>
-        <NavLink to="/item" className="site-nav-link">
+        </Link>
+        <Link to="/item" className="site-nav-link">
           <div className="site-nav-links">PRODUCTS</div>
-        </NavLink>
+        </Link>
          
       </div>
       <div className="site-nav-logo-wrapper"></div>

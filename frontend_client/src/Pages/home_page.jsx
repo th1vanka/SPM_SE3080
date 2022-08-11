@@ -1,11 +1,11 @@
 import React from "react";
-import NavBar from "../Components/nav_bar";
 import "../Css/home_page.css";
+import NavBar from "../Components/nav_bar";
 import HomeHeader from "../Components/home_header";
 import Item from "../Assets/item.jpg";
 import Item2 from "../Assets/item2.jpg";
 import Item3 from "../Assets/item3.jpg";
- 
+ import Rating from "@mui/material/Rating";
 function HomePage() {
   return (
     <div className="site-main-container">
@@ -49,58 +49,80 @@ function HomePage() {
             category="GARDENING and PLANTING"
             item_name="Wooden Planter small"
             item_price="1500.00"
+            rate="4"
           />
           <Product
             pic={Item}
             category="GARDENING and PLANTING"
             item_name="Wooden Planter small"
             item_price="1500.00"
+            rate="4"
           />
           <Product
             pic={Item2}
             category="GARDENING and PLANTING"
             item_name="Wooden Planter small"
             item_price="1500.00"
+            rate="4"
           />
           <Product
             pic={Item3}
             category="GARDENING and PLANTING"
             item_name="Wooden Planter small"
             item_price="1500.00"
+            rate="3"
           />
           <Product
             pic={Item2}
             category="GARDENING and PLANTING"
             item_name="Wooden Planter small "
             item_price="1500.00"
+            rate="4"
           />
           <Product
             pic={Item}
             category="GARDENING and PLANTING"
             item_name="Wooden Planter small"
             item_price="1500.00"
+            rate="4"
           />
           <Product
             pic={Item2}
             category="GARDENING and PLANTING"
             item_name="Wooden Planter small"
             item_price="1500.00"
+            rate="2"
           />
           <Product
             pic={Item3}
             category="GARDENING and PLANTING"
             item_name="Wooden Planter small"
             item_price="1500.00"
+            rate="3"
+          />
+          <Product
+            pic={Item2}
+            category="GARDENING and PLANTING"
+            item_name="Wooden Planter small"
+            item_price="1500.00"
+            rate="1"
+          />
+          <Product
+            pic={Item3}
+            category="GARDENING and PLANTING"
+            item_name="Wooden Planter small"
+            item_price="1500.00"
+            rate="5"
           />
         </div>
         <div className="site-item-category-container">
           <div className="site-item-category-wrapper">
-            <div style={{ paddingTop: "12px" }}>
-              <hr style={{ float: "left", width: "35%", marginTop: "12px" }} />
+            <div style={{ paddingTop: "40px" }}>
+              <hr style={{ float: "left", width: "38%", marginTop: "12px" }} />
               <p
                 style={{
                   float: "left",
-                  marginLeft: "22px",
+                  marginLeft: "18px",
                   fontSize: "19px",
                   color: "white",
                   fontWeight: "600",
@@ -108,7 +130,7 @@ function HomePage() {
               >
                 {""}BROWSE OUR CATEGORIES
               </p>
-              <hr style={{ float: "right", width: "35%", marginTop: "12px" }} />
+              <hr style={{ float: "right", width: "38%", marginTop: "12px" }} />
             </div>
             <div className="site-item-category clearfix">
               <Category name="Handicrafts" />
@@ -153,31 +175,42 @@ function HomePage() {
             >
               Most Popular
             </p>
-            <hr style={{}} />
+            <hr />
           </div>
           <Product
             pic={Item2}
             category="GARDENING and PLANTING"
             item_name="Wooden Planter small "
             item_price="1500.00"
+            rate="4"
           />
           <Product
             pic={Item}
             category="GARDENING and PLANTING"
             item_name="Wooden Planter small"
             item_price="1500.00"
+            rate="4"
           />
           <Product
             pic={Item2}
             category="GARDENING and PLANTING"
             item_name="Wooden Planter small"
             item_price="1500.00"
+            rate="4"
           />
           <Product
             pic={Item3}
             category="GARDENING and PLANTING"
             item_name="Wooden Planter small"
             item_price="1500.00"
+            rate="4"
+          />
+          <Product
+            pic={Item3}
+            category="GARDENING and PLANTING"
+            item_name="Wooden Planter small"
+            item_price="1500.00"
+            rate="4"
           />
         </div>
       </div>
@@ -189,28 +222,37 @@ export default HomePage;
 function Product(props) {
   return (
     <div className="product-container">
-      <img
-        src={props.pic}
-        alt="Product"
-        width="170px"
-        height="110px"
-        className="product-image"
-      />
-      <div
-        style={{
-          width: "172px",
-          margin: "auto",
-          paddingTop: "3px",
-          paddingBottom: "4px",
-          marginBottom: "5px",
-          backgroundColor: "#ddddfa",
-        }}
-      >
-        <p style={{ fontSize: "10px" }}>{props.category}</p>
-        <p style={{ fontSize: "14px", fontWeight: "500" }}>{props.item_name}</p>
-        <p style={{ fontSize: "15px", fontWeight: "500", marginTop: "5px" }}>
-          Rs {props.item_price}{" "}
-        </p>
+      <div className="product-wrapper">
+        <img src={props.pic} alt="Product" className="product-image" />
+        <div className="product-details-wrapper">
+          <p style={{ fontSize: "10px", marginLeft: "5px" }}>
+            {props.category}
+          </p>
+          <p style={{ fontSize: "14px", fontWeight: "500", marginLeft: "5px" }}>
+            {props.item_name}
+          </p>
+          <div style={{ display: "flex", width: "100%" }}>
+            <p
+              style={{
+                width: "50%",
+                fontSize: "15px",
+                fontWeight: "500",
+                marginTop: "5px",
+                marginLeft: "5px",
+                color: "orange",
+              }}
+            >
+              Rs {props.item_price}{" "}
+            </p>
+            <Rating
+              name="half-rating"
+              defaultValue={props.rate}
+              readOnly
+              size="small"
+              style={{ marginTop: "6px" }}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
