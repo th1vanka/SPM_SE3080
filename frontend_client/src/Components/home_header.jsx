@@ -4,9 +4,10 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import PersonIcon from "@mui/icons-material/Person";
 import Badge from "@mui/material/Badge";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import AssignmentTurnedInOutlinedIcon from "@mui/icons-material/AssignmentTurnedInOutlined";
 import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
 import ShoppingBasketOutlinedIcon from "@mui/icons-material/ShoppingBasketOutlined";
+ 
 import { useNavigate } from "react-router";
 import Flag from "react-world-flags";
 
@@ -16,6 +17,12 @@ function HomeHeader() {
   const cartHandler = () => {
     navigate("/cart");
   };
+    const reviewedHandler = () => {
+      navigate("/review");
+  };
+  const orderdHandler = () => {
+    navigate("/order");
+  }
   
   return (
     <div className="site-body-header">
@@ -23,11 +30,12 @@ function HomeHeader() {
         <div
           style={{
             display: "flex",
-            borderRight: "2px solid white",
+            borderRight: "2px solid black",
             cursor: "pointer",
           }}
+          onClick={orderdHandler}
         >
-          <FavoriteBorderIcon
+          <ShoppingBasketOutlinedIcon
             fontSize="small"
             style={{ marginTop: "2px", marginRight: "4px" }}
           />
@@ -38,13 +46,13 @@ function HomeHeader() {
               marginTop: "5px",
             }}
           >
-            Wish List
+            Orders
           </div>
         </div>
         <div
           style={{
             display: "flex",
-            borderRight: "1px solid white",
+            borderRight: "1px solid black",
             cursor: "pointer",
           }}
         >
@@ -65,11 +73,12 @@ function HomeHeader() {
         <div
           style={{
             display: "flex",
-            borderRight: "2px solid white",
+            borderRight: "1px solid black",
             cursor: "pointer",
           }}
+          onClick={reviewedHandler}
         >
-          <ShoppingBasketOutlinedIcon
+          <AssignmentTurnedInOutlinedIcon
             fontSize="small"
             style={{ marginTop: "2px", marginRight: "4px" }}
           />
@@ -80,7 +89,7 @@ function HomeHeader() {
               marginTop: "5px",
             }}
           >
-            Orders
+            To be Reviewed
           </div>
         </div>
         <div style={{ display: "flex", cursor: "pointer" }}>

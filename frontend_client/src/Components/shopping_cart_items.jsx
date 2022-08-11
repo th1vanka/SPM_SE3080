@@ -31,9 +31,10 @@ function ShoppingCartItems(props) {
             fontWeight: "500",
             marginTop: "20px",
             marginLeft: "5px",
+            color: "orange",
           }}
         >
-          Rs{props.price}
+          Rs {props.price} x {props.qty}
         </p>
       </div>
       <div className="shopping-cart-item-action">
@@ -41,7 +42,9 @@ function ShoppingCartItems(props) {
           fontSize="small"
           className="shopping-cart-item-action-btn"
         />
-        <p style={{ fontSize: "13px", marginTop: "52px" }}>{props.qty}</p>
+        <p style={{ fontSize: "14px", marginTop: "52px", color: "#A47148" }}>
+          Rs {props.price * props.qty}.00
+        </p>
       </div>
     </div>
   );
