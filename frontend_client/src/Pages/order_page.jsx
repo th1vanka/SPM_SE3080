@@ -27,12 +27,12 @@ function Order() {
                 <input type="date" className="order-filter-inputs" />
               </div>
               <div className="client-orders-wrapper">
-                <OrderDetail delete={true} review={false} />
-                <OrderDetail delete={true} review={false} />
-                <OrderDetail delete={true} review={false} />
-                <OrderDetail delete={true} review={false} />
-                <OrderDetail delete={true} review={false} />
-                <OrderDetail delete={true} review={false} />
+                <OrderDetail delete={true} review={false} status="Finished" />
+                <OrderDetail delete={true} review={false} status="Processing" />
+                <OrderDetail delete={true} review={false} status="Finished" />
+                <OrderDetail delete={true} review={false} status="Processing" />
+                <OrderDetail delete={true} review={false} status="Finished" />
+                <OrderDetail delete={true} review={false} status="Finished" />
               </div>
             </div>
           </div>

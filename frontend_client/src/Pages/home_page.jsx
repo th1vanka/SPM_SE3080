@@ -5,7 +5,8 @@ import HomeHeader from "../Components/home_header";
 import Item from "../Assets/item.jpg";
 import Item2 from "../Assets/item2.jpg";
 import Item3 from "../Assets/item3.jpg";
- import Rating from "@mui/material/Rating";
+import Product from "../Components/product";
+ 
 function HomePage() {
   return (
     <div className="site-main-container">
@@ -126,6 +127,7 @@ function HomePage() {
                   fontSize: "19px",
                   color: "white",
                   fontWeight: "600",
+                  
                 }}
               >
                 {""}BROWSE OUR CATEGORIES
@@ -218,45 +220,6 @@ function HomePage() {
   );
 }
 export default HomePage;
-
-function Product(props) {
-  return (
-    <div className="product-container">
-      <div className="product-wrapper">
-        <img src={props.pic} alt="Product" className="product-image" />
-        <div className="product-details-wrapper">
-          <p style={{ fontSize: "10px", marginLeft: "5px" }}>
-            {props.category}
-          </p>
-          <p style={{ fontSize: "14px", fontWeight: "500", marginLeft: "5px" }}>
-            {props.item_name}
-          </p>
-          <div style={{ display: "flex", width: "100%" }}>
-            <p
-              style={{
-                width: "50%",
-                fontSize: "15px",
-                fontWeight: "500",
-                marginTop: "5px",
-                marginLeft: "5px",
-                color: "orange",
-              }}
-            >
-              Rs {props.item_price}{" "}
-            </p>
-            <Rating
-              name="half-rating"
-              defaultValue={props.rate}
-              readOnly
-              size="small"
-              style={{ marginTop: "6px" }}
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function Category(props) {
   return (

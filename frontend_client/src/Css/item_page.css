@@ -86,17 +86,17 @@
   display: flex;
   justify-content: center;
   border: 1px solid #d9b79b;
-  background-color: #ffedd8;
+  background-color: #fbb86a;
   margin-top: 3px;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 .cart-add-btn-icon {
   margin-top: 1px;
 }
 
 .item-cart-add-btn:hover {
-  background-color: #a47148;
+  background-color: #f89c33;
   color: white;
 }
 

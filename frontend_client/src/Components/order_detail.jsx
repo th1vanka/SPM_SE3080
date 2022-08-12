@@ -25,7 +25,7 @@ function OrderDetail(props) {
               >
                 CHFRPU Official Store
               </p>
-              <p style={{ marginLeft: "20%" }}>Processing</p>
+              <p style={{ marginLeft: "20%",color:"green" }}>{props.status}</p>
             </div>
             <div className="order-detail-header-orddetails">
               <p> Order Date : 2022.05.27</p> <p>Order ID : 102365489</p>

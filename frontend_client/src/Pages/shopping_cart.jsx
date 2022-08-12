@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../Css/shopping_cart.css";
 import NavBar from "../Components/nav_bar";
 import HomeHeader from "../Components/home_header";
@@ -7,8 +7,10 @@ import EditIcon from "@mui/icons-material/Edit";
 import Visa from "../Assets/visa.png"
 import Master from "../Assets/master.png";
 import Paypal from "../Assets/paypal.png";
+import CleaningServicesIcon from "@mui/icons-material/CleaningServices";
   
 function ShoppingCart() {
+  const [checked, setChecked] = useState();
   return (
     <div className="site-main-container">
       <div>
@@ -25,79 +27,31 @@ function ShoppingCart() {
                 <h3 style={{ float: "left", margin: "10px" }}>
                   Shopping Cart(10)
                 </h3>
-                <button className="cart-clean-btn">Clean</button>
+                <button className="cart-clean-btn">
+                  {" "}
+                  Clean <CleaningServicesIcon fontSize="small"/>
+                </button>
               </div>
               <ShoppingCartItems
                 name="Wooden Planter small"
                 category="gardening and planting"
                 qty="4"
                 price="200.00"
+                setChecked={setChecked}
               />
               <ShoppingCartItems
                 name="Wooden Planter small"
                 category="gardening and planting"
                 qty="1"
                 price="1000.00"
+                setChecked={setChecked}
               />
               <ShoppingCartItems
                 name="Wooden Planter small"
                 category="gardening and planting"
                 qty="2"
                 price="500.00"
-              />
-              <ShoppingCartItems
-                name="Wooden Planter small"
-                category="gardening and planting"
-                qty="5"
-                price="2500.00"
-              />
-              <ShoppingCartItems
-                name="Wooden Planter small"
-                category="gardening and planting"
-                qty="3"
-                price="1500.00"
-              />
-              <ShoppingCartItems
-                name="Wooden Planter small"
-                category="gardening and planting"
-                qty="1"
-                price="500.00"
-              />
-              <ShoppingCartItems
-                name="Wooden Planter small"
-                category="gardening and planting"
-                qty="5"
-                price="2500.00"
-              />
-              <ShoppingCartItems
-                name="Wooden Planter small"
-                category="gardening and planting"
-                qty="3"
-                price="1500.00"
-              />
-              <ShoppingCartItems
-                name="Wooden Planter small"
-                category="gardening and planting"
-                qty="1"
-                price="500.00"
-              />
-              <ShoppingCartItems
-                name="Wooden Planter small"
-                category="gardening and planting"
-                qty="5"
-                price="2500.00"
-              />
-              <ShoppingCartItems
-                name="Wooden Planter small"
-                category="gardening and planting"
-                qty="3"
-                price="1500.00"
-              />
-              <ShoppingCartItems
-                name="Wooden Planter small"
-                category="gardening and planting"
-                qty="1"
-                price="500.00"
+                setChecked={setChecked}
               />
             </div>
             <div className="shopping-cart-items-total-wrapper">
