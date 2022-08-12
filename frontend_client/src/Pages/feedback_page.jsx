@@ -26,12 +26,36 @@ function FeedbackPage() {
                 <input type="date" className="order-filter-inputs" />
               </div>
               <div className="client-orders-wrapper">
-                <OrderDetail delete={false} review={true} />
-                <OrderDetail delete={false} review={true} />
-                <OrderDetail delete={false} review={true} />
-                <OrderDetail delete={false} review={true} />
-                <OrderDetail delete={false} review={true} />
-                <OrderDetail delete={false} review={true} />
+                <OrderDetail
+                  delete={false}
+                  review={true}
+                  status="To Be Review"
+                />
+                <OrderDetail
+                  delete={false}
+                  review={true}
+                  status="To Be Review"
+                />
+                <OrderDetail
+                  delete={false}
+                  review={true}
+                  status="To Be Review"
+                />
+                <OrderDetail
+                  delete={false}
+                  review={true}
+                  status="To Be Review"
+                />
+                <OrderDetail
+                  delete={false}
+                  review={true}
+                  status="To Be Review"
+                />
+                <OrderDetail
+                  delete={false}
+                  review={true}
+                  status="To Be Review"
+                />
               </div>
             </div>
           </div>

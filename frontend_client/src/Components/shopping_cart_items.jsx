@@ -4,9 +4,13 @@ import Item from "../Assets/item.jpg";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 function ShoppingCartItems(props) {
+
+  props.setChecked(true);
+
   return (
     <div className="shopping-cart-item-container">
       <div className="shopping-cart-item-image clearfix">
+        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" style={{cursor:"pointer",backgroundColor:"orange"}} />
         <center>
           <img
             src={Item}
@@ -14,8 +18,10 @@ function ShoppingCartItems(props) {
             style={{
               width: "110px",
               height: "70px",
-              marginTop: "5px",
+              marginTop: "10px",
               borderRadius: "5px",
+              marginLeft:"20px"
+
             }}
           />
         </center>
@@ -42,7 +48,7 @@ function ShoppingCartItems(props) {
           fontSize="small"
           className="shopping-cart-item-action-btn"
         />
-        <p style={{ fontSize: "14px", marginTop: "52px", color: "#A47148" }}>
+        <p style={{ fontSize: "16px", marginTop: "52px", color: "#A47148" }}>
           Rs {props.price * props.qty}.00
         </p>
       </div>

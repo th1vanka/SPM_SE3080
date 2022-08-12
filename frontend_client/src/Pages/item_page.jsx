@@ -69,7 +69,7 @@ function ItemPage() {
           </center>
         </div> */}
         <div className="site-details-wrapper clearfix">
-          <div style={{ display: "flex", width: "100%",marginTop:"20px" }}>
+          <div style={{ display: "flex", width: "100%", marginTop: "20px" }}>
             <div className="items-category-container">
               <div className="items-category">
                 <div
@@ -90,37 +90,12 @@ function ItemPage() {
                 <div className="list-category-items">
                   <ListIcon fontSize="small" />
                   &nbsp;
-                  <p style={{ fontSize: "13px" }}>Women's Fashion</p>
+                  <p style={{ fontSize: "13px" }}>Spices</p>
                 </div>
                 <div className="list-category-items">
                   <ListIcon fontSize="small" />
                   &nbsp;
-                  <p style={{ fontSize: "13px" }}>Jewelry & Watches</p>
-                </div>
-                <div className="list-category-items">
-                  <ListIcon fontSize="small" />
-                  &nbsp;
-                  <p style={{ fontSize: "13px" }}>Jewelry & Watches</p>
-                </div>
-                <div className="list-category-items">
-                  <ListIcon fontSize="small" />
-                  &nbsp;
-                  <p style={{ fontSize: "13px" }}>Jewelry & Watches</p>
-                </div>
-                <div className="list-category-items">
-                  <ListIcon fontSize="small" />
-                  &nbsp;
-                  <p style={{ fontSize: "13px" }}>Jewelry & Watches</p>
-                </div>
-                <div className="list-category-items">
-                  <ListIcon fontSize="small" />
-                  &nbsp;
-                  <p style={{ fontSize: "13px" }}>Jewelry & Watches</p>
-                </div>
-                <div className="list-category-items">
-                  <ListIcon fontSize="small" />
-                  &nbsp;
-                  <p style={{ fontSize: "13px" }}>Jewelry & Watches</p>
+                  <p style={{ fontSize: "13px" }}>Bags & Shoes</p>
                 </div>
                 <div className="list-category-items">
                   <ListIcon fontSize="small" />
