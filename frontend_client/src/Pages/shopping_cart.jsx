@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../Css/shopping_cart.css";
 import NavBar from "../Components/nav_bar";
 import HomeHeader from "../Components/home_header";
@@ -8,9 +8,40 @@ import Visa from "../Assets/visa.png"
 import Master from "../Assets/master.png";
 import Paypal from "../Assets/paypal.png";
 import CleaningServicesIcon from "@mui/icons-material/CleaningServices";
-  
+import Footter from "../Components/footter";
+
+const details = [
+  {
+    name: "Wooden Planter small",
+  },
+  {
+    name: "pot",
+  },
+  {
+    name: "sand",
+  },
+];  
 function ShoppingCart() {
-  const [checked, setChecked] = useState();
+  const [name, setName] = useState();
+
+  const [data, setData] = useState([])
+  
+  // useEffect(() => {
+  //   setData(...data,name)
+  // },[])
+  
+  const checkHandler = (e) => {
+    const names=e.target.name
+    let tempData = details.map((detail) =>
+      detail.name === names ? { ...detail, checked: names } : detail
+    );
+    setName(tempData)
+  };
+
+  const proceedHandler = () => {
+    console.log(name);
+  }
+
   return (
     <div className="site-main-container">
       <div>
@@ -29,30 +60,19 @@ function ShoppingCart() {
                 </h3>
                 <button className="cart-clean-btn">
                   {" "}
-                  Clean <CleaningServicesIcon fontSize="small"/>
+                  Clean <CleaningServicesIcon fontSize="small" />
                 </button>
               </div>
-              <ShoppingCartItems
-                name="Wooden Planter small"
-                category="gardening and planting"
-                qty="4"
-                price="200.00"
-                setChecked={setChecked}
-              />
-              <ShoppingCartItems
-                name="Wooden Planter small"
-                category="gardening and planting"
-                qty="1"
-                price="1000.00"
-                setChecked={setChecked}
-              />
-              <ShoppingCartItems
-                name="Wooden Planter small"
-                category="gardening and planting"
-                qty="2"
-                price="500.00"
-                setChecked={setChecked}
-              />
+
+              {details.map((detail) => (
+                <ShoppingCartItems
+                  name={detail.name}
+                  category="gardening and planting"
+                  qty="4"
+                  price="200.00"
+                  checkHandler={checkHandler}
+                />
+              ))}
             </div>
             <div className="shopping-cart-items-total-wrapper">
               <center>
@@ -82,7 +102,12 @@ function ShoppingCart() {
               </div>
               <div className="shopping-cart-proceed-btn-wrapper">
                 <center>
-                  <button className="shopping-cart-proceed-btn">Proceed</button>
+                  <button
+                    className="shopping-cart-proceed-btn"
+                    onClick={proceedHandler}
+                  >
+                    Proceed
+                  </button>
                 </center>
               </div>
 
@@ -123,6 +148,7 @@ function ShoppingCart() {
             </div>
           </div>
         </div>
+        <Footter />
       </div>
     </div>
   );

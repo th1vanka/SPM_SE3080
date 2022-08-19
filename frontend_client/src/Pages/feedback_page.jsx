@@ -3,6 +3,7 @@ import NavBar from "../Components/nav_bar";
 import HomeHeader from "../Components/home_header";
 import OrderSideNav from "../Components/order_details_side_nav";
 import OrderDetail from "../Components/order_detail";
+import Footter from "../Components/footter";
 
 function FeedbackPage() {
   return (
@@ -62,6 +63,7 @@ function FeedbackPage() {
 
           {/* body end */}
         </div>
+        <Footter/>
       </div>
     </div>
   );

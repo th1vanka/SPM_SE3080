@@ -5,12 +5,20 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 
 function ShoppingCartItems(props) {
 
-  props.setChecked(true);
+  // const checkHandler = (e) => {
+  //    props.setName(e.target.name)
+  // }
 
   return (
     <div className="shopping-cart-item-container">
       <div className="shopping-cart-item-image clearfix">
-        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" style={{cursor:"pointer",backgroundColor:"orange"}} />
+        <input
+          type="checkbox"
+          id="vehicle1"
+          name={props.name}
+          style={{ cursor: "pointer", backgroundColor: "orange" }}
+          onChange={props.checkHandler}
+        />
         <center>
           <img
             src={Item}
@@ -20,8 +28,7 @@ function ShoppingCartItems(props) {
               height: "70px",
               marginTop: "10px",
               borderRadius: "5px",
-              marginLeft:"20px"
-
+              marginLeft: "20px",
             }}
           />
         </center>
