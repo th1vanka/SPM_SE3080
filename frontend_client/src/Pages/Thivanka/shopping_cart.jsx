@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import "../Css/shopping_cart.css";
-import NavBar from "../Components/nav_bar";
-import HomeHeader from "../Components/home_header";
-import ShoppingCartItems from "../Components/shopping_cart_items";
+import "../../Css/Thivanka/shopping_cart.css";
+import NavBar from "../../Components/Thivanka/nav_bar";
+import HomeHeader from "../../Components/Thivanka/home_header";
+import ShoppingCartItems from "../../Components/Thivanka/shopping_cart_items";
 import EditIcon from "@mui/icons-material/Edit";
-import Visa from "../Assets/visa.png"
-import Master from "../Assets/master.png";
-import Paypal from "../Assets/paypal.png";
+import Visa from "../../Assets/visa.png";
+import Master from "../../Assets/master.png";
+import Paypal from "../../Assets/paypal.png";
 import CleaningServicesIcon from "@mui/icons-material/CleaningServices";
-import Footter from "../Components/footter";
+import Footter from "../../Components/Thivanka/footter";
 
 const details = [
   {

@@ -1,5 +1,5 @@
 import React from 'react'
-import "../Css/review.css";
+import "../../Css/Thivanka/review.css";
 import Rating from "@mui/material/Rating";
 
 function Review(props) {

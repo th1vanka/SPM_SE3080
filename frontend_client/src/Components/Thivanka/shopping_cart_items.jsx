@@ -1,6 +1,6 @@
 import React from "react";
-import "../Css/shopping_cart.css";
-import Item from "../Assets/item.jpg";
+import "../../Css/Thivanka/shopping_cart.css";
+import Item from "../../Assets/item.jpg";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 function ShoppingCartItems(props) {

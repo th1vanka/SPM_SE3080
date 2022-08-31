@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import "../Css/item_page.css";
-import NavBar from "../Components/nav_bar";
-import Item from "../Assets/item.jpg";
+import "../../Css/Thivanka/item_page.css";
+import NavBar from "../../Components/Thivanka/nav_bar";
+import Item from "../../Assets/item.jpg";
 import Rating from "@mui/material/Rating";
-import Review from "../Components/review";
-import HomeHeader from "../Components/home_header";
+import Review from "../../Components/Thivanka/review";
+import HomeHeader from "../../Components/Thivanka/home_header";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ListIcon from "@mui/icons-material/List";
-import Footter from "../Components/footter";
+import Footter from "../../Components/Thivanka/footter";
  
 function ItemPage() {
   const [active, setActive] = useState(true);

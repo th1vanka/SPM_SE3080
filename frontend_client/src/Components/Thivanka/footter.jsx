@@ -1,11 +1,11 @@
 import React from 'react'
-import "../Css/footter.css"
+import "../../Css/Thivanka/footter.css";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import MarkunreadIcon from "@mui/icons-material/Markunread";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-import MobApp from "../Assets/app.png"
+import MobApp from "../../Assets/app.png";
  
 
 function Footter() {

@@ -1,6 +1,6 @@
 import React from "react";
 import Rating from "@mui/material/Rating";
-import "../Css/home_page.css";
+import "../../Css/Thivanka/home_page.css";
 
 function Product(props) {
   return (
