@@ -1,12 +1,12 @@
 import React from "react";
-import "../Css/home_page.css";
-import NavBar from "../Components/nav_bar";
-import HomeHeader from "../Components/home_header";
-import Item from "../Assets/item.jpg";
-import Item2 from "../Assets/item2.jpg";
-import Item3 from "../Assets/item3.jpg";
-import Product from "../Components/product";
-import Footter from "../Components/footter";
+import "../../Css/Thivanka/home_page.css";
+import NavBar from "../../Components/Thivanka/nav_bar";
+import HomeHeader from "../../Components/Thivanka/home_header";
+import Item from "../../Assets/item.jpg";
+import Item2 from "../../Assets/item2.jpg";
+import Item3 from "../../Assets/item3.jpg";
+import Product from "../../Components/Thivanka/product";
+import Footter from "../../Components/Thivanka/footter";
  
 function HomePage() {
   return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import "../Css/order_page.css"
+import "../../Css/Thivanka/order_page.css";
 import {NavLink} from "react-router-dom"
 
 function OrderSideNav() {

@@ -1,9 +1,9 @@
 import React from 'react'
-import NavBar from "../Components/nav_bar";
-import HomeHeader from "../Components/home_header";
-import OrderSideNav from "../Components/order_details_side_nav";
-import OrderDetail from "../Components/order_detail";
-import Footter from "../Components/footter";
+import NavBar from "../../Components/Thivanka/nav_bar";
+import HomeHeader from "../../Components/Thivanka/home_header";
+import OrderSideNav from "../../Components/Thivanka/order_details_side_nav";
+import OrderDetail from "../../Components/Thivanka/order_detail";
+import Footter from "../../Components/Thivanka/footter";
 
 function FeedbackPage() {
   return (

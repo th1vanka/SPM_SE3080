@@ -1,6 +1,6 @@
 import React from "react";
-import "../Css/order_detail.css";
-import Item from "../Assets/item.jpg";
+import "../../Css/Thivanka/order_detail.css";
+import Item from "../../Assets/item.jpg";
 import StoreMallDirectoryIcon from "@mui/icons-material/StoreMallDirectory";
 
 function OrderDetail(props) {
