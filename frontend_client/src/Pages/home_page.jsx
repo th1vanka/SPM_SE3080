@@ -6,6 +6,7 @@ import Item from "../Assets/item.jpg";
 import Item2 from "../Assets/item2.jpg";
 import Item3 from "../Assets/item3.jpg";
 import Product from "../Components/product";
+import Footter from "../Components/footter";
  
 function HomePage() {
   return (
@@ -215,6 +216,7 @@ function HomePage() {
             rate="4"
           />
         </div>
+        <Footter/>
       </div>
     </div>
   );
