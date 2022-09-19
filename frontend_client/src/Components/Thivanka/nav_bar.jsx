@@ -8,13 +8,21 @@ function NavBar() {
       {/* <div className="site-nav-logo-wrapper"></div> */}
       <div className="site-nav-logo-wrapper"></div>
       <div className="site-nav-links-wrapper">
-        <Link to="/" className="site-nav-link">
-          <div className="site-nav-links">HOME</div>
+        <Link to="/home" className="site-nav-link">
+          <div className="site-nav-links">Home</div>
         </Link>
-        <Link to="/item" className="site-nav-link">
-          <div className="site-nav-links">PRODUCTS</div>
+        <Link to="#" className="site-nav-link">
+          <div className="site-nav-links">Products</div>
         </Link>
-         
+        <Link to="#" className="site-nav-link">
+          <div className="site-nav-links">About</div>
+        </Link>
+        <Link to="#" className="site-nav-link">
+          <div className="site-nav-links">Contact Us</div>
+        </Link>
+        <Link to="#" className="site-nav-link">
+          <div className="site-nav-links">Blog</div>
+        </Link>
       </div>
       <div className="site-nav-logo-wrapper"></div>
 

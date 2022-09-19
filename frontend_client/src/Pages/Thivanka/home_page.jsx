@@ -48,15 +48,15 @@ function HomePage() {
 
           <Product
             pic={Item}
-            category="GARDENING and PLANTING"
-            item_name="Wooden Planter small"
+            category="HERBS AND SPICESG"
+            item_name="CINNAMON"
             item_price="1500.00"
             rate="4"
           />
           <Product
             pic={Item}
-            category="GARDENING and PLANTING"
-            item_name="Wooden Planter small"
+            category="HERBS AND SPICES"
+            item_name="CLOVES (KARAMBUNATTI)"
             item_price="1500.00"
             rate="4"
           />
@@ -69,8 +69,8 @@ function HomePage() {
           />
           <Product
             pic={Item3}
-            category="GARDENING and PLANTING"
-            item_name="Wooden Planter small"
+            category="HERBS AND SPICES"
+            item_name="PEPPER"
             item_price="1500.00"
             rate="3"
           />
@@ -83,8 +83,8 @@ function HomePage() {
           />
           <Product
             pic={Item}
-            category="GARDENING and PLANTING"
-            item_name="Wooden Planter small"
+            category="HERBS AND SPICES"
+            item_name="CARDAMOM"
             item_price="1500.00"
             rate="4"
           />
@@ -97,8 +97,8 @@ function HomePage() {
           />
           <Product
             pic={Item3}
-            category="GARDENING and PLANTING"
-            item_name="Wooden Planter small"
+            category="HERBS AND SPICES"
+            item_name="CHILLI"
             item_price="1500.00"
             rate="3"
           />
@@ -111,8 +111,8 @@ function HomePage() {
           />
           <Product
             pic={Item3}
-            category="GARDENING and PLANTING"
-            item_name="Wooden Planter small"
+            category="HERBS AND SPICES"
+            item_name="CUMIN"
             item_price="1500.00"
             rate="5"
           />
@@ -128,7 +128,6 @@ function HomePage() {
                   fontSize: "19px",
                   color: "white",
                   fontWeight: "600",
-                  
                 }}
               >
                 {""}BROWSE OUR CATEGORIES
@@ -216,7 +215,7 @@ function HomePage() {
             rate="4"
           />
         </div>
-        <Footter/>
+        <Footter />
       </div>
     </div>
   );

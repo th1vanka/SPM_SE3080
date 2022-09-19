@@ -12,9 +12,18 @@ function OrderSideNav() {
       <NavLink to="/order" style={{ textDecoration: "none", color: "black" }}>
         <div className="client-side-menu-link">Orders</div>
       </NavLink>
-      <div className="client-side-menu-link">Payment</div>
-      <div className="client-side-menu-link">To be shipped</div>
-      <div className="client-side-menu-link">Shipped</div>
+      <NavLink
+        to="/to-be-shipped"
+        style={{ textDecoration: "none", color: "black" }}
+      >
+        <div className="client-side-menu-link">To be shipped</div>
+      </NavLink>
+      <NavLink
+        to="/shipped"
+        style={{ textDecoration: "none", color: "black" }}
+      >
+        <div className="client-side-menu-link">Shipped</div>
+      </NavLink>
       <NavLink to="/review" style={{ textDecoration: "none", color: "black" }}>
         <div className="client-side-menu-link">To Be Review</div>
       </NavLink>

@@ -25,7 +25,8 @@ connection.once("open",()=>{
     console.log("Database connect successfully!");
 })
 
-app.use("/details",require("./Routes/Thivanka/apiRoutes"));
+app.use("/client",require("./Routes/Thivanka/apiRoutes"));
+app.use("/user", require("./Routes/Janani/apiRoutes"));
  
 
 //Display the working port

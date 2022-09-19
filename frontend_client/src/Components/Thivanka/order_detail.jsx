@@ -2,8 +2,13 @@ import React from "react";
 import "../../Css/Thivanka/order_detail.css";
 import Item from "../../Assets/item.jpg";
 import StoreMallDirectoryIcon from "@mui/icons-material/StoreMallDirectory";
+import { useNavigate } from "react-router-dom";
 
 function OrderDetail(props) {
+  const navigate = useNavigate()
+  const reviewHandler = () => {
+    navigate("/give/review");
+  }
   return (
     <div className="order-detail-container">
       <div className="order-detail-wrapper">
@@ -66,7 +71,7 @@ function OrderDetail(props) {
                 <button className="order-delete-btn">Delete</button>
               )}
               {props.review && (
-                <button className="order-delete-btn">Review</button>
+                <button className="order-delete-btn" onClick={reviewHandler}>Review</button>
               )}
             </div>
           </div>
