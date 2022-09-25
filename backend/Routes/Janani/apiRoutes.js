@@ -53,7 +53,7 @@ router.route("/details/update/:username").put(async (req, res) => {
   const username = req.params.username;
   const data = req.body.data
   
-  User.update({ username: username }, { $push: { data } })
+  User.updateOne({ username: username }, { $push: { data } })
     .then((data) => {
       res.json({ status: data.acknowledged });
     })
