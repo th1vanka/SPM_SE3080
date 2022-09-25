@@ -105,7 +105,7 @@ function Login() {
               </center>
             </div>
             <div className="login-container-right-wrapper">
-              <img src={LoginImage} width="390px" />
+              <img src={LoginImage} width="390px" alt="Login"/>
             </div>
           </div>
 

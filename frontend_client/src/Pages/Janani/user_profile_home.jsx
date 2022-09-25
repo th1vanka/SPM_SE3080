@@ -198,7 +198,12 @@ function UserProfileHome() {
                 </div>
               </div>
               <div className="image-wrapper">
-                <img src={Image} width="320px" style={{ marginTop: "50px" }} />
+                <img
+                  src={Image}
+                  width="320px"
+                  style={{ marginTop: "50px" }}
+                  alt="Profile"
+                />
               </div>
             </div>
           </div>

@@ -48,7 +48,7 @@ function Regitstration() {
           {/* body start */}
           <div className="reg-container">
             <div className="reg-container-left-wrapper">
-              <img src={LoginImage} width="390px" />
+              <img src={LoginImage} width="390px" alt="Login" />
             </div>
             <div className="reg-container-right-wrapper">
               <h3>Create Your Account!!!</h3>
