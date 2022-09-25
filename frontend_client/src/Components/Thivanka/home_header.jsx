@@ -1,18 +1,18 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import "../../Css/Thivanka/home_header.css";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import PersonIcon from "@mui/icons-material/Person";
+import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
+import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
 import Badge from "@mui/material/Badge";
-import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
-import AssignmentTurnedInOutlinedIcon from "@mui/icons-material/AssignmentTurnedInOutlined";
-import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
-import ShoppingBasketOutlinedIcon from "@mui/icons-material/ShoppingBasketOutlined";
- 
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import AssignmentTurnedIn from "@mui/icons-material/AssignmentTurnedInOutlined";
+import LocalShippingIcon from "@mui/icons-material/LocalShippingOutlined"; 
 import { useNavigate } from "react-router";
 import Flag from "react-world-flags";
+import axios from "axios";
 
 function HomeHeader() {
   const navigate = useNavigate();
+    const [details, setDetails] = useState([]);
 
   const cartHandler = () => {
     navigate("/cart");
@@ -23,6 +23,24 @@ function HomeHeader() {
   const orderdHandler = () => {
     navigate("/order");
   }
+    const shippedHandler = () => {
+      navigate("/shipped");
+  };
+
+  const profleHandler = () => {
+    navigate("/profile");
+  }
+  
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/client/cart/item/test@gmail.com")
+      .then((res) => {
+        setDetails(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  })
   
   return (
     <div className="site-body-header">
@@ -35,7 +53,7 @@ function HomeHeader() {
           }}
           onClick={orderdHandler}
         >
-          <ShoppingBasketOutlinedIcon
+          <ShoppingCartOutlinedIcon
             fontSize="small"
             style={{ marginTop: "2px", marginRight: "4px" }}
           />
@@ -55,8 +73,9 @@ function HomeHeader() {
             borderRight: "1px solid black",
             cursor: "pointer",
           }}
+          onClick={shippedHandler}
         >
-          <PaidOutlinedIcon
+          <LocalShippingIcon
             fontSize="small"
             style={{ marginTop: "2px", marginRight: "4px" }}
           />
@@ -67,7 +86,7 @@ function HomeHeader() {
               marginTop: "5px",
             }}
           >
-            Payments
+            Shipped
           </div>
         </div>
         <div
@@ -78,7 +97,7 @@ function HomeHeader() {
           }}
           onClick={reviewedHandler}
         >
-          <AssignmentTurnedInOutlinedIcon
+          <AssignmentTurnedIn
             fontSize="small"
             style={{ marginTop: "2px", marginRight: "4px" }}
           />
@@ -100,7 +119,7 @@ function HomeHeader() {
             }}
           >
             <Flag
-              code={"sl"}
+              code={"IN"}
               fallback={<span>Unknown Country</span>}
               height="14"
             />{" "}
@@ -115,30 +134,32 @@ function HomeHeader() {
           className="site-body-header-icon"
           color="error"
         >
-          <NotificationsIcon
+          <NotificationsNoneOutlinedIcon
             style={{ color: "black" }}
             titleAccess="Notifications"
             // fontSize="small"
           />
         </Badge>
         <Badge
-          badgeContent={4}
+          badgeContent={details.length}
           style={{ color: "white" }}
           className="site-body-header-icon"
           color="error"
           onClick={cartHandler}
         >
-          <ShoppingBasketIcon
+          <ShoppingCartOutlinedIcon
             style={{ color: "black", marginRight: "3px" }}
             titleAccess="Shopping Cart"
             // fontSize="small"
           />
         </Badge>
+
         <Badge className="site-body-header-icon">
-          <PersonIcon
+          <PermIdentityOutlinedIcon
             style={{ color: "black" }}
             titleAccess="My Profile"
             // fontSize="mediam"
+            onClick={profleHandler}
           />
         </Badge>
       </div>

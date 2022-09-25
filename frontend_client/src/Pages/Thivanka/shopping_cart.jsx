@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState,useEffect } from "react";
 import "../../Css/Thivanka/shopping_cart.css";
 import NavBar from "../../Components/Thivanka/nav_bar";
 import HomeHeader from "../../Components/Thivanka/home_header";
@@ -7,40 +7,84 @@ import EditIcon from "@mui/icons-material/Edit";
 import Visa from "../../Assets/visa.png";
 import Master from "../../Assets/master.png";
 import Paypal from "../../Assets/paypal.png";
-import CleaningServicesIcon from "@mui/icons-material/CleaningServices";
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import Footter from "../../Components/Thivanka/footter";
+import axios from "axios";
 
-const details = [
-  {
-    name: "Wooden Planter small",
-  },
-  {
-    name: "pot",
-  },
-  {
-    name: "sand",
-  },
-];  
+let price = 0;
 function ShoppingCart() {
-  const [name, setName] = useState();
+  const items = [];
+  const [total, setTotal] = useState(0);
+  const [details, setDetails] = useState([]);
 
-  const [data, setData] = useState([])
-  
-  // useEffect(() => {
-  //   setData(...data,name)
-  // },[])
-  
+  const reloadHandler = () => {
+    axios
+      .get("http://localhost:8000/client/cart/item/test@gmail.com")
+      .then((res) => {
+        setDetails(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    
+  }
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/client/cart/item/test@gmail.com")
+      .then((res) => {
+        setDetails(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    
+  }, []);
+
   const checkHandler = (e) => {
-    const names=e.target.name
-    let tempData = details.map((detail) =>
-      detail.name === names ? { ...detail, checked: names } : detail
-    );
-    setName(tempData)
+    const { name, checked, value } = e.target;
+    let data = { name, value, check: checked };
+    items.push(data);
+
+    if (checked === true) {
+      price = price + parseInt(value);
+    } else {
+      price = price - parseInt(value);
+    }
+    setTotal(price);
   };
+  
+  const clearCartHandler = () => {
+    const confirmBox = window.confirm(
+      "Are you sure want to approve this request?"
+    );
+    if (confirmBox === true) {
+      axios
+        .get("http://localhost:8000/client/cart/item/test@gmail.com")
+        .then((res) => {
+          if (res.data.status === true) {
+            alert("Cart Clear")
+            // window.location.reload(true)
+            reloadHandler()
+          }
+          else {
+            alert("Cart Not Clear...");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
 
   const proceedHandler = () => {
-    console.log(name);
-  }
+    if (total === 0) {
+      alert("Select an Item")
+    }
+    else {
+        alert(total);
+    }
+  };
 
   return (
     <div className="site-main-container">
@@ -56,21 +100,25 @@ function ShoppingCart() {
             <div className="shopping-cart-items-wrapper">
               <div className="shopping-cart-item-count">
                 <h3 style={{ float: "left", margin: "10px" }}>
-                  Shopping Cart(10)
+                  Shopping Cart({details.length})
                 </h3>
-                <button className="cart-clean-btn">
+                <button className="cart-clean-btn" onClick={clearCartHandler}>
                   {" "}
-                  Clean <CleaningServicesIcon fontSize="small" />
+                  Clear Cart <DeleteOutlinedIcon fontSize="small" />
                 </button>
               </div>
 
-              {details.map((detail) => (
+              {details.map((detail, index) => (
                 <ShoppingCartItems
-                  name={detail.name}
-                  category="gardening and planting"
-                  qty="4"
-                  price="200.00"
+                  key={index}
+                  name={detail.itemName}
+                  category={detail.category}
+                  qty={detail.qty}
+                  price={detail.price}
                   checkHandler={checkHandler}
+                  email="test@gmail.com"
+                  id={detail._id}
+                  image={detail.itemURL}
                 />
               ))}
             </div>
@@ -87,7 +135,7 @@ function ShoppingCart() {
                   <p>Shipping</p>
                 </div>
                 <div className="shopping-cart-items-total-dis-answer">
-                  <p>Rs 13000.00</p>
+                  <p>Rs {total}.00</p>
                   <br />
                   <p>Rs 250.00</p>
                 </div>
@@ -97,7 +145,7 @@ function ShoppingCart() {
                   <p>Sub Total</p>
                 </div>
                 <div className="shopping-cart-items-total-dis-answer">
-                  <p>Rs 13250.00</p>
+                  <p>Rs {total + 250}.00</p>
                 </div>
               </div>
               <div className="shopping-cart-proceed-btn-wrapper">

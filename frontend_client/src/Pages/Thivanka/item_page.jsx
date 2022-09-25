@@ -10,14 +10,23 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ListIcon from "@mui/icons-material/List";
 import Footter from "../../Components/Thivanka/footter";
- 
+import axios from "axios";
+import { useNavigate,useParams} from "react-router-dom";
+
 function ItemPage() {
+  const navigate = useNavigate();
+  const params = useParams();
   const [active, setActive] = useState(true);
   const [active1, setActive1] = useState(false);
   const [active2, setActive2] = useState(false);
   const [status] = useState(true);
+  const [count, setCount] = useState(1);
 
-  const [count, setCount] = useState(0);
+  const category = params.category;
+  const name = params.name;
+  const price = params.price;
+   const rate = params.rate;
+
   const disHandler = () => {
     setActive(true);
     setActive1(false);
@@ -44,6 +53,32 @@ function ItemPage() {
     } else {
       setCount(count - 1);
     }
+  };
+  const item = {
+    itemID: "10",
+    itemName: name,
+    itemURL: "http://localhost:3000/static/media/item.909e1e9b750a5486ff61.jpg",
+    qty: count,
+    price: price,
+    category: category,
+  };
+
+  const data = {
+    email: "test@gmail.com",
+    items: item
+  };
+
+  const addToCartHandler = () => {
+    axios
+      .post("http://localhost:8000/client/cart/item/save", data)
+      .then((res) => {
+        if (res.data.status === true) {
+          navigate("/cart");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -149,7 +184,7 @@ function ItemPage() {
                 <div className="item-detail-wrapper">
                   <div className="item-detail-header">
                     <p style={{ fontSize: "25px", fontWeight: "bold" }}>
-                      Wooden Planter small
+                      {name}
                     </p>
                     <p
                       style={{
@@ -159,11 +194,11 @@ function ItemPage() {
                         marginBottom: "5px",
                       }}
                     >
-                      GARDENING and PLANTING
+                      {category}
                     </p>
                     <Rating
                       name="half-rating"
-                      defaultValue={2.5}
+                      defaultValue={rate}
                       precision={0.5}
                       readOnly
                     />
@@ -184,8 +219,8 @@ function ItemPage() {
                         )}
                       </p>
                       <p>21 Items</p>
-                      <p style={{ color: "#A47148" }}>$ 20.00</p>
-                      <p style={{ color: "#A47148" }}>$ 20.00</p>
+                      <p style={{ color: "#A47148" }}>Rs {price}</p>
+                      <p style={{ color: "#A47148" }}>Rs 250.00</p>
                     </div>
                   </div>
                   <div className="item-cart-container">
@@ -211,7 +246,10 @@ function ItemPage() {
                         fontSize="small"
                       />
                     </div>
-                    <div className="item-cart-add-btn">
+                    <div
+                      className="item-cart-add-btn"
+                      onClick={addToCartHandler}
+                    >
                       <p
                         style={{
                           fontSize: "14px",
@@ -323,7 +361,7 @@ function ItemPage() {
             </div>
           </div>
         </div>
-        <Footter/>
+        <Footter />
       </div>
     </div>
   );

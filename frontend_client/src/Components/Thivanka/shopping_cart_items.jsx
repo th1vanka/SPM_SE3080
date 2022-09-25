@@ -1,13 +1,23 @@
 import React from "react";
 import "../../Css/Thivanka/shopping_cart.css";
-import Item from "../../Assets/item.jpg";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import axios from "axios";
 
 function ShoppingCartItems(props) {
 
-  // const checkHandler = (e) => {
-  //    props.setName(e.target.name)
-  // }
+  const deleteHandler = () => {
+     axios
+       .delete(`http://localhost:8000/client/cart/item/remove/${props.email}/${props.id}`)
+       .then((res) => {
+         if (res.data.status === true) {
+           window.location.reload(true);
+         }
+       })
+       .catch((err) => {
+         console.log(err);
+       });
+ 
+  }
 
   return (
     <div className="shopping-cart-item-container">
@@ -16,12 +26,13 @@ function ShoppingCartItems(props) {
           type="checkbox"
           id="vehicle1"
           name={props.name}
+          value={props.price * props.qty}
           style={{ cursor: "pointer", backgroundColor: "orange" }}
           onChange={props.checkHandler}
         />
         <center>
           <img
-            src={Item}
+            src={props.image}
             alt="item"
             style={{
               width: "110px",
@@ -35,7 +46,7 @@ function ShoppingCartItems(props) {
       </div>
       <div className="shopping-cart-item-name">
         <center>
-          <p style={{ fontSize: "14px", marginTop: "3px" }}>{props.name}</p>
+          <p style={{ fontSize: "14px", marginTop: "3px",fontWeight:"600" }}>{props.name}</p>
         </center>
 
         <p
@@ -54,6 +65,7 @@ function ShoppingCartItems(props) {
         <DeleteOutlineOutlinedIcon
           fontSize="small"
           className="shopping-cart-item-action-btn"
+          onClick={deleteHandler}
         />
         <p style={{ fontSize: "16px", marginTop: "52px", color: "#A47148" }}>
           Rs {props.price * props.qty}.00

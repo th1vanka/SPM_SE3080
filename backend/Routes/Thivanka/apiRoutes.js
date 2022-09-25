@@ -1,32 +1,74 @@
 const router = require("express").Router();
-const User = require("../../Models/Thivanka/user")
+const Cart = require("../../Models/Thivanka/cart");
 
-//hotel registration routes
-router.route("/hottel/save").post(async(req, res) => {
-    const { HottelName, HottelContact, HottelEmail, HottelAddress, Password, Latitude, Longitude } = req.body
-    const details = new User({ HottelName: HottelName, HottelContact: HottelContact, HottelEmail: HottelEmail, HottelAddress: HottelAddress, Password: Password, Latitude: Latitude, Longitude: Longitude,Type:"Hotel" })
-    await details.save()
-    .then((data)=>{
-        res.json(data)
-        const detail = new HotelLogin({HottelEmail: HottelEmail,Password: Password, Latitude: Latitude,Type:"Hotel" })
-        detail.save()
-    })
-    .catch(err=>{
-        res.json(err)
-    })
-})
+// client's items save in the cart
+router.route("/cart/item/save").post(async (req, res) => {
+  const itemDetails = req.body;
+  const items = await Cart.findOne({ email: { $eq: itemDetails.email } });
+  if (!items) {
+    const cart = new Cart(itemDetails);
+    await cart
+      .save()
+      .then((data) => {
+        res.json({ status: true, data });
+      })
+      .catch((err) => {
+        res.json({ status: false, err });
+      });
+  } else {
+    await Cart.findOneAndUpdate(
+      { email: itemDetails.email },
+      { $push: { items: itemDetails.items } }
+    )
+      .then((data) => {
+        res.json({ status: true, data });
+      })
+      .catch((err) => {
+        res.json({ status: false, err });
+      });
+  }
+});
 
-router.route("/login/:email/:password").get((req, res) => {
-    let email = req.params.email;
-    let pass = req.params.password;
-    User.findOne({ $and: [{ HottelEmail: { $eq: email } }, { Password: { $eq: pass } }] })
-    .then(data => {
-        res.json(data)
+// client's items get from the cart
+router.route("/cart/item/:email").get(async (req, res) => {
+  const email = req.params.email;
+    Cart.findOne({ email: { $eq: email } })
+    .then((data) => {
+        if (!data) {
+          res.json(data);
+        } else {
+          res.json(data.items);
+        }
     })
-    .catch(error =>{
-        res.json(error)
+        .catch((err) => {
+        res.json({ status: false, err });
     })
-})
+});
 
- 
+// client's items remove from the cart
+router.route("/cart/item/remove/:email/:id").delete(async (req, res) => {
+  const email = req.params.email;
+  const id = req.params.id;
+  Cart.update({ email: email }, { $pull: { items: { _id: id } } })
+    .then((data) => {
+      res.json({ status: data.acknowledged });
+    })
+    .catch((err) => {
+      res.json({ status: false, err });
+    });
+});
+
+// client's items remove from the cart
+router.route("/cart/item/clear/:email").delete(async (req, res) => {
+  const email = req.params.email;
+  Cart.deleteOne({ email: email })
+    .then((data) => {
+      res.json({ status: data.acknowledged });
+    })
+    .catch((err) => {
+      res.json({ status: false, err });
+    });
+});
+
+
 module.exports = router;

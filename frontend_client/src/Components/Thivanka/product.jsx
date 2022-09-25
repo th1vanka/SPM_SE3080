@@ -1,10 +1,16 @@
 import React from "react";
 import Rating from "@mui/material/Rating";
 import "../../Css/Thivanka/home_page.css";
+import { useNavigate } from "react-router-dom";
 
 function Product(props) {
+const navigate=useNavigate()
+  const itemHandler = () => {
+    navigate(`/item/${props.category}/${props.item_name}/${props.item_price}/${props.rate}`);
+  }
+
   return (
-    <div className="product-container">
+    <div className="product-container" onClick={itemHandler}>
       <div className="product-wrapper">
         <img src={props.pic} alt="Product" className="product-image" />
         <div className="product-details-wrapper">
@@ -25,7 +31,7 @@ function Product(props) {
                 color: "orange",
               }}
             >
-              Rs {props.item_price}{" "}
+              Rs {props.item_price}
             </p>
             <Rating
               name="half-rating"
