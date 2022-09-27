@@ -16,10 +16,11 @@ function ShoppingCart() {
   const items = [];
   const [total, setTotal] = useState(0);
   const [details, setDetails] = useState([]);
+   const email = localStorage.getItem("email");
 
   const reloadHandler = () => {
     axios
-      .get("http://localhost:8000/client/cart/item/test@gmail.com")
+      .get(`http://localhost:8000/client/cart/item/${email}`)
       .then((res) => {
         setDetails(res.data);
       })
@@ -31,15 +32,16 @@ function ShoppingCart() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/client/cart/item/test@gmail.com")
+      .get(`http://localhost:8000/client/cart/item/${email}`)
       .then((res) => {
-        setDetails(res.data);
+        if (res.data !== null) {
+          setDetails(res.data);
+        }
       })
       .catch((err) => {
         console.log(err);
       });
-    
-  }, []);
+  }, [email]);
 
   const checkHandler = (e) => {
     const { name, checked, value } = e.target;
@@ -60,14 +62,13 @@ function ShoppingCart() {
     );
     if (confirmBox === true) {
       axios
-        .get("http://localhost:8000/client/cart/item/test@gmail.com")
+        .get(`http://localhost:8000/client/cart/item/${email}`)
         .then((res) => {
           if (res.data.status === true) {
-            alert("Cart Clear")
+            alert("Cart Clear");
             // window.location.reload(true)
-            reloadHandler()
-          }
-          else {
+            reloadHandler();
+          } else {
             alert("Cart Not Clear...");
           }
         })
@@ -103,7 +104,6 @@ function ShoppingCart() {
                   Shopping Cart({details.length})
                 </h3>
                 <button className="cart-clean-btn" onClick={clearCartHandler}>
-                  {" "}
                   Clear Cart <DeleteOutlinedIcon fontSize="small" />
                 </button>
               </div>
@@ -116,7 +116,7 @@ function ShoppingCart() {
                   qty={detail.qty}
                   price={detail.price}
                   checkHandler={checkHandler}
-                  email="test@gmail.com"
+                  email={email}
                   id={detail._id}
                   image={detail.itemURL}
                 />

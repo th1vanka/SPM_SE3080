@@ -35,7 +35,7 @@ router.route("/cart/item/:email").get(async (req, res) => {
     Cart.findOne({ email: { $eq: email } })
     .then((data) => {
         if (!data) {
-          res.json(data);
+          res.json(null);
         } else {
           res.json(data.items);
         }
@@ -49,7 +49,7 @@ router.route("/cart/item/:email").get(async (req, res) => {
 router.route("/cart/item/remove/:email/:id").delete(async (req, res) => {
   const email = req.params.email;
   const id = req.params.id;
-  Cart.update({ email: email }, { $pull: { items: { _id: id } } })
+  Cart.updateOne({ email: email }, { $pull: { items: { _id: id } } })
     .then((data) => {
       res.json({ status: data.acknowledged });
     })

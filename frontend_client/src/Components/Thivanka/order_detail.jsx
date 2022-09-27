@@ -30,10 +30,13 @@ function OrderDetail(props) {
               >
                 CHFRPU Official Store
               </p>
-              <p style={{ marginLeft: "20%",color:"green" }}>{props.status}</p>
+              <p style={{ marginLeft: "20%", color: "green" }}>
+                {props.status}
+              </p>
             </div>
             <div className="order-detail-header-orddetails">
-              <p> Order Date : 2022.05.27</p> <p>Order ID : 102365489</p>
+              <p> Order Date : 2022.05.27</p>{" "}
+              <p>Order ID : 6318cb0974eb04a509c0ddca</p>
             </div>
           </div>
 
@@ -71,7 +74,9 @@ function OrderDetail(props) {
                 <button className="order-delete-btn">Delete</button>
               )}
               {props.review && (
-                <button className="order-delete-btn" onClick={reviewHandler}>Review</button>
+                <button className="order-delete-btn" onClick={reviewHandler}>
+                  Review
+                </button>
               )}
             </div>
           </div>

@@ -11,7 +11,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ListIcon from "@mui/icons-material/List";
 import Footter from "../../Components/Thivanka/footter";
 import axios from "axios";
-import { useNavigate,useParams} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function ItemPage() {
   const navigate = useNavigate();
@@ -21,11 +21,11 @@ function ItemPage() {
   const [active2, setActive2] = useState(false);
   const [status] = useState(true);
   const [count, setCount] = useState(1);
-
+  const email = localStorage.getItem("email");
   const category = params.category;
   const name = params.name;
   const price = params.price;
-   const rate = params.rate;
+  const rate = params.rate;
 
   const disHandler = () => {
     setActive(true);
@@ -64,8 +64,8 @@ function ItemPage() {
   };
 
   const data = {
-    email: "test@gmail.com",
-    items: item
+    email: email,
+    items: item,
   };
 
   const addToCartHandler = () => {

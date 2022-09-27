@@ -13,33 +13,41 @@ import axios from "axios";
 function HomeHeader() {
   const navigate = useNavigate();
     const [details, setDetails] = useState([]);
-
+  const email = localStorage.getItem("email");
+  
   const cartHandler = () => {
-    navigate("/cart");
+    email && navigate("/cart");
   };
     const reviewedHandler = () => {
-      navigate("/review");
+      email && navigate("/review");
   };
   const orderdHandler = () => {
-    navigate("/order");
+    email && navigate("/order");
   }
     const shippedHandler = () => {
-      navigate("/shipped");
+      email && navigate("/shipped");
   };
 
   const profleHandler = () => {
     navigate("/profile");
   }
   
-  useEffect(() => {
+  function fetchdata(){
     axios
-      .get("http://localhost:8000/client/cart/item/test@gmail.com")
+      .get(`http://localhost:8000/client/cart/item/${email}`)
       .then((res) => {
-        setDetails(res.data);
+        if (res.data !== null) {
+          setDetails(res.data);
+        }
       })
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  useEffect(() => {
+
+     email && fetchdata();
   })
   
   return (
@@ -129,7 +137,7 @@ function HomeHeader() {
       </div>
       <div className="site-body-header-icon-wrapper">
         <Badge
-          badgeContent={3}
+          badgeContent={0}
           style={{ color: "white" }}
           className="site-body-header-icon"
           color="error"
