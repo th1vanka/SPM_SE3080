@@ -61,15 +61,13 @@ function NavBar() {
       </div>
       {/* orders end */}
 
-
-      
       {/* reports start */}
       <div className="nav_body ">
         <div className="nav_link_section ">
           <ReportIcon fontSize="small" />{" "}
           <p className="nav_section_text">Reports</p>
         </div>
-        <NavLink to="#" className="link_styles">
+        <NavLink to="/order/report" className="link_styles">
           <div className="nav_link_wrapper">
             <AutorenewIcon fontSize="small" style={{ marginLeft: "45px" }} />
             <p className="nav_link clearfix">Order Report</p>

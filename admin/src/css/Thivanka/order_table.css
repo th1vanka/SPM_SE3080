@@ -62,17 +62,16 @@
 }
 .order-table-row {
   width: 100%;
-  min-height:40px;
+  min-height: 40px;
   display: flex;
   align-items: center;
-    background-color: white;
-    padding-top: 5px;
-    padding-bottom: 10px;
-    cursor: pointer;
-    margin-top: 1px;
-    
+  background-color: white;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  cursor: pointer;
+  margin-top: 1px;
 }
-.order-table-row:hover{
-    transform: scale(1.01);
-    background-color: rgba(3, 42, 62, 0.071)
+.order-table-row:hover {
+  transform: scale(1.01);
+  background-color: rgba(3, 42, 62, 0.071);
 }
