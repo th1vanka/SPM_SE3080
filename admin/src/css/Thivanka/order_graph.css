@@ -1,0 +1,78 @@
+.order-section-two-container {
+  width: 97%;
+  height: 50px;
+  margin: auto;
+  background-color: white;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+.order-section-three-container {
+  width: 97%;
+  margin: auto;
+  margin-top: 2px;
+}
+.order-table-header-col-1 {
+  width: 30%;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+}
+.order-table-header-col-2 {
+  width: 10%;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+}
+.order-table-header-col-3 {
+  width: 40%;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+}
+.order-table-header-col-4 {
+  width: 20%;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+}
+.order-table-col-1 {
+  width: 30%;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+}
+.order-table-col-2 {
+  width: 10%;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+}
+.order-table-col-3 {
+  width: 40%;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+}
+.order-table-col-4 {
+  width: 20%;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+}
+.order-table-row {
+  width: 100%;
+  min-height:40px;
+  display: flex;
+  align-items: center;
+    background-color: white;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    cursor: pointer;
+    margin-top: 1px;
+    
+}
+.order-table-row:hover{
+    transform: scale(1.01);
+    background-color: rgb(255, 248, 248)
+}
