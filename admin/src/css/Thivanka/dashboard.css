@@ -43,7 +43,6 @@
 .graph-wrapper {
   width: 69%;
   float: left;
-  padding-top: 30px;
   padding-bottom: 10px;
   background-color: white;
 }
@@ -51,7 +50,38 @@
   width: 30%;
   float: right;
   background-color: white;
+  padding-bottom: 15px;
 }
+.stat-summary-section-wraper{
+  width: 95%;
+  height: 30px;
+  margin: auto;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+.stat-summary-section-topic{
+  width: 70%;
+  font-size: 14px;
+  font-weight: 500;
+  color:gray;
+  text-align: center
+}
+.stat-summary-section-answer{
+  width: 30%;
+  font-size: 17px;
+  font-weight: 500;
+  color:rgb(0, 0, 0);
+  text-align: center
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -65,6 +95,9 @@
   }
   .stat-wrapper {
     width: 40%;
+    float: left;
+    margin-top: 10px;
+    
   }
 }
 @media only screen and (max-width: 900px) {
