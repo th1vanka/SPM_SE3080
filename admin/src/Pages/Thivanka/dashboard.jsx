@@ -68,10 +68,28 @@ function Dashboard() {
           </div>
           <div className="stat-wrapper">
             <center>
-              <h4>Summery</h4>
+              <h4>Summary</h4>
             </center>
-            <div>
-              <h4>Summery</h4>
+            <div className="stat-summary-section-wraper">
+              <div className="stat-summary-section-topic">Recent Orders</div>
+              <div className="stat-summary-section-answer">10</div>
+            </div>
+            <div className="stat-summary-section-wraper">
+              {" "}
+              <div className="stat-summary-section-topic">Shipped Orders</div>
+              <div className="stat-summary-section-answer">10</div>
+            </div>
+            <div className="stat-summary-section-wraper">
+              {" "}
+              <div className="stat-summary-section-topic">Recent Products</div>
+              <div className="stat-summary-section-answer">10</div>
+            </div>
+            <div className="stat-summary-section-wraper">
+              {" "}
+              <div className="stat-summary-section-topic">
+                To Be Shipped Orders
+              </div>
+              <div className="stat-summary-section-answer">10</div>
             </div>
           </div>
         </div>

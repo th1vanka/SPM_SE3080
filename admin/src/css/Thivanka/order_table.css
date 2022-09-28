@@ -74,5 +74,5 @@
 }
 .order-table-row:hover{
     transform: scale(1.01);
-    background-color: rgb(255, 248, 248)
+    background-color: rgba(3, 42, 62, 0.071)
 }

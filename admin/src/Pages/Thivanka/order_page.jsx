@@ -2,7 +2,7 @@ import React from 'react'
 import "../../css/Thivanka/order.css";
 import "../../css/common.css";
 import NavBar from '../../Components/Thivanka/nav_bar';
-import OrderGraph from '../../Components/Thivanka/order_graph';
+import OrderTable from "../../Components/Thivanka/order_table";
  
 function Orders() {
   return (
@@ -29,7 +29,7 @@ function Orders() {
             <input type="search" placeholder="Search" className="search-box" />
           </div>
         </div>
-         <OrderGraph/>
+        <OrderTable />
       </div>
     </div>
   );

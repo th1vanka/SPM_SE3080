@@ -1,7 +1,7 @@
 import React from "react";
-import "../../css/Thivanka/order_graph.css";
+import "../../css/Thivanka/order_table.css";
 
-function OrderGraph() {
+function OrderTable() {
   return (
     <div>
       <div className="order-section-two-container ">
@@ -11,18 +11,18 @@ function OrderGraph() {
         <div className="order-table-header-col-4">Amount</div>
       </div>
       <div className="order-section-three-container ">
-        <GraphRow />
-        <GraphRow />
-        <GraphRow />
-        <GraphRow />
+        <TableRow />
+        <TableRow />
+        <TableRow />
+        <TableRow />
       </div>
     </div>
   );
 }
 
-export default OrderGraph;
+export default OrderTable;
 
-function GraphRow() {
+function TableRow() {
     return (
       <div className="order-table-row">
         <div className="order-table-col-1">6318cb0974eb04a509c0ddca</div>

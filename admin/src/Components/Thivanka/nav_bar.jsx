@@ -6,6 +6,7 @@ import AutorenewIcon from "@mui/icons-material/Autorenew";
 import DepartureBoardIcon from "@mui/icons-material/DepartureBoard";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import { NavLink } from "react-router-dom";
+import ReportIcon from "@mui/icons-material/Report";
 
 function NavBar() {
   return (
@@ -59,6 +60,23 @@ function NavBar() {
         </NavLink>
       </div>
       {/* orders end */}
+
+
+      
+      {/* reports start */}
+      <div className="nav_body ">
+        <div className="nav_link_section ">
+          <ReportIcon fontSize="small" />{" "}
+          <p className="nav_section_text">Reports</p>
+        </div>
+        <NavLink to="#" className="link_styles">
+          <div className="nav_link_wrapper">
+            <AutorenewIcon fontSize="small" style={{ marginLeft: "45px" }} />
+            <p className="nav_link clearfix">Order Report</p>
+          </div>
+        </NavLink>
+      </div>
+      {/* reports end */}
     </div>
   );
 }
