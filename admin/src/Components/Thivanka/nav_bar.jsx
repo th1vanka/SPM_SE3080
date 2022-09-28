@@ -61,6 +61,35 @@ function NavBar() {
       </div>
       {/* orders end */}
 
+   {/* seller details start */}
+
+   <div className="nav_body ">
+        <div className="nav_link_section ">
+          <BookmarkAddedIcon fontSize="small" />{" "}
+          <p className="nav_section_text">Seller</p>
+        </div>
+        
+        <NavLink to="/" className="link_styles">
+          <div className="nav_link_wrapper">
+            <DepartureBoardIcon
+              fontSize="small"
+              style={{ marginLeft: "45px" }}
+            />
+            <p className="nav_link clearfix">Sellers Details</p>
+          </div>
+        </NavLink>
+        <NavLink to="/" className="link_styles">
+          <div className="nav_link_wrapper">
+            <LocalShippingIcon
+              fontSize="small"
+              style={{ marginLeft: "45px" }}
+            />
+            <p className="nav_link clearfix">Complaints</p>
+          </div>
+        </NavLink>
+      </div>
+   {/* seller details end */}
+
       {/* reports start */}
       <div className="nav_body ">
         <div className="nav_link_section ">
@@ -74,6 +103,7 @@ function NavBar() {
           </div>
         </NavLink>
       </div>
+      
       {/* reports end */}
     </div>
   );
