@@ -1,16 +1,17 @@
 import React from "react";
-import NavBar from "../Components/nav_bar";
-import "../css/dashboard.css";
+import NavBar from "../../Components/Thivanka/nav_bar";
+import "../../css/Thivanka/dashboard.css";
+import "../../css/common.css";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import PeopleIcon from "@mui/icons-material/People";
 import StorefrontIcon from "@mui/icons-material/Storefront";
- 
-import Chart from "../Components/chart";
+import Chart from "../../Components/Thivanka/chart";
+
 function Dashboard() {
   return (
     <div className="main-container">
       <NavBar />
-      <div className="body-container">
+      <div className="body-container clearfix">
         <div className="dash_section_one_container ">
           <div className="dash_section_one_container_header ">
             <h3>Dashboard</h3>
@@ -63,9 +64,16 @@ function Dashboard() {
         </div>
         <div className="dash_section_two_container ">
           <div className="graph-wrapper">
-             <Chart/>
+            <Chart />
           </div>
-          <div className="stat-wrapper">stat</div>
+          <div className="stat-wrapper">
+            <center>
+              <h4>Summery</h4>
+            </center>
+            <div>
+              <h4>Summery</h4>
+            </div>
+          </div>
         </div>
       </div>
     </div>

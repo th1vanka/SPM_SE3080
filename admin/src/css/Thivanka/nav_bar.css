@@ -47,6 +47,13 @@
   font-size: 15px;
   font-weight: 400;
 }
+.link_styles{
+  text-decoration: none;
+}
+.active div {
+  background-color: rgb(25, 66, 88);
+  color: rgb(255, 255, 255);
+}
 
 @media only screen and (max-width: 900px) {
   .nav_main_container{
