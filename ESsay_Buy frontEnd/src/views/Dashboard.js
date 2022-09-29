@@ -52,9 +52,9 @@ function Dashboard() {
       pathname: "/my-complaint",
     });
   };
-  const clickFeedaback = () => {
+  const AddItemsDash = () => {
     history.push({
-      pathname: "/my-feedback",
+      pathname: "/Add-item",
     });
   };
   const sellerSup =() => {
@@ -156,13 +156,13 @@ function Dashboard() {
                 <Card
                   className="dashboard-card"
                   id="card4"
-                  onClick={clickFeedaback}
+                  onClick={AddItemsDash}
                 >
                   <img
-                    src={require("assets/img/rating.png").default}
+                    src={require("assets/img/calendar.png").default}
                     className="dashboard-icon"
                   />
-                  Reviews
+                  Add Items
                   <label className="dashboard-card-subtitle">
                     
                   </label>
