@@ -17,12 +17,15 @@ import Unregister from "views/Unregister";
 import Dashboard from "views/Dashboard";
 import SellerSup from "views/SelelerSup";
 
+//debo
+import AddItemsDash from "views/Debo/AddItem Dash";
+
 
 
 import Login from "views/Login";
 import { ReactSession } from "react-client-session";
 
-//import { UpdateComplaint } from "views/updateComplaint";
+
 
 import SignUp from "./views/SignUp"
 
@@ -69,6 +72,11 @@ function App() {
         </Route>
         <Route path="/Seller-sup" exat>
           <SellerSup></SellerSup>
+          </Route>
+
+          {/* debo */}
+          <Route path="/Add-item" exat>
+          <AddItemsDash></AddItemsDash>
           </Route>
         
         

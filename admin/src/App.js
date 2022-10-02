@@ -7,6 +7,12 @@ import Shipped from './Pages/Thivanka/shipped_page';
 import Report from './Pages/Thivanka/report_page';
 import OrderDetails from './Components/Thivanka/order_details';
 
+//naween
+import Complaints from './Pages/Naween/Complaints';
+import SellerDetalils from './Pages/Naween/SellerDetalils';
+import SellerReply from './Pages/Naween/SellerReply';
+import TestReply from './Pages/Naween/TestReply';
+
 function App() {
   return (
     <Router>
@@ -17,6 +23,10 @@ function App() {
         <Route path="/shipped/order" element={<Shipped />} />
         <Route path="/order/report" element={<Report />} />
         <Route path="/order/details/:oid" element={<OrderDetails />} />
+        <Route path="/complaints" element={<Complaints/>} />
+        <Route path="/SellerDetalils" element={<SellerDetalils></SellerDetalils>} />
+        <Route path="/SellerReply" element={<SellerReply/>} />
+        <Route path="/test" element={<TestReply/>} />
       </Routes>
     </Router>
   );

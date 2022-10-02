@@ -69,7 +69,7 @@ function NavBar() {
           <p className="nav_section_text">Seller</p>
         </div>
         
-        <NavLink to="/" className="link_styles">
+        <NavLink to="/SellerDetalils" className="link_styles">
           <div className="nav_link_wrapper">
             <DepartureBoardIcon
               fontSize="small"
@@ -78,13 +78,22 @@ function NavBar() {
             <p className="nav_link clearfix">Sellers Details</p>
           </div>
         </NavLink>
-        <NavLink to="/" className="link_styles">
+        <NavLink to="/complaints" className="link_styles">
           <div className="nav_link_wrapper">
             <LocalShippingIcon
               fontSize="small"
               style={{ marginLeft: "45px" }}
             />
             <p className="nav_link clearfix">Complaints</p>
+          </div>
+        </NavLink>
+        <NavLink to="/SellerReply" className="link_styles">
+          <div className="nav_link_wrapper">
+            <LocalShippingIcon
+              fontSize="small"
+              style={{ marginLeft: "45px" }}
+            />
+            <p className="nav_link clearfix">Seller Reply</p>
           </div>
         </NavLink>
       </div>
