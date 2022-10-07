@@ -69,7 +69,7 @@ function SellerReply() {
             
             <center>
             <form onSubmit={sendEmail}>
-                <label>name</label>
+                <label>Seller's Nname</label>
                 <input type="text" name="name"/>
                 <br/>
 
@@ -77,7 +77,8 @@ function SellerReply() {
                 <input type="email" name="user_email"/>
                 <br/>
 
-                <label>Message</label>
+                <label>
+response</label>
                 <textarea name='message' rows='4'/>
                 <br/>
 
