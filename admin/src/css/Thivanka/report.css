@@ -1,0 +1,57 @@
+.report-header-container {
+  width: 97%;
+  margin: auto;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 50px;  
+  background-color: white;
+}
+.report-header-section-wrapper {
+  width: 20%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+}
+
+.report-header-answer {
+  color: green;
+  font-weight: 600;
+  font-size: 20px;
+  margin: 0;
+}
+.report-header-answer2 {
+  color: rgb(183, 0, 0);
+  font-weight: 600;
+  font-size: 20px;
+  margin: 0;
+}
+.report-header-question{
+    color: gray;
+  font-weight: 600;
+  font-size: 12px;
+  margin: 0;
+}
+ 
+.report-graph-container {
+  width: 97%;
+  margin: auto;
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+.report-graph-section-wrapper1 {
+  width: 68%;
+  min-height: 300px;
+   text-align: center;
+  background-color: white;
+   
+   
+}
+.report-graph-section-wrapper2 {
+  width: 31%;
+  min-height: 300px;
+   text-align: center;
+  background-color: white;
+      
+}
