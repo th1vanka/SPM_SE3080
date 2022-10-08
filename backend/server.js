@@ -1,33 +1,28 @@
 const express = require("express");
-const mogoose = require("mongoose");
+const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const dotenv = require("dotenv");
 require("dotenv").config();
 const app = express();
- 
-//port Number Assign
-const port = process.env.port || 8000;
+const upload = require("./utils/multer");
 
 app.use(cors());
 app.use(bodyParser.json());
-
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 //Database Connection URL
 const URL = process.env.DB_URL;
 
-mogoose.connect(URL,{
-    useUnifiedTopology:true,
-});
-
 //Check the database connection
-const connection = mogoose.connection;
-connection.once("open",()=>{
-    console.log("Database connect successfully!");
-})
+mongoose.connect(URL)
+.then(() => console.log("Database connect successfully!"))
+.catch((err) => console.log(err));
 
-app.use("/client",require("./Routes/Thivanka/apiRoutes"));
-app.use("/user", require("./Routes/Janani/apiRoutes"));
- 
+app.use("/items",upload.single('image'), require('./Routes/Deborah/itemRoutes')) 
+
+//port Number Assign
+const port = process.env.port || 8000;
 
 //Display the working port
 app.listen(port,()=>{
