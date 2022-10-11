@@ -6,7 +6,9 @@ import { useNavigate } from "react-router-dom";
 function Product(props) {
 const navigate=useNavigate()
   const itemHandler = () => {
-    navigate(`/item/${props.category}/${props.item_name}/${props.item_price}/${props.rate}`);
+    navigate(
+      `/item/${props.category}/${props.item_name}/${props.item_price}/${props.rate}/${props.id}`
+    );
   }
 
   return (
@@ -39,6 +41,7 @@ const navigate=useNavigate()
               readOnly
               size="small"
               style={{ marginTop: "6px" }}
+              precision={0.5}
             />
           </div>
         </div>

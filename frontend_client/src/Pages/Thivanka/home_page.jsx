@@ -1,14 +1,35 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import "../../Css/Thivanka/home_page.css";
 import NavBar from "../../Components/Thivanka/nav_bar";
 import HomeHeader from "../../Components/Thivanka/home_header";
 import Item from "../../Assets/item.jpg";
-import Item2 from "../../Assets/item2.jpg";
-import Item3 from "../../Assets/item3.jpg";
 import Product from "../../Components/Thivanka/product";
 import Footter from "../../Components/Thivanka/footter";
+import axios from "axios";
  
 function HomePage() {
+  const [details, setDetial] = useState([])
+
+  function getItem() {
+    axios
+      .get("http://localhost:8000/client/product/get")
+      .then((res) => {
+        if (res.data.status === true) {
+          setDetial(res.data.data);
+        } else {
+          alert(res.data.message);
+        }
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  }
+  
+  useEffect(() => {
+    getItem() 
+  },[])
+  
+
   return (
     <div className="site-main-container">
       <div>
@@ -46,78 +67,18 @@ function HomePage() {
             <hr style={{}} />
           </div>
 
-          <Product
-            pic={Item}
-            category="HERBS AND SPICESG"
-            item_name="CINNAMON"
-            item_price="1500.00"
-            rate="4"
-          />
-          <Product
-            pic={Item}
-            category="HERBS AND SPICES"
-            item_name="CLOVES (KARAMBUNATTI)"
-            item_price="1500.00"
-            rate="4"
-          />
-          <Product
-            pic={Item2}
-            category="GARDENING and PLANTING"
-            item_name="Wooden Planter small"
-            item_price="1500.00"
-            rate="4"
-          />
-          <Product
-            pic={Item3}
-            category="HERBS AND SPICES"
-            item_name="PEPPER"
-            item_price="1500.00"
-            rate="3"
-          />
-          <Product
-            pic={Item2}
-            category="GARDENING and PLANTING"
-            item_name="Wooden Planter small "
-            item_price="1500.00"
-            rate="4"
-          />
-          <Product
-            pic={Item}
-            category="HERBS AND SPICES"
-            item_name="CARDAMOM"
-            item_price="1500.00"
-            rate="4"
-          />
-          <Product
-            pic={Item2}
-            category="GARDENING and PLANTING"
-            item_name="Wooden Planter small"
-            item_price="1500.00"
-            rate="2"
-          />
-          <Product
-            pic={Item3}
-            category="HERBS AND SPICES"
-            item_name="CHILLI"
-            item_price="1500.00"
-            rate="3"
-          />
-          <Product
-            pic={Item2}
-            category="GARDENING and PLANTING"
-            item_name="Wooden Planter small"
-            item_price="1500.00"
-            rate="1"
-          />
-          <Product
-            pic={Item3}
-            category="HERBS AND SPICES"
-            item_name="CUMIN"
-            item_price="1500.00"
-            rate="5"
-          />
+          {details.map((detail, index) => (
+            <Product
+              pic={detail.url}
+              category={detail.category}
+              item_name={detail.name}
+              item_price={detail.price}
+              rate={detail.totRating.toFixed(1)}
+              id={detail.id}
+            />
+          ))}
         </div>
-        <div className="site-item-category-container">
+        {/* <div className="site-item-category-container">
           <div className="site-item-category-wrapper">
             <div style={{ paddingTop: "40px" }}>
               <hr style={{ float: "left", width: "38%", marginTop: "12px" }} />
@@ -214,7 +175,7 @@ function HomePage() {
             item_price="1500.00"
             rate="4"
           />
-        </div>
+        </div> */}
         <Footter />
       </div>
     </div>

@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "../../Css/Thivanka/item_page.css";
 import NavBar from "../../Components/Thivanka/nav_bar";
-import Item from "../../Assets/item.jpg";
 import Rating from "@mui/material/Rating";
 import Review from "../../Components/Thivanka/review";
 import HomeHeader from "../../Components/Thivanka/home_header";
@@ -15,6 +14,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 function ItemPage() {
   const navigate = useNavigate();
+  const [details,setDetails]=useState([]);
   const params = useParams();
   const [active, setActive] = useState(true);
   const [active1, setActive1] = useState(false);
@@ -26,6 +26,7 @@ function ItemPage() {
   const name = params.name;
   const price = params.price;
   const rate = params.rate;
+  const id = params.id;
 
   const disHandler = () => {
     setActive(true);
@@ -54,10 +55,27 @@ function ItemPage() {
       setCount(count - 1);
     }
   };
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/client/each/item/${id}`)
+      .then((res) => {
+        if (res.data.status === true) {
+          setDetails(res.data.data)
+        }
+        else {
+          alert(res.data.message)
+        }
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  },[])
+
   const item = {
-    itemID: "10",
+    itemID: id,
     itemName: name,
-    itemURL: "http://localhost:3000/static/media/item.909e1e9b750a5486ff61.jpg",
+    itemURL: details.image,
     qty: count,
     price: price,
     category: category,
@@ -174,7 +192,7 @@ function ItemPage() {
               <div className="item-details-main-container ">
                 <div className="item-image-wrapper clearfix">
                   <img
-                    src={Item}
+                    src={details.image}
                     alt="Product"
                     width="250px"
                     height="200px"
@@ -302,58 +320,23 @@ function ItemPage() {
                 <div className="more-item-details-body-wrapper">
                   {active ? (
                     <div className="more-item-details-body">
-                      Long ago in India there was an old deserted village. Empty
-                      were the old houses, streets and shops. The windows were
-                      open, the stairs broken. Making it one very fine place for
-                      mice to run around, you can be sure! In fact, the mice had
-                      been happily living in this area for hundreds of years,
-                      even before the people had come in the first place to
-                      build a village and then left. Long ago in India there was
-                      an old deserted village. Empty were the old houses,
-                      streets and shops. The windows were open, the stairs
-                      broken. Making it one very fine place for mice to run
-                      around, you can be sure! In fact, the mice had been
-                      happily living in this area for hundreds of years, even
-                      before the people had come in the first place to build a
-                      village and then left.
+                      {details.Description}
                     </div>
                   ) : active1 ? (
                     <div className="more-item-details-body">
-                      All the elephants were thinking about as they marched was
-                      how good it would be to jump in that lake for a cool swim.
-                      They did not know that as they marched through the
-                      village, those big elephant feet were stamping down on the
-                      web of mazes and tunnels the mice had made. What a mess
-                      the elephants left behind! The mice quickly held a
-                      meeting. “If the herd comes back this way again, our
-                      community is doomed!” cried one mouse.
+                      {details.Description}
                     </div>
                   ) : (
                     <div className="more-item-details-body">
-                      <Review
-                        rate="5"
-                        name="Paryag Creation"
-                        review="Long ago in India there was an old deserted village. Empty were the old houses, streets and shops. The windows were open, the stairs broken. Making it one very fine place for mice to run around, you can be sure!"
-                        date="2017-01-01"
-                      />
-                      <Review
-                        rate="5"
-                        name="Paryag Creation"
-                        review="Long ago in India there was an old deserted village. Empty were the old houses, streets and shops. The windows were open, the stairs broken. Making it one very fine place for mice to run around, you can be sure!"
-                        date="2017-01-01"
-                      />
-                      <Review
-                        rate="5"
-                        name="Paryag Creation"
-                        review="Long ago in India there was an old deserted village. Empty were the old houses, streets and shops. The windows were open, the stairs broken. Making it one very fine place for mice to run around, you can be sure!"
-                        date="2017-01-01"
-                      />
-                      <Review
-                        rate="5"
-                        name="Paryag Creation"
-                        review="Long ago in India there was an old deserted village. Empty were the old houses, streets and shops. The windows were open, the stairs broken. Making it one very fine place for mice to run around, you can be sure!"
-                        date="2017-01-01"
-                      />
+                      {details.ratings.map((detail, index) => (
+                        <Review
+                          rate={detail.Review}
+                          name={detail.Name}
+                          review={detail.Comment}
+                          date={detail.Date}
+                          key={index}
+                        />
+                      ))}
                     </div>
                   )}
                 </div>

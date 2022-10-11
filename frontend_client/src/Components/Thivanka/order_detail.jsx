@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 function OrderDetail(props) {
   const navigate = useNavigate()
   const reviewHandler = () => {
-    navigate(`/give/review/${props.itemId}`);
+    navigate(`/give/review/${props.itemId}/${props.id}`);
   }
 
   return (

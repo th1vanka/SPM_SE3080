@@ -408,4 +408,41 @@ router.route("/item/rating/save/:itemId/:oid").post(async (req, res) => {
   callFunc(id, oid);
 });
 
+//get specific orders
+router.route("/product/get").get(async (req, res) => {
+  let tot = 0;
+  let newArr = [];
+  let newObj = {};
+  Product.find().exec(function (err, details) {
+    if (err) {
+      res.json({ status: false, message: "Something went wrong!" });
+    } else {
+      for (let i = 0; i < details.length; i++) {
+        for (let y = 0; y < details[i].ratings.length; y++) {
+          tot = tot + parseInt(details[i].ratings[y].Review);
+        }
+        newObj.totRating = (tot / details[i].ratings.length);
+         newObj.id = details[i]._id;
+        newObj.url = details[i].image;
+        newObj.category = details[i].category;
+        newObj.name = details[i].name;
+        newObj.price = details[i].price;
+        newArr.push(newObj);
+      }
+      res.json({ status: true, data: newArr });
+    }
+  });
+});
+
+router.route("/each/item/:id").get(async (req, res) => {
+  const id = req.params.id;
+  Product.findOne({ _id: { $eq: id } })
+    .then((data) => {
+      res.json({ status: true, data });
+    })
+    .catch((err) => {
+      res.json({ status: false, message: "Something went wrong!" });
+    });
+});
+
 module.exports = router;
