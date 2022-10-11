@@ -12,7 +12,9 @@ function Dashboard() {
   const [recentOrders, setrecentOrders] = useState();
   const [toBeShippedOrders, setToBeShippedOrders] = useState();
   const [shippedOrders, setShippedOrders] = useState();
-    const [completedOrders, setCompletedOrders] = useState();
+  const [completedOrders, setCompletedOrders] = useState();
+
+ 
 
   function recentOrderFunc() {
     return new Promise((resolve) => {
@@ -115,7 +117,12 @@ function Dashboard() {
               />
             </div>
             <div className="dash_section_one_container_box_body ">
-              <p>100,000</p>
+              <p>
+                {completedOrders +
+                  shippedOrders +
+                  toBeShippedOrders +
+                  recentOrders}
+              </p>
             </div>
           </div>
           <div className="dash_section_one_container_box ">
@@ -184,7 +191,9 @@ function Dashboard() {
             <div className="stat-summary-section-wraper">
               {" "}
               <div className="stat-summary-section-topic">Completed Orders</div>
-              <div className="stat-summary-section-answer">{completedOrders}</div>
+              <div className="stat-summary-section-answer">
+                {completedOrders}
+              </div>
             </div>
           </div>
         </div>
