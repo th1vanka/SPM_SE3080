@@ -7,9 +7,38 @@ import NavBar from "../../Components/Thivanka/nav_bar";
 import HomeHeader from "../../Components/Thivanka/home_header";
 import Footter from "../../Components/Thivanka/footter";
 import Rating from "@mui/material/Rating";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 function ClientReviewPage() {
   const [active, setActive] = useState(true);
+  const [rating, setValue] = useState();
+  const [comment, setComment] = useState();
+  const params = useParams();
+  const itemId = params.itemId;
+  const name = localStorage.getItem("userName");
+
+  const data = {
+    name: name,
+    review: rating,
+    comment: comment,
+  };
+
+  const ratingHandler = () => {
+    axios
+      .post(`http://localhost:8000/client/item/rating/save/${itemId}`, data)
+      .then((res) => {
+        if (res.status === true) {
+          // setActive(false);
+        } else {
+          alert(res.message);
+        }
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  };
+
   return (
     <div className="site-main-container">
       <div>
@@ -54,7 +83,14 @@ function ClientReviewPage() {
                     Product Review
                   </p>
 
-                  <Rating name="size-large" defaultValue={0} size="large" />
+                  <Rating
+                    name="size-large"
+                    defaultValue={0}
+                    size="large"
+                    onChange={(event, newValue) => {
+                      setValue(newValue);
+                    }}
+                  />
                   <br />
                   <br />
                   <textarea
@@ -68,14 +104,12 @@ function ClientReviewPage() {
                       borderRadius: "5px",
                       fontFamily: "cursive",
                     }}
+                    onChange={(e) => {
+                      setComment(e.target.value);
+                    }}
                   />
                   <br />
-                  <button
-                    className="order-delete-btn"
-                    onClick={() => {
-                      setActive(false);
-                    }}
-                  >
+                  <button className="order-rating-btn" onClick={ratingHandler}>
                     Continue
                   </button>
                 </div>
@@ -127,8 +161,7 @@ function ClientReviewPage() {
                     }}
                   />
                   <br />
-                  <button className="order-delete-btn">Submit</button>
-                  
+                  <button className="order-rating-btn">Submit</button>
                 </div>
               )}
             </div>

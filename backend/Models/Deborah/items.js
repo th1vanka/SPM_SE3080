@@ -1,64 +1,49 @@
 //to get the database model
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const rating = new mongoose.Schema({
-    Name: String,
-    Date: Date,
-    Reviews: Number,
-    Comments: String,
+  Name: String,
+  Date: String,
+  Review: String,
+  Comment: String,
 });
 
 //columns, properties of the schema
 const itemSchema = new mongoose.Schema({
-    Image: {
-        type: String
-    },
+  image: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  category: {
+    type: String,
+    required: true,
+  },
 
-    ItemNo: {
-        type: String
-    },
-
-    ItemName: {
-        type: String
-    },
-
-    Quantity: {
-        type: Number
-    },
-
-    Status: {
-        type: String
-    },
-
-    Price: {
-        type: Number
-    },
-
-    Reviews: {
-        type: Number
-    },
-
-    Category: {
-        type: String
-    },
-
-    Description: {
-        type: String
-    },
-
-    SellerID : {
-        type: String
-    },
-
-    SellerName: {
-        type: String
-    },
-
-    ratings: [rating],
-
-    CloudinaryID: {
-        type: String
-    }
+  quantity: {
+    type: String,
+    required: true,
+  },
+  price: {
+    type: String,
+    required: true,
+  },
+  status: {
+    type: String,
+    required: true,
+  },
+  Description: {
+    type: String,
+    required: true,
+  },
+  sellerID: {
+    type: String,
+    required: true,
+  },
+  ratings: [rating],
 });
 
-module.exports = mongoose.model('Items', itemSchema);
+module.exports = mongoose.model("Items", itemSchema);

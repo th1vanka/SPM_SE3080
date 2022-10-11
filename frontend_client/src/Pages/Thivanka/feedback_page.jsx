@@ -24,6 +24,7 @@ function FeedbackPage() {
         alert(err.message);
       });
   }, []);
+
   return (
     <div className="site-main-container">
       <div>
@@ -55,6 +56,7 @@ function FeedbackPage() {
                     price={detail.product.productPrice}
                     date={detail.orderDate}
                     id={detail.oId}
+                    itemId={detail.product.productId}
                   />
                 ))}
               </div>

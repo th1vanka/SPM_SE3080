@@ -28,7 +28,7 @@ function App() {
           <Route path="/review" element={<FeedbackPage />} />
           <Route path="/to-be-shipped" element={<ToBeShippedPage />} />
           <Route path="/shipped" element={<ShippedPage />} />
-          <Route path="/give/review" element={<ClientReviewPage />} />
+          <Route path="/give/review/:itemId" element={<ClientReviewPage />} />
           <Route path="/" element={<Login />} />
           <Route path="/registration" element={<Regitstration />} />
           <Route path="/profile" element={<UserProfileHome />} />
