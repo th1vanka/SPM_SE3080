@@ -20,7 +20,8 @@ mongoose.connect(URL)
 .catch((err) => console.log(err));
 
 app.use("/items", upload.single('image'), require('./Routes/Deborah/itemRoutes')) 
-app.use("/client",  require("./Routes/Thivanka/apiRoutes")
+app.use("/client", require("./Routes/Thivanka/apiRoutes")); 
+    app.use("/user",  require("./Routes/Janani/apiRoutes")
 ); 
 
 //port Number Assign

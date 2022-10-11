@@ -42,7 +42,8 @@ function Report() {
 
 
   async function callFunc() {
-    const graph = await graphData();
+    await graphData();
+    
   }
 
   useEffect(() => {

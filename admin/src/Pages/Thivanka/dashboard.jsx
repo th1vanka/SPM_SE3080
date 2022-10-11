@@ -14,8 +14,6 @@ function Dashboard() {
   const [shippedOrders, setShippedOrders] = useState();
   const [completedOrders, setCompletedOrders] = useState();
 
- 
-
   function recentOrderFunc() {
     return new Promise((resolve) => {
       axios
@@ -24,7 +22,6 @@ function Dashboard() {
           if (res.data.status === false) {
             alert(res.data.message);
           } else {
-            
             setrecentOrders(res.data.count);
             resolve(true);
           }
@@ -34,6 +31,7 @@ function Dashboard() {
         });
     });
   }
+
   function toBeShippeOrderFunc() {
     return new Promise((resolve) => {
       axios
@@ -51,6 +49,7 @@ function Dashboard() {
         });
     });
   }
+
   function shippedOrderFunc() {
     return new Promise((resolve) => {
       axios
@@ -68,29 +67,30 @@ function Dashboard() {
         });
     });
   }
-    function completedOrderFunc() {
-      return new Promise((resolve) => {
-        axios
-          .get("http://localhost:8000/client/order/count/Completed")
-          .then((res) => {
-            if (res.data.status === false) {
-              alert(res.data.message);
-            } else {
-              setCompletedOrders(res.data.count);
-              resolve(true);
-            }
-          })
-          .catch((err) => {
-            alert(err.message);
-          });
-      });
-    }
+
+  function completedOrderFunc() {
+    return new Promise((resolve) => {
+      axios
+        .get("http://localhost:8000/client/order/count/Completed")
+        .then((res) => {
+          if (res.data.status === false) {
+            alert(res.data.message);
+          } else {
+            setCompletedOrders(res.data.count);
+            resolve(true);
+          }
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    });
+  }
 
   async function callFunc() {
     await recentOrderFunc();
     await toBeShippeOrderFunc();
     await shippedOrderFunc();
-       await completedOrderFunc();
+    await completedOrderFunc();
   }
 
   useEffect(() => {
