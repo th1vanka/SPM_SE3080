@@ -19,7 +19,10 @@ mongoose.connect(URL)
 .then(() => console.log("Database connect successfully!"))
 .catch((err) => console.log(err));
 
-app.use("/items",upload.single('image'), require('./Routes/Deborah/itemRoutes')) 
+app.use("/items", upload.single('image'), require('./Routes/Deborah/itemRoutes')) 
+app.use("/client", require("./Routes/Thivanka/apiRoutes")); 
+    app.use("/user",  require("./Routes/Janani/apiRoutes")
+); 
 
 //port Number Assign
 const port = process.env.port || 8000;

@@ -12,7 +12,7 @@ function Dashboard() {
   const [recentOrders, setrecentOrders] = useState();
   const [toBeShippedOrders, setToBeShippedOrders] = useState();
   const [shippedOrders, setShippedOrders] = useState();
-    const [completedOrders, setCompletedOrders] = useState();
+  const [completedOrders, setCompletedOrders] = useState();
 
   function recentOrderFunc() {
     return new Promise((resolve) => {
@@ -22,7 +22,6 @@ function Dashboard() {
           if (res.data.status === false) {
             alert(res.data.message);
           } else {
-            
             setrecentOrders(res.data.count);
             resolve(true);
           }
@@ -32,6 +31,7 @@ function Dashboard() {
         });
     });
   }
+
   function toBeShippeOrderFunc() {
     return new Promise((resolve) => {
       axios
@@ -49,6 +49,7 @@ function Dashboard() {
         });
     });
   }
+
   function shippedOrderFunc() {
     return new Promise((resolve) => {
       axios
@@ -66,29 +67,30 @@ function Dashboard() {
         });
     });
   }
-    function completedOrderFunc() {
-      return new Promise((resolve) => {
-        axios
-          .get("http://localhost:8000/client/order/count/Completed")
-          .then((res) => {
-            if (res.data.status === false) {
-              alert(res.data.message);
-            } else {
-              setCompletedOrders(res.data.count);
-              resolve(true);
-            }
-          })
-          .catch((err) => {
-            alert(err.message);
-          });
-      });
-    }
+
+  function completedOrderFunc() {
+    return new Promise((resolve) => {
+      axios
+        .get("http://localhost:8000/client/order/count/Completed")
+        .then((res) => {
+          if (res.data.status === false) {
+            alert(res.data.message);
+          } else {
+            setCompletedOrders(res.data.count);
+            resolve(true);
+          }
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    });
+  }
 
   async function callFunc() {
     await recentOrderFunc();
     await toBeShippeOrderFunc();
     await shippedOrderFunc();
-       await completedOrderFunc();
+    await completedOrderFunc();
   }
 
   useEffect(() => {
@@ -115,7 +117,12 @@ function Dashboard() {
               />
             </div>
             <div className="dash_section_one_container_box_body ">
-              <p>100,000</p>
+              <p>
+                {completedOrders +
+                  shippedOrders +
+                  toBeShippedOrders +
+                  recentOrders}
+              </p>
             </div>
           </div>
           <div className="dash_section_one_container_box ">
@@ -184,7 +191,9 @@ function Dashboard() {
             <div className="stat-summary-section-wraper">
               {" "}
               <div className="stat-summary-section-topic">Completed Orders</div>
-              <div className="stat-summary-section-answer">{completedOrders}</div>
+              <div className="stat-summary-section-answer">
+                {completedOrders}
+              </div>
             </div>
           </div>
         </div>

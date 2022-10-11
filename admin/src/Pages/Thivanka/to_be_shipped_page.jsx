@@ -29,7 +29,7 @@ function ToBeShipped() {
   return (
     <div className="main-container">
       <NavBar />
-      <div className="body-container">
+      <div className="body-container clearfix">
         <div className="tobeshipped-section-one-container ">
           <div className="tobeshipped-section-one-left ">
             <h3 style={{ marginLeft: "25px", marginRight: "5px" }}>

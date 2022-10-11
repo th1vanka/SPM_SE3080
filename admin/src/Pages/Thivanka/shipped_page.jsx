@@ -26,7 +26,7 @@ function Shipped() {
   return (
     <div className="main-container">
       <NavBar />
-      <div className="body-container">
+      <div className="body-container clearfix">
         <div className="shipped-section-one-container ">
           <div className="shipped-section-one-left ">
             <h3 style={{ marginLeft: "25px", marginRight: "5px" }}>
