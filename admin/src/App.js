@@ -25,7 +25,6 @@ function App() {
         <Route path="/complete/order" element={<Completed />} />
         <Route path="/order/report" element={<Report />} />
         <Route path="/order/details/:oid/:state" element={<OrderDetails />} />
-
         <Route path="/complaints" element={<Complaints/>} />
         <Route path="/SellerDetalils" element={<SellerDetalils></SellerDetalils>} />
         <Route path="/SellerReply" element={<SellerReply/>} />
