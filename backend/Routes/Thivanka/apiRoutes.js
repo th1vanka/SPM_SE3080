@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Cart = require("../../Models/Thivanka/cart");
 const Order = require("../../Models/Thivanka/order");
+const Product = require("../../Models/Deborah/items");
 
 // client's items save in the cart
 router.route("/cart/item/save").post(async (req, res) => {
@@ -343,6 +344,68 @@ router.route("/summery/order").get(async (req, res) => {
       }
     }
   });
+});
+
+router.route("/item/rating/save/:itemId/:oid").post(async (req, res) => {
+  const id = req.params.itemId;
+  const oid = req.params.oid;
+  const { name, review, comment } = req.body;
+
+  let today = new Date();
+  let date =
+    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+
+  function ratingFunc(name, review, comment, date) {
+    return new Promise((resolve) => {
+      Product.findOneAndUpdate(
+        { _id: id },
+        {
+          $push: {
+            ratings: [
+              {
+                Name: name,
+                Date: date,
+                Review: review,
+                Comment: comment,
+              },
+            ],
+          },
+        }
+      )
+        .then((data) => {
+          if (data) {
+            resolve(true);
+          }
+        })
+        .catch((err) => {
+          res.json(err);
+        });
+    });
+  }
+  async function callFunc(iid, oid) {
+    const status = await ratingFunc(name, review, comment, date);
+    if (status === true) {
+      Order.updateOne(
+        { _id: oid, "product.productId": iid },
+        { $set: { "product.$.isReviewed": true } }
+      ).then((data) => {
+        if (data.modifiedCount > 0) {
+          res.json({
+            status: true,
+            message: "Thank you for your valuable feedback!",
+          });
+        } else {
+          res.json({
+            status: false,
+            message: "Try again later!",
+          });
+        }
+      });
+    } else {
+      res.json({ status: false, message: "Something went wrong!" });
+    }
+  }
+  callFunc(id, oid);
 });
 
 module.exports = router;
