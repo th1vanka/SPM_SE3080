@@ -35,14 +35,13 @@ function OrderDetail(props) {
               </p>
             </div>
             <div className="order-detail-header-orddetails">
-              <p> Order Date : 2022.05.27</p>{" "}
-              <p>Order ID : 6318cb0974eb04a509c0ddca</p>
+              <p> Order Date : {props.date}</p> <p>Order ID : {props.id}</p>
             </div>
           </div>
 
           <div className="order-body">
             <div style={{ width: "75%" }}>
-              <h3>Wooden Planter small</h3>
+              <h3>{props.pname}</h3>
               <p
                 style={{
                   marginTop: "5px",
@@ -51,7 +50,7 @@ function OrderDetail(props) {
                   marginLeft: "5px",
                 }}
               >
-                4 Items
+                {props.qty} Items
               </p>
               <p
                 style={{
@@ -61,18 +60,15 @@ function OrderDetail(props) {
                   marginLeft: "5px",
                 }}
               >
-                US $100 x 4
+                ${props.price} x {props.qty}
               </p>
             </div>
             <div style={{ width: "25%", paddingTop: "10px" }}>
               <p
                 style={{ fontWeight: "500", fontSize: "13px", color: "orange" }}
               >
-                Total: US $400.00
+                Total: {(props.price * props.qty).toFixed(2)}
               </p>
-              {props.delete && (
-                <button className="order-delete-btn">Delete</button>
-              )}
               {props.review && (
                 <button className="order-delete-btn" onClick={reviewHandler}>
                   Review

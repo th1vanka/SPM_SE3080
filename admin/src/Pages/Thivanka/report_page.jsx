@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../css/common.css";
 import "../../css/Thivanka/report.css";
 import NavBar from "../../Components/Thivanka/nav_bar";
@@ -15,76 +15,44 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import axios from "axios";
 
 function Report() {
+  const [graph, setGraphDetails] = useState([]);
 
-const data = [
-  {
-    name: "Jan",
-    Completed: 4000,
-    Cancelled: 2400,
-  },
-  {
-    name: "Feb",
-    Completed: 3000,
-    Cancelled: 1398,
-  },
-  {
-    name: "Mar",
-    Completed: 2000,
-    Cancelled: 9800,
-  },
-  {
-    name: "Apr",
-    Completed: 2780,
-    Cancelled: 3908,
-  },
-  {
-    name: "May",
-    Completed: 1890,
-    Cancelled: 4800,
-  },
-  {
-    name: "Jun",
-    Completed: 2390,
-    Cancelled: 3800,
-  },
-  {
-    name: "Jul",
-    Completed: 3490,
-    Cancelled: 4300,
-  },
-  {
-    name: "Aug",
-    Completed: 3490,
-    Cancelled: 4300,
-  },
-  {
-    name: "Sep",
-    Completed: 3490,
-    Cancelled: 4300,
-  },
-  {
-    name: "Oct",
-    Completed: 3490,
-    Cancelled: 4300,
-  },
-  {
-    name: "Nov",
-    Completed: 3490,
-    Cancelled: 4300,
-  },
-  {
-    name: "Dec",
-    Completed: 3490,
-    Cancelled: 4300,
-  },
-];
-const data01 = [
-  { name: "Completed Orders", value: 400 },
-  { name: "Cancelled Orders", value: 300 },
-   
-];
+  function graphData() {
+    return new Promise((resolve) => {
+      axios
+        .get("http://localhost:8000/client/summery/order")
+        .then((res) => {
+          if (res.data.status === false) {
+            alert(res.data.message);
+          } else {
+            setGraphDetails(res.data.data);
+            resolve(true);
+          }
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    });
+  }
+
+  
+
+
+  async function callFunc() {
+    const graph = await graphData();
+  }
+
+  useEffect(() => {
+    callFunc();
+  }, []);
+
+  const data01 = [
+    { name: "Completed Orders", value: 400 },
+    { name: "Cancelled Orders", value: 300 },
+  ];
 
   return (
     <div className="main-container">
@@ -134,12 +102,12 @@ const data01 = [
         </div>
         <div className="report-graph-container">
           <div className="report-graph-section-wrapper1">
-            <h5 style={{ color: "gray" }}>Test heading</h5>
+            <h5 style={{ color: "gray" }}>Annual Order Rate </h5>
             <ResponsiveContainer width="100%" height="80%">
               <LineChart
                 width={500}
                 height={300}
-                data={data}
+                data={graph}
                 margin={{
                   top: 5,
                   right: 35,
@@ -154,11 +122,10 @@ const data01 = [
                 <Legend />
                 <Line
                   type="monotone"
-                  dataKey="Completed"
+                  dataKey="Orders"
                   stroke="green"
                   activeDot={{ r: 8 }}
                 />
-                <Line type="monotone" dataKey="Cancelled" stroke="red" />
               </LineChart>
             </ResponsiveContainer>
           </div>
