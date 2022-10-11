@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const User = require("../../Models/Janani/user");
 
-//hotel registration routes
+//user registration routes
 router.route("/data/save").post(async (req, res) => {
   const { name, email, country, password } = req.body;
   const user = User.find({ email: { $eq: email } });
@@ -9,7 +9,6 @@ router.route("/data/save").post(async (req, res) => {
     res.json({ status: false, message: "This user is alraedy exist!" });
   } else {
     const details = new User({
-      username: "1030",
       name: name,
       mobile: "0000000000",
       bdate: "0",
@@ -25,7 +24,8 @@ router.route("/data/save").post(async (req, res) => {
           message: "Registration Done!",
         });
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err);
         res.json({
           status: false,
           message: "Something went wrong!",
@@ -48,11 +48,10 @@ router.route("/login/:email/:password").get((req, res) => {
     });
 });
 
-
 router.route("/details/update/:username").put(async (req, res) => {
   const username = req.params.username;
-  const data = req.body.data
-  
+  const data = req.body.data;
+
   User.updateOne({ username: username }, { $push: { data } })
     .then((data) => {
       res.json({ status: data.acknowledged });

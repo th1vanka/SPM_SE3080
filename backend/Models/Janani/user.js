@@ -5,10 +5,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  username: {
-    type: String,
-    required: true,
-  },
+
   email: {
     type: String,
     required: true,
@@ -32,6 +29,6 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-const users = new mongoose.model("Users", userSchema);
+const users = new mongoose.model("Clients", userSchema);
 
 module.exports = users;
