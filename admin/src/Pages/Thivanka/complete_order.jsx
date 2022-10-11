@@ -7,9 +7,9 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 
-function ToBeShipped() {
+function Completed() {
   const [details, setDetails] = useState([]);
-  const state = "To be shipped";
+  const state = "Completed";
 
   useEffect(() => {
     axios
@@ -74,7 +74,7 @@ function ToBeShipped() {
 function TableRow(props) {
   const navigate = useNavigate();
   const clickHandler = () => {
-    const state = "Shipped";
+    const state = "Complete";
     navigate(`/order/details/${props.id}/${state}`);
   };
   return (
@@ -87,4 +87,4 @@ function TableRow(props) {
   );
 }
 
-export default ToBeShipped;
+export default Completed;
