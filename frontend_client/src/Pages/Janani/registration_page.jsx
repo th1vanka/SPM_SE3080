@@ -5,12 +5,15 @@ import Footter from "../../Components/Thivanka/footter";
 import "../../Css/Janani/registration.css";
 import axios from "axios";
 import LoginImage from "../../Assets/login.png";
+import { useNavigate } from "react-router";
 
 function Regitstration() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [country, setContry] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigation = useNavigate();
 
   const submitHandler = () => {
     if (name.trim().length === 0) {
@@ -23,9 +26,11 @@ function Regitstration() {
       alert("All the feilds required!");
     } else {
       const data = { name, email, country, password };
+
       axios
         .post("http://localhost:8000/user/data/save", data)
         .then((res) => {
+          navigation("/");
           alert(res.data.message);
         })
         .catch((err) => {

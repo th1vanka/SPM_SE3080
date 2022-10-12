@@ -1,33 +1,39 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "../../Components/Thivanka/nav_bar";
-import HomeHeader from "../../Components/Thivanka/home_header";
-import Footter from "../../Components/Thivanka/footter";
-import "../../Css/Janani/user_profile_home.css";
-import Image from "../../Assets/Profile data.png";
+import NavBar from "../../../Components/Thivanka/nav_bar";
+import HomeHeader from "../../../Components/Thivanka/home_header";
+import Footter from "../../../Components/Thivanka/footter";
+import "../../../Css/Janani/user_profile_home.css";
+import Image from "../../../Assets/Profile data.png";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-function UserProfileHome() {
+function UserProfileAddAddress() {
   const nav = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState(localStorage.getItem("email"));
   const [country, setContry] = useState(localStorage.getItem("con"));
   const [mobile, setMobile] = useState(localStorage.getItem("mobile"));
-  const [bdate, setBDate] = useState(localStorage.getItem("bdate"));
+  const [personalInformation, setPersonalInformation] = useState("");
+  const [address, setAddress] = useState("");
   const userName = localStorage.getItem("userName");
 
   const navigate = useNavigate();
+  const { state } = useLocation();
+  console.log(state);
   useEffect(() => {
-    getUserDetails();
-  }, [email]);
+    if (state) getShippingDetails(state);
+  }, [state]);
 
-  const getUserDetails = () => {
+  const getShippingDetails = (state) => {
+    const id = state;
     axios
-      .get(`http://localhost:8000/user/details/get/${email}`)
+      .get(`http://localhost:8000/user/address/getbyid/${id}`)
       .then((res) => {
-        setName(res.data?.name);
-        setBDate(res.data?.bdate);
-        setMobile(res.data?.mobile);
+        console.log(res);
+        setPersonalInformation(res.data.personalInfo);
+        setContry(res.data.country);
+        setAddress(res.data.address);
+        setMobile(res.data.mobile);
       })
       .catch((err) => {
         console.log(err);
@@ -35,19 +41,19 @@ function UserProfileHome() {
   };
 
   const updateHandler = () => {
+    const id = state;
     const data = {
-      name,
+      personalInformation,
       email,
       country,
       mobile,
-      bdate,
+      address,
     };
     axios
-      .put(`http://localhost:8000/user/details/update/${data.email}`, data)
+      .put(`http://localhost:8000/user/address/update/${id}`, data)
       .then((res) => {
         if (res.data.status === true) {
-          getUserDetails();
-          alert("User Updated !!");
+          alert("Address Updated !!");
         } else {
           alert(res.data.message);
         }
@@ -57,16 +63,35 @@ function UserProfileHome() {
       });
   };
 
-  const deleteHandler = () => {
+  const addHandler = () => {
+    if (personalInformation == "") {
+      alert("Please provide the personal informations");
+      return;
+    } else if (address == "") {
+      alert("Please provide the address");
+      return;
+    } else if (address.length < 10) {
+      alert("Address must be more than 10 characters");
+      return;
+    } else if (mobile.length != 10) {
+      alert("Mobile number is invalid");
+      return;
+    }
+    const data = {
+      personalInformation,
+      email,
+      country,
+      mobile,
+      address,
+    };
     axios
-      .get(`http://localhost:8000/user/details/remove/${email}`)
+      .post(`http://localhost:8000/user/address/add`, data)
       .then((res) => {
-        if (res.data) {
-          localStorage.clear();
-          alert("Done");
-          nav("/");
+        if (res.data.status === true) {
+          alert("Address Updated !!");
+          navigate("/profile/address-book");
         } else {
-          alert("Faild");
+          alert(res.data.message);
         }
       })
       .catch((err) => {
@@ -88,10 +113,10 @@ function UserProfileHome() {
           <div className="profile-home-container">
             <div className="profile-home-container-left-wrapper">
               <h4>Hi,Janani Hansika</h4>
-              <h5 style={{ marginTop: "8px" }}>My Account</h5>
+              <h5 style={{ marginTop: "8px", color: "#CC8B86" }}>My Account</h5>
               <div className="profile-home-nav-bar">
                 <p
-                  style={{ marginBottom: "30px", color: "#CC8B86" }}
+                  style={{ marginBottom: "30px" }}
                   onClick={() => navigate("/profile")}
                 >
                   My Profile
@@ -124,45 +149,7 @@ function UserProfileHome() {
             </div>
             <div className="profile-home-container-right-wrapper">
               <div className="input-wrapper">
-                <h4 style={{ marginBottom: "10px" }}>Edit Profile</h4>
-                <label
-                  style={{
-                    fontSize: "14px",
-                    fontWeight: "500",
-                    marginTop: "20px",
-                  }}
-                >
-                  Full Name
-                </label>
-                <br />
-                <input
-                  type="text"
-                  className="profile-input-fields"
-                  value={name}
-                  onChange={(e) => {
-                    setName(e.target.value);
-                  }}
-                />
-                <br />
-                <label
-                  style={{
-                    fontSize: "14px",
-                    fontWeight: "500",
-                    marginTop: "20px",
-                  }}
-                >
-                  Email Address
-                </label>
-                <br />
-                <input
-                  type="text"
-                  className="profile-input-fields"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
-                />
-                <br />
+                <h4 style={{ marginBottom: "10px" }}>Add Shipping Address</h4>
                 <label
                   style={{
                     fontSize: "14px",
@@ -193,6 +180,26 @@ function UserProfileHome() {
                     marginTop: "20px",
                   }}
                 >
+                  Personal Information
+                </label>
+                <br />
+                <input
+                  type="text"
+                  className="profile-input-fields"
+                  value={personalInformation}
+                  onChange={(e) => {
+                    setPersonalInformation(e.target.value);
+                  }}
+                />
+
+                <br />
+                <label
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "500",
+                    marginTop: "20px",
+                  }}
+                >
                   Mobile
                 </label>
                 <br />
@@ -205,6 +212,7 @@ function UserProfileHome() {
                   }}
                 />
                 <br />
+
                 <label
                   style={{
                     fontSize: "14px",
@@ -212,37 +220,32 @@ function UserProfileHome() {
                     marginTop: "20px",
                   }}
                 >
-                  Birthday
+                  Address
                 </label>
                 <br />
-                <input
-                  type="date"
+                <textarea
+                  type="text"
                   className="profile-input-fields"
-                  value={bdate}
+                  placeholder="address"
+                  style={{ height: "100px" }}
+                  value={address}
                   onChange={(e) => {
-                    setBDate(e.target.value);
+                    setAddress(e.target.value);
                   }}
                 />
-                <br />
+
                 <div
                   style={{ display: "flex", gap: "10px", marginTop: "25px" }}
                 >
-                  <button className="profile-btn" onClick={updateHandler}>
-                    Edit Profile
-                  </button>
-                  <button
-                    className="profile-btn"
-                    onClick={() => navigate("/profile/change-password")}
-                  >
-                    Edit Password
-                  </button>
-                  <button
-                    className="profile-btn"
-                    style={{ backgroundColor: "red" }}
-                    onClick={deleteHandler}
-                  >
-                    Deactivate
-                  </button>
+                  {!state ? (
+                    <button className="profile-btn" onClick={addHandler}>
+                      Add Address
+                    </button>
+                  ) : (
+                    <button className="profile-btn" onClick={updateHandler}>
+                      Update
+                    </button>
+                  )}
                 </div>
               </div>
               <div className="image-wrapper">
@@ -263,4 +266,4 @@ function UserProfileHome() {
   );
 }
 
-export default UserProfileHome;
+export default UserProfileAddAddress;

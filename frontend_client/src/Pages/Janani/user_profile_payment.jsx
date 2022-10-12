@@ -1,66 +1,16 @@
-import React, { useState, useEffect } from "react";
-import "../../Css/Thivanka/shopping_cart.css";
+import React, { useEffect, useState } from "react";
+import "../../Css/Janani/user_profile_home.css";
 import NavBar from "../../Components/Thivanka/nav_bar";
 import HomeHeader from "../../Components/Thivanka/home_header";
-import ShoppingCartItems from "../../Components/Thivanka/shopping_cart_items";
-import EditIcon from "@mui/icons-material/Edit";
-import Visa from "../../Assets/visa.png";
-import Master from "../../Assets/master.png";
-import Paypal from "../../Assets/paypal.png";
-import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import Footter from "../../Components/Thivanka/footter";
-import axios from "axios";
-import { Box, Modal, Typography } from "@mui/material";
-import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-import SendToMobileOutlinedIcon from "@mui/icons-material/SendToMobileOutlined";
-import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
-import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
+import "../../Css/Janani/user_profile_nav.css";
 import { useNavigate } from "react-router";
-let price = 0;
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  width: "50%",
-  transform: "translate(-50%, -50%)",
-
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
-function ShoppingCart() {
-  const items = [];
-  const [total, setTotal] = useState(0);
-  const [details, setDetails] = useState([]);
-  const [open, setOpen] = useState(false);
-  const [openPaymentModal, setOpenPaymentModal] = useState(false);
-  const email = localStorage.getItem("email");
-  const [shippingData, setShippingData] = useState([]);
-  const [paymentData, setPaymentData] = useState([]);
-  const [paymentDetails, setPaymentDetails] = useState(null);
-  const [shippingDetails, setShippingDetails] = useState(null);
-  const [mobile, setMobile] = useState(localStorage.getItem("mobile"));
-  const navigate = useNavigate();
-
+import axios from "axios";
+import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
+function UserProfilePaymentOptions() {
   const navigation = useNavigate();
-  useEffect(() => {
-    getShippingDetails();
-  }, [email]);
-
-  const getShippingDetails = () => {
-    axios
-      .get(`http://localhost:8000/user/address/get/${email}`)
-      .then((res) => {
-        console.log(res);
-        setShippingDetails(res.data[0]);
-        setShippingData(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
+  const [email, setEmail] = useState(localStorage.getItem("email"));
+  const [paymentOptions, setPaymentOptions] = useState([]);
   useEffect(() => {
     getPaymentOptions();
   }, [email]);
@@ -70,118 +20,27 @@ function ShoppingCart() {
       .get(`http://localhost:8000/user/payment-options/get/${email}`)
       .then((res) => {
         console.log(res);
-        setPaymentDetails(res.data[0]);
-        setPaymentData(res.data);
+        setPaymentOptions(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  const reloadHandler = () => {
+  const deleteHandler = (id) => {
     axios
-      .get(`http://localhost:8000/client/cart/item/${email}`)
+      .get(`http://localhost:8000/user/payment-options/remove/${id}`)
       .then((res) => {
-        setDetails(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8000/client/cart/item/${email}`)
-      .then((res) => {
-        if (res.data !== null) {
-          console.log("res.data", res.data);
-          setDetails(res.data);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [email]);
-
-  const checkHandler = (e) => {
-    const { name, checked, value } = e.target;
-    let data = { name, value, check: checked };
-    items.push(data);
-
-    if (checked === true) {
-      price = price + parseInt(value);
-    } else {
-      price = price - parseInt(value);
-    }
-    setTotal(price);
-  };
-
-  const clearCartHandler = () => {
-    const confirmBox = window.confirm(
-      "Are you sure want to approve this request?"
-    );
-    if (confirmBox === true) {
-      axios
-        .get(`http://localhost:8000/client/cart/item/${email}`)
-        .then((res) => {
-          if (res.data.status === true) {
-            alert("Cart Clear");
-            // window.location.reload(true)
-            reloadHandler();
-          } else {
-            alert("Cart Not Clear...");
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  };
-
-  const proceedHandler = () => {
-    console.log(total);
-    if (total === 0) {
-      alert("Select an Item");
-      return;
-    } else if (shippingDetails == null) {
-      alert("Please select a shipping address");
-      return;
-    } else if (paymentDetails == null) {
-      alert("Please select a payment option");
-      return;
-    }
-
-    const data = {
-      details,
-      shippingDetails,
-      paymentDetails,
-      email,
-      mobile,
-    };
-    axios
-      .post(`http://localhost:8000/order/save`, data)
-      .then((res) => {
-        if (res.data.status === true) {
-          alert("Order sucessfully Updated !!");
+        if (res.data) {
+          getPaymentOptions();
+          alert("Deleted !!");
         } else {
-          alert(res.data.message);
+          alert("Faild");
         }
       })
       .catch((err) => {
         console.log(err);
       });
-  };
-
-  const handelShippingDetails = (id) => {
-    shippingData.forEach((element) => {
-      if (element._id == id) setShippingDetails(element);
-    });
-  };
-
-  const handlePayment = (id) => {
-    paymentData.forEach((element) => {
-      if (element._id == id) setPaymentDetails(element);
-    });
   };
 
   return (
@@ -194,187 +53,55 @@ function ShoppingCart() {
           <HomeHeader />
         </div>
         <div className="site-details-wrapper clearfix">
-          <div className="shopping-cart-container">
-            <div className="shopping-cart-items-wrapper">
-              <div className="shopping-cart-item-count">
-                <h3 style={{ float: "left", margin: "10px" }}>
-                  Shopping Cart({details.length})
-                </h3>
-                <button className="cart-clean-btn" onClick={clearCartHandler}>
-                  Clear Cart <DeleteOutlinedIcon fontSize="small" />
-                </button>
-              </div>
-
-              {details.map((detail, index) => (
-                <ShoppingCartItems
-                  key={index}
-                  name={detail.itemName}
-                  category={detail.category}
-                  qty={detail.qty}
-                  price={detail.price}
-                  checkHandler={checkHandler}
-                  email={email}
-                  id={detail._id}
-                  image={detail.itemURL}
-                />
-              ))}
-            </div>
-            <div className="shopping-cart-items-total-wrapper">
-              <center>
-                <div style={{ fontWeight: "bold", fontSize: "18px" }}>
-                  Summary
-                </div>
-              </center>
-              <div className="shopping-cart-items-total-dis">
-                <div className="shopping-cart-items-total-dis-question">
-                  <p>Total</p>
-                  <br />
-                  <p>Shipping</p>
-                </div>
-                <div className="shopping-cart-items-total-dis-answer">
-                  <p>Rs {total}.00</p>
-                  <br />
-                  <p>Rs 250.00</p>
-                </div>
-              </div>
-              <div className="shopping-cart-items-subtotal">
-                <div className="shopping-cart-items-total-dis-question">
-                  <p>Sub Total</p>
-                </div>
-                <div className="shopping-cart-items-total-dis-answer">
-                  <p>Rs {total + 250}.00</p>
-                </div>
-              </div>
-              <div className="shopping-cart-proceed-btn-wrapper">
-                <center>
-                  <button
-                    className="shopping-cart-proceed-btn"
-                    onClick={proceedHandler}
-                  >
-                    Proceed
-                  </button>
-                </center>
-              </div>
-
-              <div className="payment-edit-section">
-                <div
-                  style={{
-                    width: "100%",
-                    display: "flex",
-                    paddingTop: "10px",
-                    paddingLeft: "10px",
-                  }}
+          {/* body start */}
+          <div className="profile-nav-home-container">
+            <div className="profile-nav-home-container-left-wrapper">
+              <h4>Hi,Janani Hansika</h4>
+              <h5 style={{ marginTop: "8px" }}>My Account</h5>
+              <div className="profile-nav-home-nav-bar">
+                <p
+                  style={{ marginBottom: "30px" }}
+                  onClick={() => navigation("/profile")}
                 >
-                  <div style={{ width: "85%", fontWeight: "500" }}>
-                    Shipping Address
-                  </div>
-                  <div
-                    style={{ width: "15%", cursor: "pointer" }}
-                    onClick={() => setOpen(true)}
-                  >
-                    <EditIcon fontSize="small" onClick={() => setOpen(true)} />
-                  </div>
-                </div>
-                <div
-                  style={{ width: "90%", margin: "auto", marginTop: "15px" }}
+                  My Profile
+                </p>
+                <p
+                  style={{ marginBottom: "30px" }}
+                  onClick={() => navigation("/profile/address-book")}
                 >
-                  <p>
-                    {shippingDetails?.address} - {shippingDetails?.personalInfo}
-                  </p>
-                </div>
-              </div>
-              <div className="payment-edit-section">
-                <div
-                  style={{
-                    width: "100%",
-                    display: "flex",
-                    paddingTop: "10px",
-                    paddingLeft: "10px",
-                  }}
+                  Address Book
+                </p>
+                <p
+                  style={{ marginBottom: "30px", color: "#CC8B86" }}
+                  onClick={() => navigation("/profile/payment")}
                 >
-                  <div style={{ width: "85%", fontWeight: "500" }}>
-                    Payment Methods
-                  </div>
-                  <div style={{ width: "15%", cursor: "pointer" }}>
-                    <EditIcon
-                      fontSize="small"
-                      onClick={() => setOpenPaymentModal(true)}
-                    />
-                  </div>
-                </div>
-                <div
-                  style={{ width: "90%", margin: "auto", marginTop: "15px" }}
+                  Payment
+                </p>
+                <p
+                  style={{ marginBottom: "30px" }}
+                  onClick={() => navigation("/order")}
                 >
-                  {paymentDetails?.cardName} - {paymentDetails?.cardNumber} -{" "}
-                  {paymentDetails?.cardType}
-                </div>
+                  Orders
+                </p>
+                <p
+                  style={{ marginBottom: "30px" }}
+                  onClick={() => navigation("/review")}
+                >
+                  Reviews
+                </p>
               </div>
             </div>
-          </div>
-        </div>
-        <Modal
-          open={open}
-          onClose={setOpen}
-          aria-labelledby="parent-modal-title"
-          aria-describedby="parent-modal-description"
-        >
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Select A Shipping Address
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            <div className="profile-nav-home-container-right-wrapper">
+              <br />
+              <h4>Payment Options</h4>
+              <button onClick={() => navigation("/profile/payment/add")}>
+                <AddCircleOutlineOutlinedIcon fontSize="large" />
+              </button>
               <div className="item-box-wrapper-shipping">
-                {shippingData.map((item, index) => (
-                  <div
-                    className="item-box-shipping"
-                    style={{
-                      paddingTop: "30px",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => {
-                      handelShippingDetails(item._id);
-                      setOpen(false);
-                    }}
-                  >
-                    <p style={{ paddingBottom: "5px" }}>
-                      <PersonOutlineOutlinedIcon /> Personal Info:{" "}
-                      {item?.personalInfo}
-                    </p>
-                    <p style={{ paddingBottom: "5px" }}>
-                      <SendToMobileOutlinedIcon />
-                      Mobile: {item?.mobile}
-                    </p>
-                    <p style={{ paddingBottom: "5px" }}>
-                      <LocationOnOutlinedIcon /> Address: {item?.address}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </Typography>
-          </Box>
-        </Modal>
-
-        <Modal
-          open={openPaymentModal}
-          onClose={setOpenPaymentModal}
-          aria-labelledby="parent-modal-title"
-          aria-describedby="parent-modal-description"
-        >
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Select A Payment Option
-            </Typography>
-            <Typography id="modal-modal-description">
-              <div className="item-box-wrapper-shipping">
-                {paymentData.map((item, index) => (
+                {paymentOptions.map((item, index) => (
                   <div
                     style={{
                       paddingTop: "30px",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => {
-                      handlePayment(item._id);
-                      setOpenPaymentModal(false);
                     }}
                   >
                     <div class="panel">
@@ -396,18 +123,30 @@ function ShoppingCart() {
                               : "data:image/png;base64,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"
                           }
                         />
+                        <p
+                          style={{
+                            color: "red",
+                            fontWeight: "bold",
+                            paddingTop: "10px",
+                          }}
+                          onClick={() => deleteHandler(item._id)}
+                        >
+                          DELETE
+                        </p>
                       </div>
                     </div>
                   </div>
                 ))}
               </div>
-            </Typography>
-          </Box>
-        </Modal>
+            </div>
+          </div>
+          {/* body end */}
+        </div>
+
         <Footter />
       </div>
     </div>
   );
 }
 
-export default ShoppingCart;
+export default UserProfilePaymentOptions;
