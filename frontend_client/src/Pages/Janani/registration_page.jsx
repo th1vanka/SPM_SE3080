@@ -6,6 +6,7 @@ import "../../Css/Janani/registration.css";
 import axios from "axios";
 import LoginImage from "../../Assets/login.png";
 import { useNavigate } from "react-router";
+import validator from "validator";
 
 function Regitstration() {
   const [name, setName] = useState("");
@@ -17,13 +18,15 @@ function Regitstration() {
 
   const submitHandler = () => {
     if (name.trim().length === 0) {
-      alert("All the feilds required!");
+      alert("All the fields required!");
     } else if (email.trim().length === 0) {
-      alert("All the feilds required!");
+      alert("All the fields required!");
+    } else if (!validator.isEmail(email)) {
+      alert("Please enter valid eamil");
     } else if (country.trim().length === 0) {
-      alert("All the feilds required!");
+      alert("All the fields required!");
     } else if (password.trim().length === 0) {
-      alert("All the feilds required!");
+      alert("All the fields required!");
     } else {
       const data = { name, email, country, password };
 
