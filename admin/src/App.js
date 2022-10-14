@@ -27,10 +27,10 @@ function App() {
         <Route path="/order/details/:oid/:state" element={<OrderDetails />} />
 
         
-        <Route path="/complaints" element={<Complaints/>} />
+        {/* <Route path="/complaints" element={<Complaints/>} />
         <Route path="/SellerDetalils" element={<SellerDetalils></SellerDetalils>} />
         <Route path="/SellerReply" element={<SellerReply/>} />
-        <Route path="/test" element={<TestReply/>} />
+        <Route path="/test" element={<TestReply/>} /> */}
       </Routes>
     </Router>
   );

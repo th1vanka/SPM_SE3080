@@ -421,8 +421,8 @@ router.route("/product/get").get(async (req, res) => {
         for (let y = 0; y < details[i].ratings.length; y++) {
           tot = tot + parseInt(details[i].ratings[y].Review);
         }
-        newObj.totRating = (tot / details[i].ratings.length);
-         newObj.id = details[i]._id;
+        newObj.totRating = tot / details[i].ratings.length;
+        newObj.id = details[i]._id;
         newObj.url = details[i].image;
         newObj.category = details[i].category;
         newObj.name = details[i].name;
@@ -444,7 +444,6 @@ router.route("/each/item/:id").get(async (req, res) => {
       res.json({ status: false, message: "Something went wrong!" });
     });
 });
-
 
 //summery client orders
 router.route("/each-month/order/total").get(async (req, res) => {
@@ -471,51 +470,91 @@ router.route("/each-month/order/total").get(async (req, res) => {
         res.json({ status: true, data: productDetails });
       }
       fetchData();
-      
+
       function getEachMonthData(details) {
         for (let x = 0; x < details.length; x++) {
-          if (details[x].month == "1") {
-            jan = jan + details[x].product.length;
-          } else if (details[x].month == "2") {
-            feb = feb + details[x].product.length;
-          } else if (details[x].month == "3") {
-            march = march + details[x].product.length;
-          } else if (details[x].month == "4") {
-            april = april + details[x].product.length;
-          } else if (details[x].month == "5") {
-            may = may + details[x].product.length;
-          } else if (details[x].month == "6") {
-            jun = jun + details[x].product.length;
-          } else if (details[x].month == "7") {
-            jul = jul + details[x].product.length;
-          } else if (details[x].month == "8") {
-            aug = aug + details[x].product.length;
-          } else if (details[x].month == "9") {
-            sep = sep + details[x].product.length;
-          } else if (details[x].month == "10") {
-            oct = oct + details[x].product.length;
-          } else if (details[x].month == "11") {
-            nov = nov + details[x].product.length;
-          } else if (details[x].month == "12") {
-            dec = dec + details[x].product.length;
+          for (let y = 0; y < details[x].product.length; y++) {
+            if (details[x].month == "1") {
+              jan = jan + parseFloat(details[x].product[y].subTotal);
+            } else if (details[x].month == "2") {
+              feb = feb + parseFloat(details[x].product[y].subTotal);
+            } else if (details[x].month == "3") {
+              march = march + parseFloat(details[x].product[y].subTotal);
+            } else if (details[x].month == "4") {
+              april = april + parseFloat(details[x].product[y].subTotal);
+            } else if (details[x].month == "5") {
+              may = may + parseFloat(details[x].product[y].subTotal);
+            } else if (details[x].month == "6") {
+              jun = jun + parseFloat(details[x].product[y].subTotal);
+            } else if (details[x].month == "7") {
+              jul = jul + parseFloat(details[x].product[y].subTotal);
+            } else if (details[x].month == "8") {
+              aug = aug + parseFloat(details[x].product[y].subTotal);
+            } else if (details[x].month == "9") {
+              sep = sep + parseFloat(details[x].product[y].subTotal);
+            } else if (details[x].month == "10") {
+              oct = oct + parseFloat(details[x].product[y].subTotal);
+            } else if (details[x].month == "11") {
+              nov = nov + parseFloat(details[x].product[y].subTotal);
+            } else if (details[x].month == "12") {
+              dec = dec + parseFloat(details[x].product[y].subTotal);
+            }
           }
         }
         dataArr.push(
-          { name: "Jan", Orders: jan },
-          { name: "Feb", Orders: feb },
-          { name: "Mar", Orders: march },
-          { name: "Apr", Orders: april },
-          { name: "May", Orders: may },
-          { name: "Jun", Orders: jun },
-          { name: "Jul", Orders: jul },
-          { name: "Aug", Orders: aug },
-          { name: "Sep", Orders: sep },
-          { name: "Oct", Orders: oct },
-          { name: "Nov", Orders: nov },
-          { name: "Dec", Orders: dec }
+          { name: "Jan", Total: jan },
+          { name: "Feb", Total: feb },
+          { name: "Mar", Total: march },
+          { name: "Apr", Total: april },
+          { name: "May", Total: may },
+          { name: "Jun", Total: jun },
+          { name: "Jul", Total: jul },
+          { name: "Aug", Total: aug },
+          { name: "Sep", Total: sep },
+          { name: "Oct", Total: oct },
+          { name: "Nov", Total: nov },
+          { name: "Dec", Total: dec }
         );
         return dataArr;
       }
+    }
+  });
+});
+
+//summery client orders
+router.route("/annual/orders/sub-total").get(async (req, res) => {
+  let tot = 0;
+
+  Order.find({ Status: { $eq: "Completed" } }).exec(function (err, details) {
+    if (err) {
+      res.json({ status: false, message: "Something went wrong!" });
+    } else {
+      function fetchData() {
+        const total = getEachMonthData(details);
+        res.json({ status: true, total });
+      }
+      fetchData();
+
+      function getEachMonthData(details) {
+        for (let x = 0; x < details.length; x++) {
+          for (let y = 0; y < details[x].product.length; y++) {
+            tot = tot + parseFloat(details[x].product[y].subTotal);
+          }
+        }
+
+        return tot.toFixed(2);
+      }
+    }
+  });
+});
+
+router.route("/annual/orders/count").get(async (req, res) => {
+   
+  Order.find({ Status: { $eq: "Completed" } }).exec(function (err, details) {
+    if (err) {
+      res.json({ status: false, message: "Something went wrong!" });
+    } else {
+      res.json({ status: true, count: details.length });
     }
   });
 });
