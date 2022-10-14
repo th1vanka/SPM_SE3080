@@ -39,8 +39,6 @@ function Report() {
   }
 
   
-
-
   async function callFunc() {
     await graphData();
     
@@ -148,6 +146,9 @@ function Report() {
               </PieChart>
             </ResponsiveContainer>
           </div>
+        </div>
+        <div>
+          
         </div>
       </div>
     </div>

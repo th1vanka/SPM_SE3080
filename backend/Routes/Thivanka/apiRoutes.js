@@ -445,4 +445,79 @@ router.route("/each/item/:id").get(async (req, res) => {
     });
 });
 
+
+//summery client orders
+router.route("/each-month/order/total").get(async (req, res) => {
+  let jan = 0;
+  let feb = 0;
+  let march = 0;
+  let april = 0;
+  let may = 0;
+  let jun = 0;
+  let jul = 0;
+  let aug = 0;
+  let sep = 0;
+  let oct = 0;
+  let nov = 0;
+  let dec = 0;
+  let dataArr = [];
+
+  Order.find({ Status: { $eq: "Completed" } }).exec(function (err, details) {
+    if (err) {
+      res.json({ status: false, message: "Something went wrong!" });
+    } else {
+      function fetchData() {
+        const productDetails = getEachMonthData(details);
+        res.json({ status: true, data: productDetails });
+      }
+      fetchData();
+      
+      function getEachMonthData(details) {
+        for (let x = 0; x < details.length; x++) {
+          if (details[x].month == "1") {
+            jan = jan + details[x].product.length;
+          } else if (details[x].month == "2") {
+            feb = feb + details[x].product.length;
+          } else if (details[x].month == "3") {
+            march = march + details[x].product.length;
+          } else if (details[x].month == "4") {
+            april = april + details[x].product.length;
+          } else if (details[x].month == "5") {
+            may = may + details[x].product.length;
+          } else if (details[x].month == "6") {
+            jun = jun + details[x].product.length;
+          } else if (details[x].month == "7") {
+            jul = jul + details[x].product.length;
+          } else if (details[x].month == "8") {
+            aug = aug + details[x].product.length;
+          } else if (details[x].month == "9") {
+            sep = sep + details[x].product.length;
+          } else if (details[x].month == "10") {
+            oct = oct + details[x].product.length;
+          } else if (details[x].month == "11") {
+            nov = nov + details[x].product.length;
+          } else if (details[x].month == "12") {
+            dec = dec + details[x].product.length;
+          }
+        }
+        dataArr.push(
+          { name: "Jan", Orders: jan },
+          { name: "Feb", Orders: feb },
+          { name: "Mar", Orders: march },
+          { name: "Apr", Orders: april },
+          { name: "May", Orders: may },
+          { name: "Jun", Orders: jun },
+          { name: "Jul", Orders: jul },
+          { name: "Aug", Orders: aug },
+          { name: "Sep", Orders: sep },
+          { name: "Oct", Orders: oct },
+          { name: "Nov", Orders: nov },
+          { name: "Dec", Orders: dec }
+        );
+        return dataArr;
+      }
+    }
+  });
+});
+
 module.exports = router;
