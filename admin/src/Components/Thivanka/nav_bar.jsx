@@ -120,8 +120,18 @@ function NavBar() {
             <p className="nav_link clearfix">Seller Reply</p>
           </div>
         </NavLink>
+        <NavLink to="/SellerReport" className="link_styles">
+          <div className="nav_link_wrapper">
+            <LocalShippingIcon
+              fontSize="small"
+              style={{ marginLeft: "45px" }}
+            />
+            <p className="nav_link clearfix">Seller Report</p>
+          </div>
+        </NavLink>
       </div>
-      {/* seller details end */}
+      
+   {/* seller details end */}
 
       {/* reports start */}
       <div className="nav_body ">

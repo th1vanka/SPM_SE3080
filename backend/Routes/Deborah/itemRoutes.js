@@ -6,29 +6,56 @@ const router = express.Router();
 //to save item details
 router.post("/items/save", (req, res) => {
   const paths = req.file.path;
+  const { name, category, quantity, price, status, Description, sellerID } =
+    req.body;
 
   cloudinary.uploader.upload(paths, function (error, result) {
     if (error) {
       console.log(error);
     } else {
       let link = result.secure_url;
-      console.log(link);
+      saveData(
+        link,
+        name, 
+        category,
+        quantity,
+        price,
+        status,
+        Description,
+        sellerID
+      );
     }
   });
 
-  //   function SaveData() {
-  //     newItem.save((err) => {
-  //       if (err) {
-  //         return res.status(400).json({
-  //           error: err,
-  //         });
-  //       } else {
-  //         return res.status(200).json({
-  //           success: "Item has been added successfully",
-  //         });
-  //       }
-  //     });
-  //   }
+  function saveData(
+    link,
+    name,
+    category,
+    quantity,
+    price,
+    status,
+    Description,
+    sellerID
+  ) {
+    const details = new Items({
+      image: link,
+      name: name,
+      category: category,
+      quantity: quantity,
+      price: price,
+      status: status,
+      Description: Description,
+      sellerID: sellerID,
+    });
+    details
+      .save()
+      .then((data) => {
+        res.json(data);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+  }
 });
 
 //read all item details from database

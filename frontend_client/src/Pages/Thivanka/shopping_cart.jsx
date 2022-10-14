@@ -216,6 +216,7 @@ function ShoppingCart() {
                   email={email}
                   id={detail._id}
                   image={detail.itemURL}
+                  itemId={detail.itemID}
                 />
               ))}
             </div>

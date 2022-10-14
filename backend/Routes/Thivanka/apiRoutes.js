@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Cart = require("../../Models/Thivanka/cart");
 const Order = require("../../Models/Thivanka/order");
+const Product = require("../../Models/Deborah/items");
 
 // client's items save in the cart
 router.route("/cart/item/save").post(async (req, res) => {
@@ -297,6 +298,180 @@ router.route("/summery/order").get(async (req, res) => {
         res.json({ status: true, data: productDetails });
       }
       fetchData();
+      function getEachMonthData(details) {
+        for (let x = 0; x < details.length; x++) {
+          if (details[x].month == "1") {
+            jan = jan + details[x].product.length;
+          } else if (details[x].month == "2") {
+            feb = feb + details[x].product.length;
+          } else if (details[x].month == "3") {
+            march = march + details[x].product.length;
+          } else if (details[x].month == "4") {
+            april = april + details[x].product.length;
+          } else if (details[x].month == "5") {
+            may = may + details[x].product.length;
+          } else if (details[x].month == "6") {
+            jun = jun + details[x].product.length;
+          } else if (details[x].month == "7") {
+            jul = jul + details[x].product.length;
+          } else if (details[x].month == "8") {
+            aug = aug + details[x].product.length;
+          } else if (details[x].month == "9") {
+            sep = sep + details[x].product.length;
+          } else if (details[x].month == "10") {
+            oct = oct + details[x].product.length;
+          } else if (details[x].month == "11") {
+            nov = nov + details[x].product.length;
+          } else if (details[x].month == "12") {
+            dec = dec + details[x].product.length;
+          }
+        }
+        dataArr.push(
+          { name: "Jan", Orders: jan },
+          { name: "Feb", Orders: feb },
+          { name: "Mar", Orders: march },
+          { name: "Apr", Orders: april },
+          { name: "May", Orders: may },
+          { name: "Jun", Orders: jun },
+          { name: "Jul", Orders: jul },
+          { name: "Aug", Orders: aug },
+          { name: "Sep", Orders: sep },
+          { name: "Oct", Orders: oct },
+          { name: "Nov", Orders: nov },
+          { name: "Dec", Orders: dec }
+        );
+        return dataArr;
+      }
+    }
+  });
+});
+
+router.route("/item/rating/save/:itemId/:oid").post(async (req, res) => {
+  const id = req.params.itemId;
+  const oid = req.params.oid;
+  const { name, review, comment } = req.body;
+
+  let today = new Date();
+  let date =
+    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+
+  function ratingFunc(name, review, comment, date) {
+    return new Promise((resolve) => {
+      Product.findOneAndUpdate(
+        { _id: id },
+        {
+          $push: {
+            ratings: [
+              {
+                Name: name,
+                Date: date,
+                Review: review,
+                Comment: comment,
+              },
+            ],
+          },
+        }
+      )
+        .then((data) => {
+          if (data) {
+            resolve(true);
+          }
+        })
+        .catch((err) => {
+          res.json(err);
+        });
+    });
+  }
+  async function callFunc(iid, oid) {
+    const status = await ratingFunc(name, review, comment, date);
+    if (status === true) {
+      Order.updateOne(
+        { _id: oid, "product.productId": iid },
+        { $set: { "product.$.isReviewed": true } }
+      ).then((data) => {
+        if (data.modifiedCount > 0) {
+          res.json({
+            status: true,
+            message: "Thank you for your valuable feedback!",
+          });
+        } else {
+          res.json({
+            status: false,
+            message: "Try again later!",
+          });
+        }
+      });
+    } else {
+      res.json({ status: false, message: "Something went wrong!" });
+    }
+  }
+  callFunc(id, oid);
+});
+
+//get specific orders
+router.route("/product/get").get(async (req, res) => {
+  let tot = 0;
+  let newArr = [];
+  let newObj = {};
+  Product.find().exec(function (err, details) {
+    if (err) {
+      res.json({ status: false, message: "Something went wrong!" });
+    } else {
+      for (let i = 0; i < details.length; i++) {
+        for (let y = 0; y < details[i].ratings.length; y++) {
+          tot = tot + parseInt(details[i].ratings[y].Review);
+        }
+        newObj.totRating = (tot / details[i].ratings.length);
+         newObj.id = details[i]._id;
+        newObj.url = details[i].image;
+        newObj.category = details[i].category;
+        newObj.name = details[i].name;
+        newObj.price = details[i].price;
+        newArr.push(newObj);
+      }
+      res.json({ status: true, data: newArr });
+    }
+  });
+});
+
+router.route("/each/item/:id").get(async (req, res) => {
+  const id = req.params.id;
+  Product.findOne({ _id: { $eq: id } })
+    .then((data) => {
+      res.json({ status: true, data });
+    })
+    .catch((err) => {
+      res.json({ status: false, message: "Something went wrong!" });
+    });
+});
+
+
+//summery client orders
+router.route("/each-month/order/total").get(async (req, res) => {
+  let jan = 0;
+  let feb = 0;
+  let march = 0;
+  let april = 0;
+  let may = 0;
+  let jun = 0;
+  let jul = 0;
+  let aug = 0;
+  let sep = 0;
+  let oct = 0;
+  let nov = 0;
+  let dec = 0;
+  let dataArr = [];
+
+  Order.find({ Status: { $eq: "Completed" } }).exec(function (err, details) {
+    if (err) {
+      res.json({ status: false, message: "Something went wrong!" });
+    } else {
+      function fetchData() {
+        const productDetails = getEachMonthData(details);
+        res.json({ status: true, data: productDetails });
+      }
+      fetchData();
+      
       function getEachMonthData(details) {
         for (let x = 0; x < details.length; x++) {
           if (details[x].month == "1") {

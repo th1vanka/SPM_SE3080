@@ -24,7 +24,7 @@ function App() {
         <Routes>
           <Route path="/home" element={<HomePage />} />
           <Route
-            path="/item/:category/:name/:price/:rate"
+            path="/item/:category/:name/:price/:rate/:id"
             element={<ItemPage />}
           />
           <Route path="/cart" element={<ShoppingCart />} />
@@ -32,7 +32,7 @@ function App() {
           <Route path="/review" element={<FeedbackPage />} />
           <Route path="/to-be-shipped" element={<ToBeShippedPage />} />
           <Route path="/shipped" element={<ShippedPage />} />
-          <Route path="/give/review" element={<ClientReviewPage />} />
+          <Route path="/give/review/:itemId/:oid" element={<ClientReviewPage />} />
           <Route path="/" element={<Login />} />
           <Route path="/registration" element={<Regitstration />} />
           <Route path="/profile" element={<UserProfileHome />} />

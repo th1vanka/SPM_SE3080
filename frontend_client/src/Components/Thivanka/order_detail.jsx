@@ -7,8 +7,9 @@ import { useNavigate } from "react-router-dom";
 function OrderDetail(props) {
   const navigate = useNavigate()
   const reviewHandler = () => {
-    navigate("/give/review");
+    navigate(`/give/review/${props.itemId}/${props.id}`);
   }
+
   return (
     <div className="order-detail-container">
       <div className="order-detail-wrapper">
@@ -70,7 +71,7 @@ function OrderDetail(props) {
                 Total: {(props.price * props.qty).toFixed(2)}
               </p>
               {props.review && (
-                <button className="order-delete-btn" onClick={reviewHandler}>
+                <button className="order-rating-btn" onClick={reviewHandler}>
                   Review
                 </button>
               )}
