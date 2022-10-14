@@ -7,6 +7,7 @@ import DepartureBoardIcon from "@mui/icons-material/DepartureBoard";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import { NavLink } from "react-router-dom";
 import ReportIcon from "@mui/icons-material/Report";
+import TaskIcon from "@mui/icons-material/Task";
 
 function NavBar() {
   return (
@@ -58,17 +59,23 @@ function NavBar() {
             <p className="nav_link clearfix">Shipped</p>
           </div>
         </NavLink>
+        <NavLink to="/complete/order" className="link_styles">
+          <div className="nav_link_wrapper">
+            <TaskIcon fontSize="small" style={{ marginLeft: "45px" }} />
+            <p className="nav_link clearfix">Completed</p>
+          </div>
+        </NavLink>
       </div>
       {/* orders end */}
 
-   {/* seller details start */}
+      {/* seller details start */}
 
-   <div className="nav_body ">
+      <div className="nav_body ">
         <div className="nav_link_section ">
           <BookmarkAddedIcon fontSize="small" />{" "}
           <p className="nav_section_text">Seller</p>
         </div>
-        
+
         <NavLink to="/SellerDetalils" className="link_styles">
           <div className="nav_link_wrapper">
             <DepartureBoardIcon
@@ -122,7 +129,7 @@ function NavBar() {
           </div>
         </NavLink>
       </div>
-      
+
       {/* reports end */}
     </div>
   );

@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
-import "../../css/Thivanka/shipped.css";
+import "../../css/Thivanka/to_be_shipped.css";
 import "../../css/common.css";
 import "../../css/Thivanka/order_table.css";
 import NavBar from "../../Components/Thivanka/nav_bar";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function Shipped() {
+
+function Completed() {
   const [details, setDetails] = useState([]);
+  const state = "Completed";
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/client/order/Shipped")
+      .get(`http://localhost:8000/client/order/${state}`)
       .then((res) => {
         if (res.data.status === false) {
           alert(res.data.message);
@@ -23,14 +25,15 @@ function Shipped() {
         alert(err);
       });
   }, []);
+
   return (
     <div className="main-container">
       <NavBar />
       <div className="body-container clearfix">
-        <div className="shipped-section-one-container ">
-          <div className="shipped-section-one-left ">
+        <div className="tobeshipped-section-one-container ">
+          <div className="tobeshipped-section-one-left ">
             <h3 style={{ marginLeft: "25px", marginRight: "5px" }}>
-              Shipped Orders
+              To Be Shipped Orders
             </h3>
             <p
               style={{
@@ -43,7 +46,7 @@ function Shipped() {
               {details.length}
             </p>
           </div>
-          <div className="shipped-section-one-right">
+          <div className="tobeshipped-section-one-right">
             <input type="search" placeholder="Search" className="search-box" />
           </div>
         </div>
@@ -71,7 +74,7 @@ function Shipped() {
 function TableRow(props) {
   const navigate = useNavigate();
   const clickHandler = () => {
-    const state = "Completed";
+    const state = "Complete";
     navigate(`/order/details/${props.id}/${state}`);
   };
   return (
@@ -83,4 +86,5 @@ function TableRow(props) {
     </div>
   );
 }
-export default Shipped;
+
+export default Completed;

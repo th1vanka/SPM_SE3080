@@ -5,6 +5,8 @@ import axios from "axios";
 
 function ShoppingCartItems(props) {
 
+ 
+
   const deleteHandler = () => {
      axios
        .delete(`http://localhost:8000/client/cart/item/remove/${props.email}/${props.id}`)
@@ -25,7 +27,7 @@ function ShoppingCartItems(props) {
         <input
           type="checkbox"
           id="vehicle1"
-          name={props.name}
+          name={props.itemId}
           value={props.price * props.qty}
           style={{ cursor: "pointer", backgroundColor: "orange" }}
           onChange={props.checkHandler}
@@ -46,7 +48,9 @@ function ShoppingCartItems(props) {
       </div>
       <div className="shopping-cart-item-name">
         <center>
-          <p style={{ fontSize: "14px", marginTop: "3px",fontWeight:"600" }}>{props.name}</p>
+          <p style={{ fontSize: "14px", marginTop: "3px", fontWeight: "600" }}>
+            {props.name}
+          </p>
         </center>
 
         <p

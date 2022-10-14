@@ -2,14 +2,55 @@ import React, { useState } from "react";
 import "../../Css/Thivanka/client_review_page.css";
 import "../../Css/Thivanka/home_page.css";
 import Item from "../../Assets/item3.jpg";
-import Item2 from "../../Assets/item2.jpg";
+// import Item2 from "../../Assets/item2.jpg";
 import NavBar from "../../Components/Thivanka/nav_bar";
 import HomeHeader from "../../Components/Thivanka/home_header";
 import Footter from "../../Components/Thivanka/footter";
 import Rating from "@mui/material/Rating";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 function ClientReviewPage() {
-  const [active, setActive] = useState(true);
+  // const [active, setActive] = useState(true);
+  const [rating, setValue] = useState();
+  const [comment, setComment] = useState('');
+  const params = useParams();
+  const itemId = params.itemId;
+  const oId = params.oid;
+  const name = localStorage.getItem("userName");
+
+  const data = {
+    name: name,
+    review: rating,
+    comment: comment,
+  };
+
+  const ratingHandler = () => {
+    if (!rating) {
+      alert("Please give a rating.");
+    }
+    else if (comment.trim().length === 0) {
+       alert("Please give a review.");
+    } else {
+      axios
+        .post(
+          `http://localhost:8000/client/item/rating/save/${itemId}/${oId}`,
+          data
+        )
+        .then((res) => {
+          if (res.status === true) {
+            alert(res.message);
+          } else {
+            alert(res.message);
+          }
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    }
+      
+  };
+
   return (
     <div className="site-main-container">
       <div>
@@ -22,7 +63,7 @@ function ClientReviewPage() {
         <div className="site-details-wrapper clearfix">
           <div className="review-form-container">
             <div className="review-form-wrapper">
-              {active ? (
+              {/* {active ? ( */}
                 <div>
                   <img
                     src={Item}
@@ -54,7 +95,14 @@ function ClientReviewPage() {
                     Product Review
                   </p>
 
-                  <Rating name="size-large" defaultValue={0} size="large" />
+                  <Rating
+                    name="size-large"
+                    defaultValue={0}
+                    size="large"
+                    onChange={(event, newValue) => {
+                      setValue(newValue);
+                    }}
+                  />
                   <br />
                   <br />
                   <textarea
@@ -68,18 +116,16 @@ function ClientReviewPage() {
                       borderRadius: "5px",
                       fontFamily: "cursive",
                     }}
+                    onChange={(e) => {
+                      setComment(e.target.value);
+                    }}
                   />
                   <br />
-                  <button
-                    className="order-delete-btn"
-                    onClick={() => {
-                      setActive(false);
-                    }}
-                  >
+                  <button className="order-rating-btn" onClick={ratingHandler}>
                     Continue
                   </button>
                 </div>
-              ) : (
+              {/* ) : (
                 <div>
                   <img
                     src={Item2}
@@ -127,10 +173,9 @@ function ClientReviewPage() {
                     }}
                   />
                   <br />
-                  <button className="order-delete-btn">Submit</button>
-                  
+                  <button className="order-rating-btn">Submit</button>
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         </div>

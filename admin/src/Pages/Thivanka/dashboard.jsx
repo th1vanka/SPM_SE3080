@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../../Components/Thivanka/nav_bar";
 import "../../css/Thivanka/dashboard.css";
 import "../../css/common.css";
@@ -6,8 +6,97 @@ import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import PeopleIcon from "@mui/icons-material/People";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import Chart from "../../Components/Thivanka/chart";
+import axios from "axios";
 
 function Dashboard() {
+  const [recentOrders, setrecentOrders] = useState();
+  const [toBeShippedOrders, setToBeShippedOrders] = useState();
+  const [shippedOrders, setShippedOrders] = useState();
+  const [completedOrders, setCompletedOrders] = useState();
+
+  function recentOrderFunc() {
+    return new Promise((resolve) => {
+      axios
+        .get("http://localhost:8000/client/order/count/Pending")
+        .then((res) => {
+          if (res.data.status === false) {
+            alert(res.data.message);
+          } else {
+            setrecentOrders(res.data.count);
+            resolve(true);
+          }
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    });
+  }
+
+  function toBeShippeOrderFunc() {
+    return new Promise((resolve) => {
+      axios
+        .get("http://localhost:8000/client/order/count/To be shipped")
+        .then((res) => {
+          if (res.data.status === false) {
+            alert(res.data.message);
+          } else {
+            setToBeShippedOrders(res.data.count);
+            resolve(true);
+          }
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    });
+  }
+
+  function shippedOrderFunc() {
+    return new Promise((resolve) => {
+      axios
+        .get("http://localhost:8000/client/order/count/Shipped")
+        .then((res) => {
+          if (res.data.status === false) {
+            alert(res.data.message);
+          } else {
+            setShippedOrders(res.data.count);
+            resolve(true);
+          }
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    });
+  }
+
+  function completedOrderFunc() {
+    return new Promise((resolve) => {
+      axios
+        .get("http://localhost:8000/client/order/count/Completed")
+        .then((res) => {
+          if (res.data.status === false) {
+            alert(res.data.message);
+          } else {
+            setCompletedOrders(res.data.count);
+            resolve(true);
+          }
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    });
+  }
+
+  async function callFunc() {
+    await recentOrderFunc();
+    await toBeShippeOrderFunc();
+    await shippedOrderFunc();
+    await completedOrderFunc();
+  }
+
+  useEffect(() => {
+    callFunc();
+  }, []);
+
   return (
     <div className="main-container">
       <NavBar />
@@ -28,7 +117,12 @@ function Dashboard() {
               />
             </div>
             <div className="dash_section_one_container_box_body ">
-              <p>100,000</p>
+              <p>
+                {completedOrders +
+                  shippedOrders +
+                  toBeShippedOrders +
+                  recentOrders}
+              </p>
             </div>
           </div>
           <div className="dash_section_one_container_box ">
@@ -71,25 +165,35 @@ function Dashboard() {
               <h4>Summary</h4>
             </center>
             <div className="stat-summary-section-wraper">
-              <div className="stat-summary-section-topic">Recent Orders</div>
-              <div className="stat-summary-section-answer">10</div>
-            </div>
-            <div className="stat-summary-section-wraper">
-              {" "}
-              <div className="stat-summary-section-topic">Shipped Orders</div>
-              <div className="stat-summary-section-answer">10</div>
-            </div>
-            <div className="stat-summary-section-wraper">
               {" "}
               <div className="stat-summary-section-topic">Recent Products</div>
               <div className="stat-summary-section-answer">10</div>
             </div>
             <div className="stat-summary-section-wraper">
-              {" "}
+              <div className="stat-summary-section-topic">Recent Orders</div>
+              <div className="stat-summary-section-answer">{recentOrders}</div>
+            </div>
+
+            <div className="stat-summary-section-wraper">
               <div className="stat-summary-section-topic">
                 To Be Shipped Orders
               </div>
-              <div className="stat-summary-section-answer">10</div>
+              <div className="stat-summary-section-answer">
+                {" "}
+                {toBeShippedOrders}
+              </div>
+            </div>
+            <div className="stat-summary-section-wraper">
+              {" "}
+              <div className="stat-summary-section-topic">Shipped Orders</div>
+              <div className="stat-summary-section-answer">{shippedOrders}</div>
+            </div>
+            <div className="stat-summary-section-wraper">
+              {" "}
+              <div className="stat-summary-section-topic">Completed Orders</div>
+              <div className="stat-summary-section-answer">
+                {completedOrders}
+              </div>
             </div>
           </div>
         </div>
