@@ -24,7 +24,9 @@ import {
     FormGroup,
     Alert,
     Container,
+    
     Button,
+    Form,
     FormText
   } from "reactstrap";
 
@@ -41,6 +43,7 @@ function SellerReply() {
         emailjs.sendForm("service_yka1l24","template_h4k90bs",e.target, "user_tFsjf2dJTs0g6ZYzrwN51").then(res=>{
             console.log(res);
         }).catch(err=> console.log(err));
+        
       }
 
 
@@ -68,27 +71,54 @@ function SellerReply() {
         <div>
             
             <center>
-            <form onSubmit={sendEmail}>
-                <label>Seller's Nname</label>
-                <input type="text" name="name"/>
-                <br/>
+              <br/> <br/> <br/>
+              
+              
 
-                <label>Email</label>
-                <input type="email" name="user_email"/>
-                <br/>
+              <div className= {styles.FormContainer}>
+            <Form onSubmit={sendEmail}>
 
-                <label>
-response</label>
-                <textarea name='message' rows='4'/>
-                <br/>
 
-                <Button color = "primary" type = "submit" 
+                <div className={styles.hy} >
+                <FormGroup>
+                  
+                <label className={styles.label}>Seller's Name</label>
+                
+                <input className={styles.input} type="text" name="name"/>
+                </FormGroup>
+                </div>
+                <br/>
+                    
+                <div className={styles.hy}>
+                <FormGroup>
+                <label className={styles.label} >Email </label>
+                <input className={styles.input} type="email" name="user_email"/>
+                </FormGroup>
+                </div>
+                <br/>
+                
+
+                <div className={styles.hy}>
+                <FormGroup>
+                <label className={styles.label}> response</label>
+                <textarea className={styles.input} name='message' rows='4'/>
+                </FormGroup>
+                </div>
+                <br/><br/><br/>
+                
+                <FormGroup >
+                <Button  className={styles.btn_seller}  type = "submit" 
                 onClick = {() =>{
                   ;
                 }}
                 >submit</Button>
+                </FormGroup>
 
-            </form>
+              </Form> 
+              </div>
+
+             
+
             </center>
         </div>
     

@@ -8,6 +8,10 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
 
+import { ReactSession } from "react-client-session";
+import { Link } from "react-router-dom";
+
+
 import ComplStyles from "../../css/Naween/compl.module.css";
 
 import {
@@ -25,23 +29,25 @@ import {
 
 
 function SellerDetalils() {
+  const [users, setusers]= useState([]);
+
+  useEffect(() => {
+    axios
+    .get("http://localhost:8070/users")
+    .then((res) =>{
+      setusers(res.data);
+    })
+    .catch((err)=>{
+      alert("something went wrong :(");
+      console.log(err);
+    });
+    return() =>{
+
+    };
+  }, []);
+
+ // let history = useHistory();
  
-   
-
-    const [sellerSups, setSellerSups] = useState([]);
-    const [message , setMessage] = useState("");
-
-    useEffect(() => {
-        axios.get("http://localhost:8070/sellerSup/").then((res) =>{
-            setSellerSups(res.data);
-            console.log(res.data);
-        }).catch((err) =>{
-            console.log(err);
-        })
-    
-      }, []);
-
-
 
     return (
       <div className="main-container">
@@ -61,7 +67,44 @@ function SellerDetalils() {
           </div>
 
         <center>
-             
+          <br/>
+          <br/>
+          <br/>
+             <div>
+              
+              <div className={ComplStyles.DetailsDiv}>
+                <table width="100%" border="2px" className={ComplStyles.tbldata}>
+                  <tr>
+                    <th className={ComplStyles.tbldata}>Full Name</th>
+                    <th className={ComplStyles.tbldata}>Email</th>
+                    <th className={ComplStyles.tbldata}>Country</th>
+                    <th className={ComplStyles.tbldata}>Mobile Number</th>
+                    <th className={ComplStyles.tbldata}>User Name</th>
+                    <th className={ComplStyles.tbldata}>NIC</th>
+                    <th className={ComplStyles.tbldata}>Date Of Birth</th>
+                  </tr>
+                  {users
+                  .map((user) =>(
+                    <tr className={ComplStyles.tbldata}>
+                      <td className={ComplStyles.tbldata}>{user.fullName}</td>
+                      <td className={ComplStyles.tbldata}>{user.email}</td>
+                      <td className={ComplStyles.tbldata}>{user.country}</td>
+                      <td className={ComplStyles.tbldata}>{user.mobileNo}</td>
+                      <td className={ComplStyles.tbldata}>{user.username}</td>
+                      <td className={ComplStyles.tbldata}>{user.nic}</td>
+                      <td className={ComplStyles.tbldata}>{user.dateOfBirth}</td>
+                     {/* <td className={ComplStyles.tbldata}>
+
+                  </td> */}
+                    </tr>
+                  ))
+                  
+                  }
+                </table>
+              </div>
+
+
+             </div>
              
 
         </center>
