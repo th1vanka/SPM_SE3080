@@ -16,7 +16,7 @@ function ShoppingCart() {
   const items = [];
   const [total, setTotal] = useState(0);
   const [details, setDetails] = useState([]);
-   const email = localStorage.getItem("email");
+const email = localStorage.getItem("email");
 
   const reloadHandler = () => {
     axios
@@ -83,7 +83,8 @@ function ShoppingCart() {
       alert("Select an Item")
     }
     else {
-        alert(total);
+      alert(total);
+      console.log(details);
     }
   };
 
@@ -119,6 +120,7 @@ function ShoppingCart() {
                   email={email}
                   id={detail._id}
                   image={detail.itemURL}
+                  itemId={detail.itemID}
                 />
               ))}
             </div>
