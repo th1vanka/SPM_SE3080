@@ -54,6 +54,7 @@ function UserProfileAddAddress() {
       .then((res) => {
         if (res.data.status === true) {
           alert("Address Updated !!");
+          navigate("/profile/address-book");
         } else {
           alert(res.data.message);
         }
@@ -116,31 +117,31 @@ function UserProfileAddAddress() {
               <h5 style={{ marginTop: "8px", color: "#CC8B86" }}>My Account</h5>
               <div className="profile-home-nav-bar">
                 <p
-                  style={{ marginBottom: "30px" }}
+                  style={{ marginBottom: "30px", cursor: "pointer" }}
                   onClick={() => navigate("/profile")}
                 >
                   My Profile
                 </p>
                 <p
-                  style={{ marginBottom: "30px" }}
+                  style={{ marginBottom: "30px", cursor: "pointer" }}
                   onClick={() => navigate("/profile/address-book")}
                 >
                   Address Book
                 </p>
                 <p
-                  style={{ marginBottom: "30px" }}
+                  style={{ marginBottom: "30px", cursor: "pointer" }}
                   onClick={() => navigate("/profile/payment")}
                 >
                   Payment
                 </p>
                 <p
-                  style={{ marginBottom: "30px" }}
+                  style={{ marginBottom: "30px", cursor: "pointer" }}
                   onClick={() => navigate("/order")}
                 >
                   Orders
                 </p>
                 <p
-                  style={{ marginBottom: "30px" }}
+                  style={{ marginBottom: "30px", cursor: "pointer" }}
                   onClick={() => navigate("/review")}
                 >
                   Reviews

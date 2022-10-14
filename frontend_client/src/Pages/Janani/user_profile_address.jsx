@@ -63,31 +63,35 @@ function UserProfileAddressBook() {
               <h5 style={{ marginTop: "8px" }}>My Account</h5>
               <div className="profile-nav-home-nav-bar">
                 <p
-                  style={{ marginBottom: "30px" }}
+                  style={{ marginBottom: "30px", cursor: "pointer" }}
                   onClick={() => navigation("/profile")}
                 >
                   My Profile
                 </p>
                 <p
-                  style={{ marginBottom: "30px", color: "#CC8B86" }}
+                  style={{
+                    marginBottom: "30px",
+                    color: "#CC8B86",
+                    cursor: "pointer",
+                  }}
                   onClick={() => navigation("/profile")}
                 >
                   Address Book
                 </p>
                 <p
-                  style={{ marginBottom: "30px" }}
+                  style={{ marginBottom: "30px", cursor: "pointer" }}
                   onClick={() => navigation("/profile/payment")}
                 >
                   Payment
                 </p>
                 <p
-                  style={{ marginBottom: "30px" }}
+                  style={{ marginBottom: "30px", cursor: "pointer" }}
                   onClick={() => navigation("/orders")}
                 >
                   Orders
                 </p>
                 <p
-                  style={{ marginBottom: "30px" }}
+                  style={{ marginBottom: "30px", cursor: "pointer" }}
                   onClick={() => navigation("/review")}
                 >
                   Reviews
