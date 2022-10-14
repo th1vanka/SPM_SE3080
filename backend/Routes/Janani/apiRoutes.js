@@ -88,6 +88,17 @@ router.route("/details/remove/:email").get(async (req, res) => {
     });
 });
 
+router.route("/details/removebyid/:id").get(async (req, res) => {
+  const id = req.params.id;
+  User.findOneAndDelete({ _id: { $eq: id } })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
+
 router.route("/details/get/:email").get(async (req, res) => {
   const email = req.params.email;
   User.findOne({ email: { $eq: email } })
@@ -99,6 +110,15 @@ router.route("/details/get/:email").get(async (req, res) => {
     });
 });
 
+router.route("/details/getall").get(async (req, res) => {
+  User.find()
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
 //shipping address routes
 router.route("/address/add").post(async (req, res) => {
   const { personalInformation, email, country, address, mobile } = req.body;
