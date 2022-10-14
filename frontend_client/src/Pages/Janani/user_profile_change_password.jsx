@@ -7,66 +7,31 @@ import Image from "../../Assets/Profile data.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function UserProfileHome() {
+function UserProfileChangePassword() {
   const nav = useNavigate();
-  const [name, setName] = useState("");
   const [email, setEmail] = useState(localStorage.getItem("email"));
-  const [country, setContry] = useState(localStorage.getItem("con"));
-  const [mobile, setMobile] = useState(localStorage.getItem("mobile"));
-  const [bdate, setBDate] = useState(localStorage.getItem("bdate"));
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
   const userName = localStorage.getItem("userName");
 
   const navigate = useNavigate();
-  useEffect(() => {
-    getUserDetails();
-  }, [email]);
-
-  const getUserDetails = () => {
-    axios
-      .get(`http://localhost:8000/user/details/get/${email}`)
-      .then((res) => {
-        setName(res.data?.name);
-        setBDate(res.data?.bdate);
-        setMobile(res.data?.mobile);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   const updateHandler = () => {
-    const data = {
-      name,
-      email,
-      country,
-      mobile,
-      bdate,
-    };
+    if (password != confirmPassword) {
+      alert("Passwords do not match !!");
+      return;
+    }
+
+    const data = { password };
     axios
-      .put(`http://localhost:8000/user/details/update/${data.email}`, data)
+      .put(`http://localhost:8000/user/password/change/${email}`, data)
       .then((res) => {
         if (res.data.status === true) {
-          getUserDetails();
-          alert("User Updated !!");
+          alert("Password changed !!");
+          navigate("/profile");
         } else {
           alert(res.data.message);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const deleteHandler = () => {
-    axios
-      .get(`http://localhost:8000/user/details/remove/${email}`)
-      .then((res) => {
-        if (res.data) {
-          localStorage.clear();
-          alert("Done");
-          nav("/");
-        } else {
-          alert("Faild");
         }
       })
       .catch((err) => {
@@ -128,7 +93,7 @@ function UserProfileHome() {
             </div>
             <div className="profile-home-container-right-wrapper">
               <div className="input-wrapper">
-                <h4 style={{ marginBottom: "10px" }}>Edit Profile</h4>
+                <h4 style={{ marginBottom: "10px" }}>Change Password</h4>
                 <label
                   style={{
                     fontSize: "14px",
@@ -136,15 +101,15 @@ function UserProfileHome() {
                     marginTop: "20px",
                   }}
                 >
-                  Full Name
+                  New Password
                 </label>
                 <br />
                 <input
-                  type="text"
+                  type="password"
                   className="profile-input-fields"
-                  value={name}
+                  value={password}
                   onChange={(e) => {
-                    setName(e.target.value);
+                    setPassword(e.target.value);
                   }}
                 />
                 <br />
@@ -155,97 +120,25 @@ function UserProfileHome() {
                     marginTop: "20px",
                   }}
                 >
-                  Email Address
+                  Retype Password
                 </label>
                 <br />
                 <input
-                  type="text"
+                  type="password"
                   className="profile-input-fields"
-                  value={email}
+                  value={confirmPassword}
                   onChange={(e) => {
-                    setEmail(e.target.value);
+                    setConfirmPassword(e.target.value);
                   }}
                 />
                 <br />
-                <label
-                  style={{
-                    fontSize: "14px",
-                    fontWeight: "500",
-                    marginTop: "20px",
-                  }}
-                >
-                  Country
-                </label>
-                <br />
-                <select
-                  className="profile-input-fields"
-                  style={{ width: "78%" }}
-                  onChange={(e) => {
-                    setContry(e.target.value);
-                  }}
-                >
-                  <option value={country}>{country}</option>
-                  <option value="IN">INDIA</option>
-                  <option value="US">USA</option>
-                  <option value="SL">Sri-Lanka</option>
-                </select>
-                <br />
-                <label
-                  style={{
-                    fontSize: "14px",
-                    fontWeight: "500",
-                    marginTop: "20px",
-                  }}
-                >
-                  Mobile
-                </label>
-                <br />
-                <input
-                  type="number"
-                  className="profile-input-fields"
-                  value={mobile}
-                  onChange={(e) => {
-                    setMobile(e.target.value);
-                  }}
-                />
-                <br />
-                <label
-                  style={{
-                    fontSize: "14px",
-                    fontWeight: "500",
-                    marginTop: "20px",
-                  }}
-                >
-                  Birthday
-                </label>
-                <br />
-                <input
-                  type="date"
-                  className="profile-input-fields"
-                  value={bdate}
-                  onChange={(e) => {
-                    setBDate(e.target.value);
-                  }}
-                />
+
                 <br />
                 <div
                   style={{ display: "flex", gap: "10px", marginTop: "25px" }}
                 >
                   <button className="profile-btn" onClick={updateHandler}>
-                    Edit Profile
-                  </button>
-                  <button
-                    className="profile-btn"
-                    onClick={() => navigate("/profile/change-password")}
-                  >
-                    Edit Password
-                  </button>
-                  <button
-                    className="profile-btn"
-                    style={{ backgroundColor: "red" }}
-                    onClick={deleteHandler}
-                  >
-                    Deactivate
+                    Change Password
                   </button>
                 </div>
               </div>
@@ -267,4 +160,4 @@ function UserProfileHome() {
   );
 }
 
-export default UserProfileHome;
+export default UserProfileChangePassword;

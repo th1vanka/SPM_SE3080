@@ -1,21 +1,19 @@
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-
+const addressSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true,
   },
   mobile: {
     type: String,
     required: true,
   },
-  bdate: {
+  personalInfo: {
+    type: String,
+    required: true,
+  },
+  address: {
     type: String,
     required: true,
   },
@@ -23,12 +21,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  password: {
-    type: String,
-    required: true,
-  },
 });
 
-const users = new mongoose.model("Clients", userSchema);
+const AddressBook = new mongoose.model("Address-book", addressSchema);
 
-module.exports = users;
+module.exports = AddressBook;

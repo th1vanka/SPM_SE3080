@@ -8,6 +8,7 @@ import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import { NavLink } from "react-router-dom";
 import ReportIcon from "@mui/icons-material/Report";
 import TaskIcon from "@mui/icons-material/Task";
+import GroupIcon from "@mui/icons-material/Group";
 
 function NavBar() {
   return (
@@ -67,6 +68,22 @@ function NavBar() {
         </NavLink>
       </div>
       {/* orders end */}
+
+      {/* customer details start */}
+
+      <div className="nav_body ">
+        <div className="nav_link_section ">
+          <BookmarkAddedIcon fontSize="small" />{" "}
+          <p className="nav_section_text">Customer</p>
+        </div>
+
+        <NavLink to="/customer/users" className="link_styles">
+          <div className="nav_link_wrapper">
+            <GroupIcon fontSize="small" style={{ marginLeft: "45px" }} />
+            <p className="nav_link clearfix">Users</p>
+          </div>
+        </NavLink>
+      </div>
 
       {/* seller details start */}
 

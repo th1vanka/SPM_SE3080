@@ -4,8 +4,14 @@ import NavBar from "../../Components/Thivanka/nav_bar";
 import HomeHeader from "../../Components/Thivanka/home_header";
 import Footter from "../../Components/Thivanka/footter";
 import "../../Css/Janani/user_profile_nav.css";
-
+import { useNavigate } from "react-router";
+import PersonIcon from "@mui/icons-material/Person";
+import ContactMailIcon from "@mui/icons-material/ContactMail";
+import PaymentIcon from "@mui/icons-material/Payment";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
+import ReviewsIcon from "@mui/icons-material/Reviews";
 function UserProfileNav() {
+  const navigation = useNavigate();
   return (
     <div className="site-main-container">
       <div>
@@ -19,27 +25,103 @@ function UserProfileNav() {
           {/* body start */}
           <div className="profile-nav-home-container">
             <div className="profile-nav-home-container-left-wrapper">
-              <h4>Hi,Janani Hansika</h4>
+              <h4>Hi,Janani Malshika</h4>
               <h5 style={{ marginTop: "8px", color: "#CC8B86" }}>My Account</h5>
               <div className="profile-nav-home-nav-bar">
-                <p style={{ marginBottom: "30px" }}>My Profile</p>
-                <p style={{ marginBottom: "30px" }}>Address Book</p>
-                <p style={{ marginBottom: "30px" }}>Payment</p>
-                <p style={{ marginBottom: "30px" }}>Orders</p>
-                <p style={{ marginBottom: "30px" }}>Reviews</p>
+                <p
+                  style={{ marginBottom: "30px", cursor: "pointer" }}
+                  onClick={() => navigation("/profile")}
+                >
+                  My Profile
+                </p>
+
+                <p
+                  style={{ marginBottom: "30px", cursor: "pointer" }}
+                  onClick={() => navigation("/profile/address-book")}
+                >
+                  Address Book
+                </p>
+                <p
+                  style={{ marginBottom: "30px", cursor: "pointer" }}
+                  onClick={() => navigation("/profile/payment")}
+                >
+                  Payment
+                </p>
+                <p
+                  style={{ marginBottom: "30px", cursor: "pointer" }}
+                  onClick={() => navigation("/order")}
+                >
+                  Orders
+                </p>
+                <p
+                  style={{ marginBottom: "30px", cursor: "pointer" }}
+                  onClick={() => navigation("/review")}
+                >
+                  Reviews
+                </p>
               </div>
             </div>
             <div className="profile-nav-home-container-right-wrapper">
               <br />
               <h4>Manage My Account</h4>
               <div className="item-box-wrapper">
-                <div className="item-box">s</div>
-                <div className="item-box">a</div>
-                <div className="item-box">e</div>
+                <div
+                  className="item-box"
+                  onClick={() => navigation("/profile")}
+                  style={{ paddingTop: "30px", cursor: "pointer" }}
+                >
+                  <p>
+                    {" "}
+                    <PersonIcon fontSize="large" />
+                  </p>
+                  <span style={{ fontWeight: "bold" }}> My Profile</span>
+                </div>
+                <div
+                  className="item-box"
+                  onClick={() => navigation("/profile/address-book")}
+                  style={{ paddingTop: "30px", cursor: "pointer" }}
+                >
+                  <p>
+                    {" "}
+                    <ContactMailIcon fontSize="large" />
+                  </p>
+                  <span style={{ fontWeight: "bold" }}>Address Book</span>
+                </div>
+                <div
+                  className="item-box"
+                  onClick={() => navigation("/profile/payment")}
+                  style={{ paddingTop: "30px", cursor: "pointer" }}
+                >
+                  <p>
+                    {" "}
+                    <PaymentIcon fontSize="large" />
+                  </p>
+                  <span style={{ fontWeight: "bold" }}> Payments</span>
+                </div>
               </div>
               <div className="item-box-wrapper2">
-                <div className="item-box2">s</div>
-                <div className="item-box2">a</div>
+                <div
+                  className="item-box2"
+                  onClick={() => navigation("/profile")}
+                  style={{ paddingTop: "30px", cursor: "pointer" }}
+                >
+                  <p>
+                    {" "}
+                    <LocalShippingIcon fontSize="large" />
+                  </p>
+                  <span style={{ fontWeight: "bold" }}> Orders</span>
+                </div>
+                <div
+                  className="item-box2"
+                  onClick={() => navigation("/profile")}
+                  style={{ paddingTop: "30px", cursor: "pointer" }}
+                >
+                  <p>
+                    {" "}
+                    <ReviewsIcon fontSize="large" />
+                  </p>
+                  <span style={{ fontWeight: "bold" }}> Reviews</span>
+                </div>
               </div>
             </div>
           </div>

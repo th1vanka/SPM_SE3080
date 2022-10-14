@@ -1,34 +1,33 @@
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema({
-  name: {
+const paymentSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    required: true,
+  },
+  cardName: {
+    type: String,
+    required: true,
+  },
+  cardNumber: {
+    type: String,
+    required: true,
+  },
+  cvv: {
+    type: String,
+    required: true,
+  },
+  cardType: {
     type: String,
     required: true,
   },
 
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  mobile: {
-    type: String,
-    required: true,
-  },
-  bdate: {
-    type: String,
-    required: true,
-  },
-  country: {
-    type: String,
-    required: true,
-  },
-  password: {
+  expireDate: {
     type: String,
     required: true,
   },
 });
 
-const users = new mongoose.model("Clients", userSchema);
+const PaymentOptions = new mongoose.model("Payment-options", paymentSchema);
 
-module.exports = users;
+module.exports = PaymentOptions;

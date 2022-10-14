@@ -1,38 +1,38 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "../../Css/Thivanka/home_header.css";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
 import Badge from "@mui/material/Badge";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import AssignmentTurnedIn from "@mui/icons-material/AssignmentTurnedInOutlined";
-import LocalShippingIcon from "@mui/icons-material/LocalShippingOutlined"; 
+import LocalShippingIcon from "@mui/icons-material/LocalShippingOutlined";
 import { useNavigate } from "react-router";
 import Flag from "react-world-flags";
 import axios from "axios";
 
 function HomeHeader() {
   const navigate = useNavigate();
-    const [details, setDetails] = useState([]);
+  const [details, setDetails] = useState([]);
   const email = localStorage.getItem("email");
-  
+
   const cartHandler = () => {
     email && navigate("/cart");
   };
-    const reviewedHandler = () => {
-      email && navigate("/review");
+  const reviewedHandler = () => {
+    email && navigate("/review");
   };
   const orderdHandler = () => {
     email && navigate("/order");
-  }
-    const shippedHandler = () => {
-      email && navigate("/shipped");
+  };
+  const shippedHandler = () => {
+    email && navigate("/shipped");
   };
 
   const profleHandler = () => {
-    navigate("/profile");
-  }
-  
-  function fetchdata(){
+    navigate("/profile/nav");
+  };
+
+  function fetchdata() {
     axios
       .get(`http://localhost:8000/client/cart/item/${email}`)
       .then((res) => {
@@ -46,10 +46,9 @@ function HomeHeader() {
   }
 
   useEffect(() => {
+    email && fetchdata();
+  });
 
-     email && fetchdata();
-  })
-  
   return (
     <div className="site-body-header">
       <div className="site-body-header-details-wrapper">

@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import NavBar from "../../Components/Thivanka/nav_bar";
 import HomeHeader from "../../Components/Thivanka/home_header";
 import Footter from "../../Components/Thivanka/footter";
@@ -8,38 +8,37 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Login() {
-    const [emai, setEmail] = useState("");
+  const [emai, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-    const submitHandler = () => {
-       if (emai.trim().length === 0) {
-        alert("All the feilds required!");
-      } else if (password.trim().length === 0) {
-        alert("All the feilds required!");
-      } else {
-        axios
-          .get(`http://localhost:8000/user/login/${emai}/${password}`)
-          .then((res) => {
-            if (res.data!==null) {
-              localStorage.setItem("userName", res.data.name);
-              localStorage.setItem("email", res.data.email);
-              localStorage.setItem("con", res.data.country);
-              localStorage.setItem("mobile", res.data.mobile);
-              localStorage.setItem("bdate", res.data.bdate);
-              navigate("/home");
-              console.log(res.data)
-            }
-            else {
-              alert("Invalid Credintials!");
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
+  const submitHandler = () => {
+    if (emai.trim().length === 0) {
+      alert("All the fields required!");
+    } else if (password.trim().length === 0) {
+      alert("All the feilds required!");
+    } else {
+      axios
+        .get(`http://localhost:8000/user/login/${emai}/${password}`)
+        .then((res) => {
+          if (res.data !== null) {
+            localStorage.setItem("userName", res.data.name);
+            localStorage.setItem("email", res.data.email);
+            localStorage.setItem("con", res.data.country);
+            localStorage.setItem("mobile", res.data.mobile);
+            localStorage.setItem("bdate", res.data.bdate);
+            navigate("/home");
+            console.log(res.data);
+          } else {
+            alert("Invalid Credentials!");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
-  
+
   return (
     <div className="site-main-container">
       <div>
@@ -105,7 +104,7 @@ function Login() {
               </center>
             </div>
             <div className="login-container-right-wrapper">
-              <img src={LoginImage} width="390px" alt="Login"/>
+              <img src={LoginImage} width="390px" alt="Login" />
             </div>
           </div>
 

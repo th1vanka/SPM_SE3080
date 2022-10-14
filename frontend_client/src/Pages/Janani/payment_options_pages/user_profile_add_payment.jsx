@@ -1,72 +1,62 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "../../Components/Thivanka/nav_bar";
-import HomeHeader from "../../Components/Thivanka/home_header";
-import Footter from "../../Components/Thivanka/footter";
-import "../../Css/Janani/user_profile_home.css";
-import Image from "../../Assets/Profile data.png";
+import NavBar from "../../../Components/Thivanka/nav_bar";
+import HomeHeader from "../../../Components/Thivanka/home_header";
+import Footter from "../../../Components/Thivanka/footter";
+import "../../../Css/Janani/user_profile_home.css";
+import Image from "../../../Assets/Profile data.png";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-function UserProfileHome() {
+function UserProfileAddPayment() {
   const nav = useNavigate();
-  const [name, setName] = useState("");
   const [email, setEmail] = useState(localStorage.getItem("email"));
-  const [country, setContry] = useState(localStorage.getItem("con"));
-  const [mobile, setMobile] = useState(localStorage.getItem("mobile"));
-  const [bdate, setBDate] = useState(localStorage.getItem("bdate"));
+
+  const [cardName, setCardName] = useState("");
+  const [cardNumber, setCardNumber] = useState("");
+  const [cvv, setCvv] = useState("");
+  const [expireDate, setexpireDate] = useState("");
+  const [cardType, setCardType] = useState("MasterCard");
   const userName = localStorage.getItem("userName");
 
   const navigate = useNavigate();
-  useEffect(() => {
-    getUserDetails();
-  }, [email]);
 
-  const getUserDetails = () => {
-    axios
-      .get(`http://localhost:8000/user/details/get/${email}`)
-      .then((res) => {
-        setName(res.data?.name);
-        setBDate(res.data?.bdate);
-        setMobile(res.data?.mobile);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  const addHandler = () => {
+    if (cardName == "") {
+      alert("Please provide the card name");
+      return;
+    } else if (cardNumber == "") {
+      alert("Please provide the card number");
+      return;
+    } else if (cvv == "") {
+      alert("Please provide the CVV number");
+      return;
+    } else if (expireDate == "") {
+      alert("Please selecet the expire date");
+      return;
+    } else if (cardNumber.length != 16) {
+      alert("Card number is not valid  (should be 16 digit)");
+      return;
+    } else if (cvv.length <= 3 && cvv.length > 10) {
+      alert(`Card CVV number is not valid`);
+      return;
+    }
 
-  const updateHandler = () => {
     const data = {
-      name,
+      cardNumber,
+      cardName,
+      cvv,
+      expireDate,
       email,
-      country,
-      mobile,
-      bdate,
+      cardType,
     };
     axios
-      .put(`http://localhost:8000/user/details/update/${data.email}`, data)
+      .post(`http://localhost:8000/user/payment-options/add`, data)
       .then((res) => {
         if (res.data.status === true) {
-          getUserDetails();
-          alert("User Updated !!");
+          alert("Payment Option Updated !!");
+          navigate("/profile/payment");
         } else {
           alert(res.data.message);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const deleteHandler = () => {
-    axios
-      .get(`http://localhost:8000/user/details/remove/${email}`)
-      .then((res) => {
-        if (res.data) {
-          localStorage.clear();
-          alert("Done");
-          nav("/");
-        } else {
-          alert("Faild");
         }
       })
       .catch((err) => {
@@ -88,14 +78,10 @@ function UserProfileHome() {
           <div className="profile-home-container">
             <div className="profile-home-container-left-wrapper">
               <h4>Hi,Janani Hansika</h4>
-              <h5 style={{ marginTop: "8px" }}>My Account</h5>
+              <h5 style={{ marginTop: "8px", color: "#CC8B86" }}>My Account</h5>
               <div className="profile-home-nav-bar">
                 <p
-                  style={{
-                    marginBottom: "30px",
-                    color: "#CC8B86",
-                    cursor: "pointer",
-                  }}
+                  style={{ marginBottom: "30px", cursor: "pointer" }}
                   onClick={() => navigate("/profile")}
                 >
                   My Profile
@@ -128,7 +114,7 @@ function UserProfileHome() {
             </div>
             <div className="profile-home-container-right-wrapper">
               <div className="input-wrapper">
-                <h4 style={{ marginBottom: "10px" }}>Edit Profile</h4>
+                <h4 style={{ marginBottom: "10px" }}>Add Payment Details</h4>
                 <label
                   style={{
                     fontSize: "14px",
@@ -136,58 +122,19 @@ function UserProfileHome() {
                     marginTop: "20px",
                   }}
                 >
-                  Full Name
-                </label>
-                <br />
-                <input
-                  type="text"
-                  className="profile-input-fields"
-                  value={name}
-                  onChange={(e) => {
-                    setName(e.target.value);
-                  }}
-                />
-                <br />
-                <label
-                  style={{
-                    fontSize: "14px",
-                    fontWeight: "500",
-                    marginTop: "20px",
-                  }}
-                >
-                  Email Address
-                </label>
-                <br />
-                <input
-                  type="text"
-                  className="profile-input-fields"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
-                />
-                <br />
-                <label
-                  style={{
-                    fontSize: "14px",
-                    fontWeight: "500",
-                    marginTop: "20px",
-                  }}
-                >
-                  Country
+                  Card Type
                 </label>
                 <br />
                 <select
                   className="profile-input-fields"
                   style={{ width: "78%" }}
                   onChange={(e) => {
-                    setContry(e.target.value);
+                    setCardType(e.target.value);
                   }}
                 >
-                  <option value={country}>{country}</option>
-                  <option value="IN">INDIA</option>
-                  <option value="US">USA</option>
-                  <option value="SL">Sri-Lanka</option>
+                  <option value="MasterCard">MasterCard</option>
+                  <option value="VISA">VISA</option>
+                  <option value="AMEX">AMEX</option>
                 </select>
                 <br />
                 <label
@@ -197,15 +144,14 @@ function UserProfileHome() {
                     marginTop: "20px",
                   }}
                 >
-                  Mobile
+                  Name on Card
                 </label>
                 <br />
                 <input
-                  type="number"
+                  type="text"
                   className="profile-input-fields"
-                  value={mobile}
                   onChange={(e) => {
-                    setMobile(e.target.value);
+                    setCardName(e.target.value);
                   }}
                 />
                 <br />
@@ -216,36 +162,59 @@ function UserProfileHome() {
                     marginTop: "20px",
                   }}
                 >
-                  Birthday
+                  Card Number
+                </label>
+                <br />
+                <input
+                  type="text"
+                  className="profile-input-fields"
+                  onChange={(e) => {
+                    setCardNumber(e.target.value);
+                  }}
+                />
+
+                <br />
+                <label
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "500",
+                    marginTop: "20px",
+                  }}
+                >
+                  CVV
+                </label>
+                <br />
+                <input
+                  type="number"
+                  className="profile-input-fields"
+                  onChange={(e) => {
+                    setCvv(e.target.value);
+                  }}
+                />
+                <br />
+                <label
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "500",
+                    marginTop: "20px",
+                  }}
+                >
+                  Expire Date
                 </label>
                 <br />
                 <input
                   type="date"
                   className="profile-input-fields"
-                  value={bdate}
                   onChange={(e) => {
-                    setBDate(e.target.value);
+                    setexpireDate(e.target.value);
                   }}
                 />
                 <br />
                 <div
                   style={{ display: "flex", gap: "10px", marginTop: "25px" }}
                 >
-                  <button className="profile-btn" onClick={updateHandler}>
-                    Edit Profile
-                  </button>
-                  <button
-                    className="profile-btn"
-                    onClick={() => navigate("/profile/change-password")}
-                  >
-                    Edit Password
-                  </button>
-                  <button
-                    className="profile-btn"
-                    style={{ backgroundColor: "red" }}
-                    onClick={deleteHandler}
-                  >
-                    Deactivate
+                  <button className="profile-btn" onClick={addHandler}>
+                    Add
                   </button>
                 </div>
               </div>
@@ -267,4 +236,4 @@ function UserProfileHome() {
   );
 }
 
-export default UserProfileHome;
+export default UserProfileAddPayment;
