@@ -12,6 +12,7 @@ import Complaints from './Pages/Naween/Complaints';
 import SellerDetalils from './Pages/Naween/SellerDetalils';
 import SellerReply from './Pages/Naween/SellerReply';
 import TestReply from './Pages/Naween/TestReply';
+import SellerReport from './Pages/Naween/SellerReport';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/SellerDetalils" element={<SellerDetalils></SellerDetalils>} />
         <Route path="/SellerReply" element={<SellerReply/>} />
         <Route path="/test" element={<TestReply/>} />
+        <Route path="/SellerReport" element={<SellerReport/>} />
       </Routes>
     </Router>
   );

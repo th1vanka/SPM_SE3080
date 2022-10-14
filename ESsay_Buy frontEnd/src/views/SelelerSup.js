@@ -96,8 +96,12 @@ export default class SellerSup extends Component{
             draggable: true,
             progress: undefined,
             });
-
-            window.location.reload();
+            console.log(sellerSup);
+           
+            setTimeout(()=>{
+                window.location.reload();
+            } , 5000)
+            //window.location.reload();
 
     }
 
@@ -119,7 +123,7 @@ export default class SellerSup extends Component{
 
           
 
-        <div className="form-group"> 
+        <div > 
           <label> <font color ="black"><b> Seller Name: </b> </font> </label>
           <input  type="text"
           placeholder="Enter Seller Name"
@@ -147,7 +151,7 @@ export default class SellerSup extends Component{
                />
               
            
-              <FormText>enter valid Seller ID "SXXX"</FormText>
+              <FormText><label className="text-danger" >*enter valid Seller ID "SXXX"</label></FormText>
               </FormGroup>
         </div>
 
@@ -197,6 +201,9 @@ export default class SellerSup extends Component{
                   ;
                 }}
                 >submit</Button>
+                <div>
+            <label className="text-danger" style = {{float:'right' , margin : "2px" }}> please fill this form only for important purpose</label>
+        </div>
               
         
          </form>

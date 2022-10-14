@@ -90,7 +90,7 @@ function IndexNavbar() {
             target="_blank"
             title="Coded by Creative Tim"
           >
-            Esay-Buy
+            Easy-Buy
           </NavbarBrand>
           <button
             aria-expanded={navbarCollapse}
