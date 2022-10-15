@@ -12,27 +12,103 @@ import Regitstration from "./Pages/Janani/registration_page";
 import UserProfileHome from "./Pages/Janani/user_profile_home";
 import UserProfileNav from "./Pages/Janani/user_profile_nav";
 
+import Authentication from "./Auth/authentication";
+
 
 function App() {
   return (
     <div>
       <Router>
         <Routes>
-          <Route path="/home" element={<HomePage />} />
+          <Route path="/" element={<Login />} />
+          <Route
+            path="/home"
+            element={
+              <Authentication>
+                <HomePage />
+              </Authentication>
+            }
+          />
           <Route
             path="/item/:category/:name/:price/:rate/:id"
-            element={<ItemPage />}
+            element={
+              <Authentication>
+                <ItemPage />
+              </Authentication>
+            }
           />
-          <Route path="/cart" element={<ShoppingCart />} />
-          <Route path="/order" element={<Order />} />
-          <Route path="/review" element={<FeedbackPage />} />
-          <Route path="/to-be-shipped" element={<ToBeShippedPage />} />
-          <Route path="/shipped" element={<ShippedPage />} />
-          <Route path="/give/review/:itemId/:oid" element={<ClientReviewPage />} />
-          <Route path="/" element={<Login />} />
-          <Route path="/registration" element={<Regitstration />} />
-          <Route path="/profile" element={<UserProfileHome />} />
-          <Route path="/profile/nav" element={<UserProfileNav />} />
+          <Route
+            path="/cart"
+            element={
+              <Authentication>
+                <ShoppingCart />
+              </Authentication>
+            }
+          />
+          <Route
+            path="/order"
+            element={
+              <Authentication>
+                <Order />
+              </Authentication>
+            }
+          />
+          <Route
+            path="/review"
+            element={
+              <Authentication>
+                <FeedbackPage />
+              </Authentication>
+            }
+          />
+          <Route
+            path="/to-be-shipped"
+            element={
+              <Authentication>
+                <ToBeShippedPage />
+              </Authentication>
+            }
+          />
+          <Route
+            path="/shipped"
+            element={
+              <Authentication>
+                <ShippedPage />
+              </Authentication>
+            }
+          />
+          <Route
+            path="/give/review/:itemId/:oid"
+            element={
+              <Authentication>
+                <ClientReviewPage />
+              </Authentication>
+            }
+          />
+          <Route
+            path="/registration"
+            element={
+              <Authentication>
+                <Regitstration />
+              </Authentication>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <Authentication>
+                <UserProfileHome />
+              </Authentication>
+            }
+          />
+          <Route
+            path="/profile/nav"
+            element={
+              <Authentication>
+                <UserProfileNav />
+              </Authentication>
+            }
+          />
         </Routes>
       </Router>
     </div>

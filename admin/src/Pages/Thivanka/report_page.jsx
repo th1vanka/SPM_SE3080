@@ -131,16 +131,17 @@ function Report() {
     });
   }
 
-  async function callFunc() {
-    await graphData();
-    await graphData2();
-    await orderTotal();
-    await annualOrderCount();
-    await pendingOrderIncome();
-    await pendingOrderCount();
-  }
+  
 
   useEffect(() => {
+     async function callFunc() {
+       await graphData();
+       await graphData2();
+       await orderTotal();
+       await annualOrderCount();
+       await pendingOrderIncome();
+       await pendingOrderCount();
+     } 
     callFunc();
   }, []);
 
