@@ -2,7 +2,7 @@ import React from 'react'
 import "../../css/Thivanka/order.css";
 import "../../css/common.css";
 import NavBar from '../../Components/Thivanka/nav_bar';
-import OrderTable from "../../Components/Thivanka/order_table";
+import OrderTable from "../../../../admin/src/Components/Thivanka/order_table";
  
 function Orders() {
   return (
