@@ -8,7 +8,8 @@ import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import { NavLink } from "react-router-dom";
 import ReportIcon from "@mui/icons-material/Report";
 import TaskIcon from "@mui/icons-material/Task";
-
+import GroupIcon from "@mui/icons-material/Group";
+import AssessmentSharpIcon from "@mui/icons-material/AssessmentSharp";
 function NavBar() {
   return (
     <div className="nav_main_container ">
@@ -70,6 +71,22 @@ function NavBar() {
       </div>
       {/* orders end */}
 
+      {/* customer details start */}
+
+      <div className="nav_body ">
+        <div className="nav_link_section ">
+          <BookmarkAddedIcon fontSize="small" />{" "}
+          <p className="nav_section_text">Customer</p>
+        </div>
+
+        <NavLink to="/customer/users" className="link_styles">
+          <div className="nav_link_wrapper">
+            <GroupIcon fontSize="small" style={{ marginLeft: "45px" }} />
+            <p className="nav_link clearfix">Users</p>
+          </div>
+        </NavLink>
+      </div>
+
       {/* seller details start */}
 
       <div className="nav_body ">
@@ -105,7 +122,17 @@ function NavBar() {
             <p className="nav_link clearfix">Seller Reply</p>
           </div>
         </NavLink>
+        <NavLink to="/SellerReport" className="link_styles">
+          <div className="nav_link_wrapper">
+            <LocalShippingIcon
+              fontSize="small"
+              style={{ marginLeft: "45px" }}
+            />
+            <p className="nav_link clearfix">Seller Report</p>
+          </div>
+        </NavLink>
       </div>
+
       {/* seller details end */}
 
       {/* reports start */}
@@ -118,6 +145,15 @@ function NavBar() {
           <div className="nav_link_wrapper">
             <AutorenewIcon fontSize="small" style={{ marginLeft: "45px" }} />
             <p className="nav_link clearfix">Order Report</p>
+          </div>
+        </NavLink>
+        <NavLink to="/user/report" className="link_styles">
+          <div className="nav_link_wrapper">
+            <AssessmentSharpIcon
+              fontSize="small"
+              style={{ marginLeft: "45px" }}
+            />
+            <p className="nav_link clearfix">User Report</p>
           </div>
         </NavLink>
       </div>
