@@ -23,7 +23,9 @@ function Report() {
   const [graph, setGraphDetails] = useState([]);
   const [graph2, setGraph2Details] = useState([]);
   const [subTotal, setSubTotal] = useState({});
+  const [pendingOrderTotal, setPendingOrderTotal] = useState({});
   const [orderCount, setOrderCount] = useState({});
+    const [pendingOrdersCount, setPendingOrderCount] = useState({});
 
   function graphData() {
     return new Promise((resolve) => {
@@ -92,13 +94,50 @@ function Report() {
             alert(err.message);
           });
       });
-    }
+  }
+  
+      function pendingOrderIncome() {
+        return new Promise((resolve) => {
+          axios
+            .get("http://localhost:8000/client/pending/orders/sub-total")
+            .then((res) => {
+              if (res.data.status === false) {
+                alert(res.data.message);
+              } else {
+                setPendingOrderTotal(res.data);
+                resolve(true);
+              }
+            })
+            .catch((err) => {
+              alert(err.message);
+            });
+        });
+  }
+  function pendingOrderCount() {
+    return new Promise((resolve) => {
+      axios
+        .get("http://localhost:8000/client/pending/orders/count")
+        .then((res) => {
+          if (res.data.status === false) {
+            alert(res.data.message);
+          } else {
+            setPendingOrderCount(res.data);
+            resolve(true);
+          }
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    });
+  }
 
   async function callFunc() {
     await graphData();
     await graphData2();
     await orderTotal();
     await annualOrderCount();
+    await pendingOrderIncome();
+    await pendingOrderCount();
   }
 
   useEffect(() => {
@@ -134,23 +173,25 @@ function Report() {
             </div>
           </div>
           <div className="report-header-section-wrapper">
-            <div style={{ width: "30%", textAlign: "center" }}>
-              <DepartureBoardIcon fontSize="large" color="error" />
+            <div style={{ width: "30%", textAlign: "end" }}>
+              <DepartureBoardIcon fontSize="large" color="warning" />
             </div>
-            <div style={{ width: "70%", textAlign: "start" }}>
-              <p className="report-header-answer2">100000</p>
-              <p className="report-header-question">Total Cancelled Orders</p>
+            <div style={{ width: "70%", textAlign: "center" }}>
+              <p className="report-header-answer2">
+                {pendingOrdersCount.count}
+              </p>
+              <p className="report-header-question">Total Pending Orders</p>
             </div>
           </div>
           <div className="report-header-section-wrapper">
             <div style={{ width: "30%", textAlign: "center" }}>
-              <DepartureBoardIcon fontSize="large" color="error" />
+              <DepartureBoardIcon fontSize="large" color="warning" />
             </div>
             <div style={{ width: "70%", textAlign: "start" }}>
-              <p className="report-header-answer2">Rs 100000.00</p>
-              <p className="report-header-question">
-                Total Cancelled Order Amount
+              <p className="report-header-answer2">
+                Rs {pendingOrderTotal.total}
               </p>
+              <p className="report-header-question">Pending Order Income</p>
             </div>
           </div>
         </div>

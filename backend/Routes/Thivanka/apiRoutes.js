@@ -559,4 +559,41 @@ router.route("/annual/orders/count").get(async (req, res) => {
   });
 });
 
+router.route("/pending/orders/count").get(async (req, res) => {
+  Order.find({ Status: { $ne: "Completed" } }).exec(function (err, details) {
+    if (err) {
+      res.json({ status: false, message: "Something went wrong!" });
+    } else {
+      res.json({ status: true, count: details.length });
+    }
+  });
+});
+
+//summery client orders
+router.route("/pending/orders/sub-total").get(async (req, res) => {
+  let tot = 0;
+
+  Order.find({ Status: { $ne: "Completed" } }).exec(function (err, details) {
+    if (err) {
+      res.json({ status: false, message: "Something went wrong!" });
+    } else {
+      function fetchData() {
+        const total = getEachMonthTotal(details);
+        res.json({ status: true, total });
+      }
+      fetchData();
+
+      function getEachMonthTotal(details) {
+        for (let x = 0; x < details.length; x++) {
+          for (let y = 0; y < details[x].product.length; y++) {
+            tot = tot + parseFloat(details[x].product[y].subTotal);
+          }
+        }
+
+        return tot.toFixed(2);
+      }
+    }
+  });
+});
+
 module.exports = router;
