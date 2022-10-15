@@ -25,8 +25,18 @@ function UserProfileNav() {
           {/* body start */}
           <div className="profile-nav-home-container">
             <div className="profile-nav-home-container-left-wrapper">
-              <h4>Hi,Janani Malshika</h4>
-              <h5 style={{ marginTop: "8px", color: "#CC8B86" }}>My Account</h5>
+              <p>
+                <h4
+                  style={{
+                    marginTop: "8px",
+                    color: "#CC8B86",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => navigation("/profile/nav")}
+                >
+                  My Account
+                </h4>
+              </p>
               <div className="profile-nav-home-nav-bar">
                 <p
                   style={{ marginBottom: "30px", cursor: "pointer" }}
@@ -102,7 +112,7 @@ function UserProfileNav() {
               <div className="item-box-wrapper2">
                 <div
                   className="item-box2"
-                  onClick={() => navigation("/profile")}
+                  onClick={() => navigation("/order")}
                   style={{ paddingTop: "30px", cursor: "pointer" }}
                 >
                   <p>
@@ -113,7 +123,7 @@ function UserProfileNav() {
                 </div>
                 <div
                   className="item-box2"
-                  onClick={() => navigation("/profile")}
+                  onClick={() => navigation("/review")}
                   style={{ paddingTop: "30px", cursor: "pointer" }}
                 >
                   <p>

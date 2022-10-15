@@ -4,7 +4,7 @@ import HomeHeader from "../../Components/Thivanka/home_header";
 import Footter from "../../Components/Thivanka/footter";
 import "../../Css/Janani/registration.css";
 import axios from "axios";
-import LoginImage from "../../Assets/login.png";
+import LoginImage from "../../Assets/reg.png";
 import { useNavigate } from "react-router";
 import validator from "validator";
 
@@ -22,7 +22,7 @@ function Regitstration() {
     } else if (email.trim().length === 0) {
       alert("All the fields required!");
     } else if (!validator.isEmail(email)) {
-      alert("Please enter valid eamil");
+      alert("Please enter valid email");
     } else if (country.trim().length === 0) {
       alert("All the fields required!");
     } else if (password.trim().length === 0) {
@@ -87,9 +87,17 @@ function Regitstration() {
                 }}
               >
                 <option value="none">Select Your Country...</option>
-                <option value="IN">INDIA</option>
-                <option value="US">USA</option>
+                <option value="IN">India</option>
+                <option value="US">America</option>
                 <option value="SL">Sri-Lanka</option>
+                <option value="NZ">New Zealand</option>
+                <option value="UK">UK</option>
+                <option value="Ausi">Australia</option>
+                <option value="Can">Canada</option>
+                <option value="France">France</option>
+                <option value="Japan">Japan</option>
+                <option value="Rus">Russia</option>
+                <option value="Italy">Italy</option>
               </select>
               <br />
               <input

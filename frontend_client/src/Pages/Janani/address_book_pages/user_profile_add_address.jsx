@@ -3,7 +3,7 @@ import NavBar from "../../../Components/Thivanka/nav_bar";
 import HomeHeader from "../../../Components/Thivanka/home_header";
 import Footter from "../../../Components/Thivanka/footter";
 import "../../../Css/Janani/user_profile_home.css";
-import Image from "../../../Assets/Profile data.png";
+import Image from "../../../Assets/addaddress.png";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -66,7 +66,7 @@ function UserProfileAddAddress() {
 
   const addHandler = () => {
     if (personalInformation == "") {
-      alert("Please provide the personal informations");
+      alert("Please provide the personal information");
       return;
     } else if (address == "") {
       alert("Please provide the address");
@@ -89,7 +89,7 @@ function UserProfileAddAddress() {
       .post(`http://localhost:8000/user/address/add`, data)
       .then((res) => {
         if (res.data.status === true) {
-          alert("Address Updated !!");
+          alert("Address Added !!");
           navigate("/profile/address-book");
         } else {
           alert(res.data.message);
@@ -113,8 +113,16 @@ function UserProfileAddAddress() {
           {/* body start */}
           <div className="profile-home-container">
             <div className="profile-home-container-left-wrapper">
-              <h4>Hi,Janani Hansika</h4>
-              <h5 style={{ marginTop: "8px", color: "#CC8B86" }}>My Account</h5>
+              <h4
+                style={{
+                  marginTop: "8px",
+
+                  cursor: "pointer",
+                }}
+                onClick={() => navigate("/profile/nav")}
+              >
+                My Account
+              </h4>
               <div className="profile-home-nav-bar">
                 <p
                   style={{ marginBottom: "30px", cursor: "pointer" }}
@@ -123,7 +131,11 @@ function UserProfileAddAddress() {
                   My Profile
                 </p>
                 <p
-                  style={{ marginBottom: "30px", cursor: "pointer" }}
+                  style={{
+                    marginBottom: "30px",
+                    cursor: "pointer",
+                    color: "#CC8B86",
+                  }}
                   onClick={() => navigate("/profile/address-book")}
                 >
                   Address Book
@@ -169,9 +181,17 @@ function UserProfileAddAddress() {
                   }}
                 >
                   <option value={country}>{country}</option>
-                  <option value="IN">INDIA</option>
-                  <option value="US">USA</option>
+                  <option value="IN">India</option>
+                  <option value="US">America</option>
                   <option value="SL">Sri-Lanka</option>
+                  <option value="NZ">New Zealand</option>
+                  <option value="UK">UK</option>
+                  <option value="Ausi">Australia</option>
+                  <option value="Can">Canada</option>
+                  <option value="France">France</option>
+                  <option value="Japan">Japan</option>
+                  <option value="Rus">Russia</option>
+                  <option value="Italy">Italy</option>
                 </select>
                 <br />
                 <label
@@ -186,6 +206,7 @@ function UserProfileAddAddress() {
                 <br />
                 <input
                   type="text"
+                  placeholder="Please Enter Your Name..."
                   className="profile-input-fields"
                   value={personalInformation}
                   onChange={(e) => {
@@ -227,7 +248,7 @@ function UserProfileAddAddress() {
                 <textarea
                   type="text"
                   className="profile-input-fields"
-                  placeholder="address"
+                  placeholder="Please Enter Your Address..."
                   style={{ height: "100px" }}
                   value={address}
                   onChange={(e) => {
@@ -240,11 +261,11 @@ function UserProfileAddAddress() {
                 >
                   {!state ? (
                     <button className="profile-btn" onClick={addHandler}>
-                      Add Address
+                      ADD ADDRESS
                     </button>
                   ) : (
                     <button className="profile-btn" onClick={updateHandler}>
-                      Update
+                      UPDATE
                     </button>
                   )}
                 </div>

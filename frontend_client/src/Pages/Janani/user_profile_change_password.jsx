@@ -3,7 +3,7 @@ import NavBar from "../../Components/Thivanka/nav_bar";
 import HomeHeader from "../../Components/Thivanka/home_header";
 import Footter from "../../Components/Thivanka/footter";
 import "../../Css/Janani/user_profile_home.css";
-import Image from "../../Assets/Profile data.png";
+import Image from "../../Assets/Reset.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -52,8 +52,12 @@ function UserProfileChangePassword() {
           {/* body start */}
           <div className="profile-home-container">
             <div className="profile-home-container-left-wrapper">
-              <h4>Hi,Janani Hansika</h4>
-              <h5 style={{ marginTop: "8px" }}>My Account</h5>
+              <h4
+                style={{ marginTop: "8px", cursor: "pointer" }}
+                onClick={() => navigate("/profile/nav")}
+              >
+                My Account
+              </h4>
               <div className="profile-home-nav-bar">
                 <p
                   style={{
@@ -138,7 +142,7 @@ function UserProfileChangePassword() {
                   style={{ display: "flex", gap: "10px", marginTop: "25px" }}
                 >
                   <button className="profile-btn" onClick={updateHandler}>
-                    Change Password
+                    CHANGE PASSWORD
                   </button>
                 </div>
               </div>

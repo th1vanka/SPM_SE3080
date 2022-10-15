@@ -56,8 +56,14 @@ function UserProfilePaymentOptions() {
           {/* body start */}
           <div className="profile-nav-home-container">
             <div className="profile-nav-home-container-left-wrapper">
-              <h4>Hi,Janani Hansika</h4>
-              <h5 style={{ marginTop: "8px" }}>My Account</h5>
+              <p>
+                <h4
+                  style={{ marginTop: "8px", cursor: "pointer" }}
+                  onClick={() => navigation("/profile/nav")}
+                >
+                  My Account
+                </h4>
+              </p>
               <div className="profile-nav-home-nav-bar">
                 <p
                   style={{ marginBottom: "30px", cursor: "pointer" }}
@@ -123,6 +129,7 @@ function UserProfilePaymentOptions() {
                                 : "data:image/png;base64,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"
                             }
                           />
+                          <br />
                           <p
                             style={{
                               color: "red",
