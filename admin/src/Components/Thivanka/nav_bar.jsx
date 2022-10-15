@@ -14,7 +14,9 @@ function NavBar() {
   return (
     <div className="nav_main_container ">
       <div className="nav_header">
-        <p className="nav_heading_text">Heading</p>
+        <p className="nav_heading_text">
+          Easy-Buy <span style={{fontSize:"13px", color: "rgb(205, 205, 205)"}}> Admin Panel</span>
+        </p>
       </div>
       {/* Dashboard start */}
       <div className="nav_body ">

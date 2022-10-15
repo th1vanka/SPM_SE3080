@@ -36,6 +36,8 @@ function ShoppingCart() {
   const [open, setOpen] = useState(false);
   const [openPaymentModal, setOpenPaymentModal] = useState(false);
   const email = localStorage.getItem("email");
+  const cusId = localStorage.getItem("id");
+  const cusname = localStorage.getItem("name");
   const [shippingData, setShippingData] = useState([]);
   const [paymentData, setPaymentData] = useState([]);
   const [paymentDetails, setPaymentDetails] = useState(null);
@@ -43,7 +45,6 @@ function ShoppingCart() {
   const [mobile, setMobile] = useState(localStorage.getItem("mobile"));
   const navigate = useNavigate();
 
-  const navigation = useNavigate();
   useEffect(() => {
     getShippingDetails();
   }, [email]);
@@ -139,7 +140,7 @@ function ShoppingCart() {
   };
 
   const proceedHandler = () => {
-    console.log(total);
+    console.log(details);
     if (total === 0) {
       alert("Select an Item");
       return;
@@ -150,16 +151,26 @@ function ShoppingCart() {
       alert("Please select a payment option");
       return;
     }
-
-    const data = {
-      details,
-      shippingDetails,
-      paymentDetails,
-      email,
-      mobile,
+    const product = {
+      sellerId: details[0].sellerID,
+      productId: details[0].itemID,
+      productName: details[0].itemName,
+      productPrice: details[0].price,
+      productQty: details[0].qty,
+      subTotal: details[0].price * details[0].qty,
+      isReviewed: false,
     };
+
+     const data = {
+       customerId: cusId,
+       customerName: cusname,
+       customerAddress: "test",
+       customerContact: "071",
+       product: product,
+     };
+
     axios
-      .post(`http://localhost:8000/order/save`, data)
+      .post(`http://localhost:8000/client/order/save`, data)
       .then((res) => {
         if (res.data.status === true) {
           alert("Order sucessfully Updated !!");

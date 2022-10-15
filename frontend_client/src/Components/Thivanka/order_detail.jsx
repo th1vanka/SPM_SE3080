@@ -1,20 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../Css/Thivanka/order_detail.css";
 import Item from "../../Assets/item.jpg";
 import StoreMallDirectoryIcon from "@mui/icons-material/StoreMallDirectory";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function OrderDetail(props) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [data, setData] = useState({});
   const reviewHandler = () => {
     navigate(`/give/review/${props.itemId}/${props.id}`);
-  }
+  };
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/client/order/item/image/${props.pid}`)
+      .then((res) => {
+        if (res.data.status === true) {
+          setData(res.data.details);
+        } else {
+          alert(res.data.message);
+        }
+      })
+
+      .catch((err) => {
+        alert(err.message);
+      });
+  }, []);
 
   return (
     <div className="order-detail-container">
       <div className="order-detail-wrapper">
         <div className="order-detail-image">
-          <img src={Item} width="90px" alt="product" />
+          <img src={data.image} width="90px" alt="product" />
         </div>
         <div className="order-detail">
           <div className="order-detail-header">
@@ -61,7 +79,7 @@ function OrderDetail(props) {
                   marginLeft: "5px",
                 }}
               >
-                ${props.price} x {props.qty}
+                Rs {props.price} x {props.qty}
               </p>
             </div>
             <div style={{ width: "25%", paddingTop: "10px" }}>

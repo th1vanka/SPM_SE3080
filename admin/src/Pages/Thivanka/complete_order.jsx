@@ -10,6 +10,8 @@ import axios from "axios";
 function Completed() {
   const [details, setDetails] = useState([]);
   const state = "Completed";
+   const [found, setFound] = useState("");
+
 
   useEffect(() => {
     axios
@@ -26,6 +28,12 @@ function Completed() {
       });
   }, []);
 
+     const item = details.filter((data) => {
+       return (
+         data._id.toLowerCase().includes(found.toLowerCase()) ||
+         data.customerContact.toLowerCase().includes(found.toLowerCase())
+       );
+     });
   return (
     <div className="main-container">
       <NavBar />
@@ -47,7 +55,14 @@ function Completed() {
             </p>
           </div>
           <div className="tobeshipped-section-one-right">
-            <input type="search" placeholder="Search" className="search-box" />
+            <input
+              type="search"
+              placeholder="Search"
+              className="search-box"
+              onChange={(e) => {
+                setFound(e.target.value);
+              }}
+            />
           </div>
         </div>
         <div className="order-section-two-container ">
@@ -57,7 +72,7 @@ function Completed() {
           <div className="order-table-header-col-4">Contact Number</div>
         </div>
         <div className="order-section-three-container ">
-          {details.map((detail, index) => (
+          {item.map((detail, index) => (
             <TableRow
               id={detail._id}
               date={detail.orderDate}

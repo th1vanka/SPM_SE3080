@@ -4,19 +4,18 @@ const Items = require("../../Models/Deborah/items");
 const router = express.Router();
 
 //to save item details
-router.post("/items/save", (req, res) => {
+router.post("/save", (req, res) => {
   const paths = req.file.path;
   const { name, category, quantity, price, status, Description, sellerID } =
     req.body;
-
   cloudinary.uploader.upload(paths, function (error, result) {
     if (error) {
       console.log(error);
     } else {
       let link = result.secure_url;
-      saveData(
+      saveProductData(
         link,
-        name, 
+        name,
         category,
         quantity,
         price,
@@ -26,8 +25,7 @@ router.post("/items/save", (req, res) => {
       );
     }
   });
-
-  function saveData(
+  function saveProductData(
     link,
     name,
     category,
@@ -37,7 +35,7 @@ router.post("/items/save", (req, res) => {
     Description,
     sellerID
   ) {
-    const details = new Items({
+    const data = new Items({
       image: link,
       name: name,
       category: category,
@@ -47,7 +45,7 @@ router.post("/items/save", (req, res) => {
       Description: Description,
       sellerID: sellerID,
     });
-    details
+    data
       .save()
       .then((data) => {
         res.json(data);

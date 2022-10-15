@@ -9,6 +9,7 @@ import axios from "axios";
  
 function HomePage() {
   const [details, setDetial] = useState([])
+    const [found, setFound] = useState('');
 
   function getItem() {
     axios
@@ -29,6 +30,12 @@ function HomePage() {
     getItem() 
   },[])
   
+  const item = details.filter((data) => {
+    return (
+      data.name.toLowerCase().includes(found.toLowerCase()) ||
+      data.category.toLowerCase().includes(found.toLowerCase())
+    );
+  });
 
   return (
     <div className="site-main-container">
@@ -45,11 +52,17 @@ function HomePage() {
               type="search"
               placeholder="Search by name..."
               className="site-filter-inputs first"
+              onChange={(e) => {
+                setFound(e.target.value);
+              }}
             />
             <input
               type="search"
               placeholder="Search by category..."
               className="site-filter-inputs"
+              onChange={(event) => {
+                setFound(event.target.value);
+              }}
             />
           </center>
         </div>
@@ -67,13 +80,13 @@ function HomePage() {
             <hr style={{}} />
           </div>
 
-          {details.map((detail, index) => (
+          {item.map((detail, index) => (
             <Product
               pic={detail.url}
               category={detail.category}
               item_name={detail.name}
               item_price={detail.price}
-              rate={detail.totRating.toFixed(1)}
+              rate={detail.totRating}
               id={detail.id}
             />
           ))}

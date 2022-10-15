@@ -76,6 +76,7 @@ function ItemPage() {
     itemID: id,
     itemName: name,
     itemURL: details.image,
+    sellerID: details.sellerID,
     qty: count,
     price: price,
     category: category,
@@ -225,7 +226,7 @@ function ItemPage() {
                     <div className="item-detail-question">
                       <p>Status</p>
                       <p>Stock</p>
-                      <p>Price FOB in USD</p>
+                      <p>Price  </p>
                       <p>Shipping Fee</p>
                     </div>
                     <div className="item-detail-answer">

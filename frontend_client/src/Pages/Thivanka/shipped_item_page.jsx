@@ -9,12 +9,12 @@ import OrderDetail from "../../Components/Thivanka/order_detail";
 
 function ShippedPage() {
   const [details, setDetails] = useState([]);
+  const [found, setFound] = useState("");
+  const Id = localStorage.getItem("id");
 
   useEffect(() => {
     axios
-      .get(
-        `http://localhost:8000/client/order/632a00b9829d7cae30825456/Shipped`
-      )
+      .get(`http://localhost:8000/client/order/${Id}/Shipped`)
       .then((res) => {
         if (res.data.status === false) {
           alert(res.data.message);
@@ -26,6 +26,12 @@ function ShippedPage() {
         alert(err.message);
       });
   }, []);
+    const item = details.filter((data) => {
+      return (
+        data.product.productName.toLowerCase().includes(found.toLowerCase()) ||
+        data.oId.toLowerCase().includes(found.toLowerCase())
+      );
+    });
   return (
     <div className="site-main-container">
       <div>
@@ -44,10 +50,17 @@ function ShippedPage() {
               <div className="client-orders-filter-wrapper">
                 <h3 style={{ marginLeft: "20px" }}>Shipped</h3>
                 <br />
-                <input type="date" className="order-filter-inputs" />
+                <input
+                  type="text"
+                  className="order-filter-inputs"
+                  placeholder="Search..."
+                  onChange={(event) => {
+                    setFound(event.target.value);
+                  }}
+                />
               </div>
               <div className="client-orders-wrapper">
-                {details.map((detail, index) => (
+                {item.map((detail, index) => (
                   <OrderDetail
                     delete={false}
                     review={false}
@@ -57,6 +70,7 @@ function ShippedPage() {
                     price={detail.product.productPrice}
                     date={detail.orderDate}
                     id={detail.oId}
+                    pid={detail.product.productId}
                   />
                 ))}
               </div>
