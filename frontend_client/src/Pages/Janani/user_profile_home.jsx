@@ -58,20 +58,25 @@ function UserProfileHome() {
   };
 
   const deleteHandler = () => {
-    axios
-      .get(`http://localhost:8000/user/details/remove/${email}`)
-      .then((res) => {
-        if (res.data) {
-          localStorage.clear();
-          alert("Done");
-          nav("/");
-        } else {
-          alert("Failed");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const confirmBox = window.confirm(
+      "Are you sure to deactivate this account?"
+    );
+    if (confirmBox === true) {
+      axios
+        .get(`http://localhost:8000/user/details/remove/${email}`)
+        .then((res) => {
+          if (res.data) {
+            localStorage.clear();
+            alert("Done");
+            nav("/");
+          } else {
+            alert("Failed");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return (

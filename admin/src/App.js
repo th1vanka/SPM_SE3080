@@ -14,6 +14,7 @@ import SellerDetalils from "./Pages/Naween/SellerDetalils";
 import SellerReply from "./Pages/Naween/SellerReply";
 import TestReply from "./Pages/Naween/TestReply";
 import CustomerUsers from "./Pages/Janani/customer_users";
+import UserReport from "./Pages/Janani/user_report_page";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/complete/order" element={<Completed />} />
         <Route path="/customer/users" element={<CustomerUsers />} />
         <Route path="/order/report" element={<Report />} />
+        <Route path="/user/report" element={<UserReport />} />
         <Route path="/order/details/:oid/:state" element={<OrderDetails />} />
         <Route path="/complaints" element={<Complaints />} />
         <Route

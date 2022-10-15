@@ -28,19 +28,24 @@ function UserProfilePaymentOptions() {
   };
 
   const deleteHandler = (id) => {
-    axios
-      .get(`http://localhost:8000/user/payment-options/remove/${id}`)
-      .then((res) => {
-        if (res.data) {
-          getPaymentOptions();
-          alert("Deleted !!");
-        } else {
-          alert("Faild");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const confirmBox = window.confirm(
+      "Are you sure want to delete this payment option?"
+    );
+    if (confirmBox === true) {
+      axios
+        .get(`http://localhost:8000/user/payment-options/remove/${id}`)
+        .then((res) => {
+          if (res.data) {
+            getPaymentOptions();
+            alert("Deleted !!");
+          } else {
+            alert("Failed");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return (

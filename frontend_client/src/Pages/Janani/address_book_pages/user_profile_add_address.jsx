@@ -162,7 +162,9 @@ function UserProfileAddAddress() {
             </div>
             <div className="profile-home-container-right-wrapper">
               <div className="input-wrapper">
-                <h4 style={{ marginBottom: "10px" }}>Add Shipping Address</h4>
+                <h4 style={{ marginBottom: "10px" }}>
+                  {state ? "Update" : "Add"} Shipping Address
+                </h4>
                 <label
                   style={{
                     fontSize: "14px",

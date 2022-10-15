@@ -105,20 +105,23 @@ function CustomerUsers() {
 function TableRow(props) {
   const navigate = useNavigate();
   const clickHandler = (id) => {
+    const confirmBox = window.confirm("Are you sure want to delete the user?");
     window.location.reload(false);
-    axios
-      .get(`http://localhost:8000/user/details/removebyid/${id}`)
-      .then((res) => {
-        if (res.data.status === false) {
-          alert(res.data.message);
-        } else {
-          console.log(res);
-          alert("User is successfully deleted !!");
-        }
-      })
-      .catch((err) => {
-        alert(err);
-      });
+    if (confirmBox === true) {
+      axios
+        .get(`http://localhost:8000/user/details/removebyid/${id}`)
+        .then((res) => {
+          if (res.data.status === false) {
+            alert(res.data.message);
+          } else {
+            console.log(res);
+            alert("User is successfully deleted !!");
+          }
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    }
   };
   return (
     <div className="order-table-row">

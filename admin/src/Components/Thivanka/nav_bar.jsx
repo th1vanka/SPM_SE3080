@@ -9,7 +9,7 @@ import { NavLink } from "react-router-dom";
 import ReportIcon from "@mui/icons-material/Report";
 import TaskIcon from "@mui/icons-material/Task";
 import GroupIcon from "@mui/icons-material/Group";
-
+import AssessmentSharpIcon from "@mui/icons-material/AssessmentSharp";
 function NavBar() {
   return (
     <div className="nav_main_container ">
@@ -130,8 +130,8 @@ function NavBar() {
           </div>
         </NavLink>
       </div>
-      
-   {/* seller details end */}
+
+      {/* seller details end */}
 
       {/* reports start */}
       <div className="nav_body ">
@@ -143,6 +143,15 @@ function NavBar() {
           <div className="nav_link_wrapper">
             <AutorenewIcon fontSize="small" style={{ marginLeft: "45px" }} />
             <p className="nav_link clearfix">Order Report</p>
+          </div>
+        </NavLink>
+        <NavLink to="/user/report" className="link_styles">
+          <div className="nav_link_wrapper">
+            <AssessmentSharpIcon
+              fontSize="small"
+              style={{ marginLeft: "45px" }}
+            />
+            <p className="nav_link clearfix">User Report</p>
           </div>
         </NavLink>
       </div>

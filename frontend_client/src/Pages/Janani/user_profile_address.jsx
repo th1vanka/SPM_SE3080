@@ -31,19 +31,24 @@ function UserProfileAddressBook() {
   };
 
   const deleteHandler = (id) => {
-    axios
-      .get(`http://localhost:8000/user/address/remove/${id}`)
-      .then((res) => {
-        if (res.data) {
-          getShippingDetails();
-          alert("Deleted !!");
-        } else {
-          alert("Faild");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const confirmBox = window.confirm(
+      "Are you sure want to delete this address?"
+    );
+    if (confirmBox === true) {
+      axios
+        .get(`http://localhost:8000/user/address/remove/${id}`)
+        .then((res) => {
+          if (res.data) {
+            getShippingDetails();
+            alert("Deleted !!");
+          } else {
+            alert("Failed");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return (

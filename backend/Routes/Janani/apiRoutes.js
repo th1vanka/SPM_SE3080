@@ -45,7 +45,11 @@ router.route("/login/:email/:password").get((req, res) => {
     $and: [{ email: { $eq: email } }, { password: { $eq: pass } }],
   })
     .then((data) => {
-      res.json(data);
+      User.update({ email: email }, { $set: { loginDate: new Date() } }).then(
+        (updatedData) => {
+          res.json(data);
+        }
+      );
     })
     .catch((error) => {
       res.json(error);
