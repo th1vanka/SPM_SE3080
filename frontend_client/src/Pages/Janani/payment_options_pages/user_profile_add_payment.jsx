@@ -3,7 +3,7 @@ import NavBar from "../../../Components/Thivanka/nav_bar";
 import HomeHeader from "../../../Components/Thivanka/home_header";
 import Footter from "../../../Components/Thivanka/footter";
 import "../../../Css/Janani/user_profile_home.css";
-import Image from "../../../Assets/Profile data.png";
+import Image from "../../../Assets/addpayment.png";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -53,7 +53,7 @@ function UserProfileAddPayment() {
       .post(`http://localhost:8000/user/payment-options/add`, data)
       .then((res) => {
         if (res.data.status === true) {
-          alert("Payment Option Updated !!");
+          alert("Payment Details Added !!");
           navigate("/profile/payment");
         } else {
           alert(res.data.message);
@@ -77,8 +77,16 @@ function UserProfileAddPayment() {
           {/* body start */}
           <div className="profile-home-container">
             <div className="profile-home-container-left-wrapper">
-              <h4>Hi,Janani Hansika</h4>
-              <h5 style={{ marginTop: "8px", color: "#CC8B86" }}>My Account</h5>
+              <h4
+                style={{
+                  marginTop: "8px",
+
+                  cursor: "pointer",
+                }}
+                onClick={() => navigate("/profile/nav")}
+              >
+                My Account
+              </h4>
               <div className="profile-home-nav-bar">
                 <p
                   style={{ marginBottom: "30px", cursor: "pointer" }}
@@ -93,7 +101,11 @@ function UserProfileAddPayment() {
                   Address Book
                 </p>
                 <p
-                  style={{ marginBottom: "30px", cursor: "pointer" }}
+                  style={{
+                    marginBottom: "30px",
+                    cursor: "pointer",
+                    color: "#CC8B86",
+                  }}
                   onClick={() => navigate("/profile/payment")}
                 >
                   Payment
@@ -214,7 +226,7 @@ function UserProfileAddPayment() {
                   style={{ display: "flex", gap: "10px", marginTop: "25px" }}
                 >
                   <button className="profile-btn" onClick={addHandler}>
-                    Add
+                    ADD PAYMENT
                   </button>
                 </div>
               </div>

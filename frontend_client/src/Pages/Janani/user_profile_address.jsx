@@ -31,19 +31,24 @@ function UserProfileAddressBook() {
   };
 
   const deleteHandler = (id) => {
-    axios
-      .get(`http://localhost:8000/user/address/remove/${id}`)
-      .then((res) => {
-        if (res.data) {
-          getShippingDetails();
-          alert("Deleted !!");
-        } else {
-          alert("Faild");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const confirmBox = window.confirm(
+      "Are you sure want to delete this address?"
+    );
+    if (confirmBox === true) {
+      axios
+        .get(`http://localhost:8000/user/address/remove/${id}`)
+        .then((res) => {
+          if (res.data) {
+            getShippingDetails();
+            alert("Deleted !!");
+          } else {
+            alert("Failed");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return (
@@ -59,8 +64,12 @@ function UserProfileAddressBook() {
           {/* body start */}
           <div className="profile-nav-home-container">
             <div className="profile-nav-home-container-left-wrapper">
-              <h4>Hi,Janani Hansika</h4>
-              <h5 style={{ marginTop: "8px" }}>My Account</h5>
+              <h4
+                style={{ marginTop: "8px", cursor: "pointer" }}
+                onClick={() => navigation("/profile/nav")}
+              >
+                My Account
+              </h4>
               <div className="profile-nav-home-nav-bar">
                 <p
                   style={{ marginBottom: "30px", cursor: "pointer" }}
@@ -98,60 +107,61 @@ function UserProfileAddressBook() {
                 </p>
               </div>
             </div>
-            <div className="profile-nav-home-container-right-wrapper">
-              <br />
-              <h4>Shipping Address</h4>
-              <button onClick={() => navigation("/profile/address-book/add")}>
-                <AddCircleOutlineOutlinedIcon fontSize="large" />
-              </button>
-              <div className="item-box-wrapper-shipping">
-                {shippingData.map((item, index) => (
-                  <div
-                    className="item-box-shipping"
-                    style={{
-                      paddingTop: "30px",
-                    }}
-                  >
-                    <p style={{ paddingBottom: "5px" }}>
-                      <PersonOutlineOutlinedIcon /> Personal Info:{" "}
-                      {item?.personalInfo}
-                    </p>
-                    <p style={{ paddingBottom: "5px" }}>
-                      <SendToMobileOutlinedIcon />
-                      Mobile: {item?.mobile}
-                    </p>
-                    <p style={{ paddingBottom: "5px" }}>
-                      <LocationOnOutlinedIcon /> Address: {item?.address}
-                    </p>
-                    <br />
-                    <span
+            <div className="profile-home-container-right-wrapper">
+              <div className="input-wrapper">
+                <h4 style={{ marginBottom: "10px" }}>Shipping Address</h4>
+                <button onClick={() => navigation("/profile/address-book/add")}>
+                  <AddCircleOutlineOutlinedIcon fontSize="large" />
+                </button>
+                <div className="item-box-wrapper-shipping">
+                  {shippingData.map((item, index) => (
+                    <div
+                      className="item-box-shipping"
                       style={{
-                        color: "orange",
-                        fontWeight: "bold",
-                        paddingTop: "10px",
-                        cursor: "pointer",
+                        paddingTop: "30px",
                       }}
-                      onClick={() =>
-                        navigation("/profile/address-book/add", {
-                          state: item._id,
-                        })
-                      }
                     >
-                      EDIT
-                    </span>{" "}
-                    <span
-                      style={{
-                        color: "red",
-                        fontWeight: "bold",
-                        paddingTop: "10px",
-                        cursor: "pointer",
-                      }}
-                      onClick={() => deleteHandler(item._id)}
-                    >
-                      DELETE
-                    </span>
-                  </div>
-                ))}
+                      <p style={{ paddingBottom: "5px" }}>
+                        <PersonOutlineOutlinedIcon /> Personal Info:{" "}
+                        {item?.personalInfo}
+                      </p>
+                      <p style={{ paddingBottom: "5px" }}>
+                        <SendToMobileOutlinedIcon />
+                        Mobile: {item?.mobile}
+                      </p>
+                      <p style={{ paddingBottom: "5px" }}>
+                        <LocationOnOutlinedIcon /> Address: {item?.address}
+                      </p>
+                      <br />
+                      <span
+                        style={{
+                          color: "orange",
+                          fontWeight: "bold",
+                          paddingTop: "10px",
+                          cursor: "pointer",
+                        }}
+                        onClick={() =>
+                          navigation("/profile/address-book/add", {
+                            state: item._id,
+                          })
+                        }
+                      >
+                        EDIT
+                      </span>{" "}
+                      <span
+                        style={{
+                          color: "red",
+                          fontWeight: "bold",
+                          paddingTop: "10px",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => deleteHandler(item._id)}
+                      >
+                        DELETE
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

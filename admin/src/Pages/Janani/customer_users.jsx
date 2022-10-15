@@ -78,9 +78,11 @@ function CustomerUsers() {
         <div className="order-section-two-container ">
           <div className="order-table-header-col-1">User ID</div>
           <div className="order-table-header-col-1">Full Name</div>
-          <div className="order-table-header-col-1">Country</div>
-          <div className="order-table-header-col-1">Birth Date</div>
           <div className="order-table-header-col-1">Email</div>
+          <div className="order-table-header-col-1">Country</div>
+          <div className="order-table-header-col-1">Mobile</div>
+          <div className="order-table-header-col-1">Birth Date</div>
+
           <div className="order-table-header-col-1">Action</div>
         </div>
         <div className="order-section-three-container ">
@@ -88,9 +90,10 @@ function CustomerUsers() {
             <TableRow
               id={detail._id}
               name={detail.name}
-              bdate={detail.bdate}
               email={detail.email}
+              bdate={detail.bdate}
               country={detail.country}
+              mobile={detail.mobile}
               key={index}
             />
           ))}
@@ -102,29 +105,33 @@ function CustomerUsers() {
 function TableRow(props) {
   const navigate = useNavigate();
   const clickHandler = (id) => {
+    const confirmBox = window.confirm("Are you sure want to delete the user?");
     window.location.reload(false);
-    axios
-      .get(`http://localhost:8000/user/details/removebyid/${id}`)
-      .then((res) => {
-        if (res.data.status === false) {
-          alert(res.data.message);
-        } else {
-          console.log(res);
-          alert("User is successfully deleted !!");
-        }
-      })
-      .catch((err) => {
-        alert(err);
-      });
+    if (confirmBox === true) {
+      axios
+        .get(`http://localhost:8000/user/details/removebyid/${id}`)
+        .then((res) => {
+          if (res.data.status === false) {
+            alert(res.data.message);
+          } else {
+            console.log(res);
+            alert("User is successfully deleted !!");
+          }
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    }
   };
   return (
     <div className="order-table-row">
       <div className="order-table-col-1">{props.id}</div>
       <div className="order-table-col-1">{props.name}</div>
-      <div className="order-table-col-1">{props.country}</div>
-
-      <div className="order-table-col-1">{props.bdate}</div>
       <div className="order-table-col-1">{props.email}</div>
+      <div className="order-table-col-1">{props.country}</div>
+      <div className="order-table-col-1">{props.mobile}</div>
+      <div className="order-table-col-1">{props.bdate}</div>
+
       <div className="order-table-col-1">
         <DeleteSweepRoundedIcon
           fontSize="large"

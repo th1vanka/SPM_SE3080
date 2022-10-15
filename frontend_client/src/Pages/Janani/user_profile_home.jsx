@@ -47,7 +47,7 @@ function UserProfileHome() {
       .then((res) => {
         if (res.data.status === true) {
           getUserDetails();
-          alert("User Updated !!");
+          alert("User Details Updated !!");
         } else {
           alert(res.data.message);
         }
@@ -58,20 +58,25 @@ function UserProfileHome() {
   };
 
   const deleteHandler = () => {
-    axios
-      .get(`http://localhost:8000/user/details/remove/${email}`)
-      .then((res) => {
-        if (res.data) {
-          localStorage.clear();
-          alert("Done");
-          nav("/");
-        } else {
-          alert("Faild");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const confirmBox = window.confirm(
+      "Are you sure to deactivate this account?"
+    );
+    if (confirmBox === true) {
+      axios
+        .get(`http://localhost:8000/user/details/remove/${email}`)
+        .then((res) => {
+          if (res.data) {
+            localStorage.clear();
+            alert("Done");
+            nav("/");
+          } else {
+            alert("Failed");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return (
@@ -87,8 +92,15 @@ function UserProfileHome() {
           {/* body start */}
           <div className="profile-home-container">
             <div className="profile-home-container-left-wrapper">
-              <h4>Hi,Janani Hansika</h4>
-              <h5 style={{ marginTop: "8px" }}>My Account</h5>
+              <p>
+                <h4
+                  style={{ marginTop: "8px", cursor: "pointer" }}
+                  onClick={() => navigate("/profile/nav")}
+                >
+                  My Account
+                </h4>
+              </p>
+
               <div className="profile-home-nav-bar">
                 <p
                   style={{
@@ -185,9 +197,17 @@ function UserProfileHome() {
                   }}
                 >
                   <option value={country}>{country}</option>
-                  <option value="IN">INDIA</option>
-                  <option value="US">USA</option>
+                  <option value="IN">India</option>
+                  <option value="US">America</option>
                   <option value="SL">Sri-Lanka</option>
+                  <option value="NZ">New Zealand</option>
+                  <option value="UK">UK</option>
+                  <option value="Ausi">Australia</option>
+                  <option value="Can">Canada</option>
+                  <option value="France">France</option>
+                  <option value="Japan">Japan</option>
+                  <option value="Rus">Russia</option>
+                  <option value="Italy">Italy</option>
                 </select>
                 <br />
                 <label
@@ -232,20 +252,20 @@ function UserProfileHome() {
                   style={{ display: "flex", gap: "10px", marginTop: "25px" }}
                 >
                   <button className="profile-btn" onClick={updateHandler}>
-                    Edit Profile
+                    EDIT PROFILE
                   </button>
                   <button
                     className="profile-btn"
                     onClick={() => navigate("/profile/change-password")}
                   >
-                    Edit Password
+                    CHANGE PASSWORD
                   </button>
                   <button
                     className="profile-btn"
                     style={{ backgroundColor: "red" }}
                     onClick={deleteHandler}
                   >
-                    Deactivate
+                    DEACTIVATE
                   </button>
                 </div>
               </div>

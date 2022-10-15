@@ -1,29 +1,30 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 import "../../css/Thivanka/order.css";
 import "../../css/common.css";
 import "../../css/Thivanka/order_table.css";
-import NavBar from '../../Components/Thivanka/nav_bar';
-import axios from 'axios';
+import NavBar from "../../Components/Thivanka/nav_bar";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
- 
+
 function Orders() {
   const [details, setDetails] = useState([]);
 
   useEffect(() => {
-     axios
-       .get("http://localhost:8000/client/order/Pending")
-       .then((res) => {
-         if (res.data.status === false) {
-           alert(res.data.message);
-         } else {
-           setDetails(res.data.data);
-         }
-       })
-       .catch((err) => {
-         alert(err);
-       });
- },[])
-//  console.log(details)
+    axios
+      .get("http://localhost:8000/client/order/Pending")
+      .then((res) => {
+        if (res.data.status === false) {
+          alert(res.data.message);
+        } else {
+          setDetails(res.data.data);
+          console.log(res.data);
+        }
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }, []);
+  //  console.log(details)
 
   return (
     <div className="main-container">
@@ -72,11 +73,10 @@ function Orders() {
   );
 }
 
-
 function TableRow(props) {
   const navigate = useNavigate();
   const clickHandler = () => {
-    const state="To be shipped"
+    const state = "To be shipped";
     navigate(`/order/details/${props.id}/${state}`);
   };
   return (
@@ -89,4 +89,4 @@ function TableRow(props) {
   );
 }
 
-export default Orders
+export default Orders;
