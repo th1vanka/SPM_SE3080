@@ -16,17 +16,18 @@ function Login() {
     if (emai.trim().length === 0) {
       alert("All the fields required!");
     } else if (password.trim().length === 0) {
-      alert("All the feilds required!");
+      alert("All the fields required!");
     } else {
       axios
         .get(`http://localhost:8000/user/login/${emai}/${password}`)
         .then((res) => {
           if (res.data !== null) {
-            localStorage.setItem("userName", res.data.name);
+            localStorage.setItem("name", res.data.name);
             localStorage.setItem("email", res.data.email);
             localStorage.setItem("con", res.data.country);
             localStorage.setItem("mobile", res.data.mobile);
             localStorage.setItem("bdate", res.data.bdate);
+            localStorage.setItem("id", res.data._id);
             navigate("/home");
             console.log(res.data);
           } else {

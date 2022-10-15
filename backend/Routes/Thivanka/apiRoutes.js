@@ -75,7 +75,6 @@ router.route("/cart/item/clear/:email").delete(async (req, res) => {
 //save orders
 router.route("/order/save").post(async (req, res) => {
   const {
-    orderDate,
     customerId,
     customerName,
     customerAddress,
@@ -85,17 +84,19 @@ router.route("/order/save").post(async (req, res) => {
 
   const d = new Date();
   let month = d.getMonth();
+  let today_date = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
 
   const order = new Order({
-    orderDate: orderDate,
+    orderDate: today_date,
     customerId: customerId,
     customerName: customerName,
     customerAddress: customerAddress,
     customerContact: customerContact,
-    Status: "Completed",
+    Status: "Pending",
     month: month,
     product: product,
   });
+
   await order
     .save()
     .then((data) => {
@@ -353,7 +354,7 @@ router.route("/item/rating/save/:itemId/:oid").post(async (req, res) => {
 
   let today = new Date();
   let date =
-    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+  today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
 
   function ratingFunc(name, review, comment, date) {
     return new Promise((resolve) => {
@@ -366,7 +367,7 @@ router.route("/item/rating/save/:itemId/:oid").post(async (req, res) => {
                 Name: name,
                 Date: date,
                 Review: review,
-                Comment: comment,
+                Comment: comment, 
               },
             ],
           },
@@ -378,7 +379,10 @@ router.route("/item/rating/save/:itemId/:oid").post(async (req, res) => {
           }
         })
         .catch((err) => {
-          res.json(err);
+          res.json({
+            status: false,
+            message: "Try again later!",
+          });
         });
     });
   }
@@ -421,13 +425,25 @@ router.route("/product/get").get(async (req, res) => {
         for (let y = 0; y < details[i].ratings.length; y++) {
           tot = tot + parseInt(details[i].ratings[y].Review);
         }
-        newObj.totRating = tot / details[i].ratings.length;
-        newObj.id = details[i]._id;
-        newObj.url = details[i].image;
-        newObj.category = details[i].category;
-        newObj.name = details[i].name;
-        newObj.price = details[i].price;
-        newArr.push(newObj);
+        if (details[i].ratings.length === 0) {
+          newObj.totRating = 0;
+          newObj.id = details[i]._id;
+          newObj.url = details[i].image;
+          newObj.category = details[i].category;
+          newObj.name = details[i].name;
+          newObj.price = details[i].price;
+          newArr.push(newObj);
+          newObj={}
+        } else {
+          newObj.totRating = tot / details[i].ratings.length;
+          newObj.id = details[i]._id;
+          newObj.url = details[i].image;
+          newObj.category = details[i].category;
+          newObj.name = details[i].name;
+          newObj.price = details[i].price;
+          newArr.push(newObj);
+          newObj = {};
+        }
       }
       res.json({ status: true, data: newArr });
     }
@@ -592,6 +608,17 @@ router.route("/pending/orders/sub-total").get(async (req, res) => {
 
         return tot.toFixed(2);
       }
+    }
+  });
+});
+
+router.route("/order/item/image/:iid").get(async (req, res) => {
+  const iid=req.params.iid
+  Product.findOne({ _id: { $eq: iid } }).exec(function (err, details) {
+    if (err) {
+      res.json({ status: false, message: "Something went wrong!" });
+    } else {
+      res.json({ status: true, details });
     }
   });
 });

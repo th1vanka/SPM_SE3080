@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 function Orders() {
   const [details, setDetails] = useState([]);
+       const [found, setFound] = useState("");
 
   useEffect(() => {
     axios
@@ -24,6 +25,13 @@ function Orders() {
         alert(err);
       });
   }, []);
+
+    const item = details.filter((data) => {
+      return (
+        data._id.toLowerCase().includes(found.toLowerCase()) ||
+        data.customerContact.toLowerCase().includes(found.toLowerCase())
+      );
+    });
   //  console.log(details)
 
   return (
@@ -47,7 +55,14 @@ function Orders() {
             </p>
           </div>
           <div className="order-section-one-right">
-            <input type="search" placeholder="Search" className="search-box" />
+            <input
+              type="search"
+              placeholder="Search"
+              className="search-box"
+              onChange={(e) => {
+                setFound(e.target.value);
+              }}
+            />
           </div>
         </div>
 
@@ -58,7 +73,7 @@ function Orders() {
           <div className="order-table-header-col-4">Contact Number</div>
         </div>
         <div className="order-section-three-container ">
-          {details.map((detail, index) => (
+          {item.map((detail, index) => (
             <TableRow
               id={detail._id}
               date={detail.orderDate}
@@ -79,6 +94,7 @@ function TableRow(props) {
     const state = "To be shipped";
     navigate(`/order/details/${props.id}/${state}`);
   };
+  
   return (
     <div className="order-table-row" onClick={clickHandler}>
       <div className="order-table-col-1">{props.id}</div>

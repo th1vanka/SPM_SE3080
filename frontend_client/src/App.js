@@ -114,27 +114,47 @@ function App() {
           />
           <Route
             path="/profile/address-book"
-            element={<UserProfileAddressBook />}
+            element={
+              <Authentication>
+                <UserProfileAddressBook />{" "}
+              </Authentication>
+            }
           />
 
           <Route
             path="/profile/address-book/add"
-            element={<UserProfileAddAddress />}
+            element={
+              <Authentication>
+                <UserProfileAddAddress />{" "}
+              </Authentication>
+            }
           />
 
           <Route
             path="/profile/payment"
-            element={<UserProfilePaymentOptions />}
+            element={
+              <Authentication>
+                <UserProfilePaymentOptions />{" "}
+              </Authentication>
+            }
           />
 
           <Route
             path="/profile/payment/add"
-            element={<UserProfileAddPayment />}
+            element={
+              <Authentication>
+                <UserProfileAddPayment />{" "}
+              </Authentication>
+            }
           />
 
           <Route
             path="/profile/change-password"
-            element={<UserProfileChangePassword />}
+            element={
+              <Authentication>
+                <UserProfileChangePassword />{" "}
+              </Authentication>
+            }
           />
         </Routes>
       </Router>

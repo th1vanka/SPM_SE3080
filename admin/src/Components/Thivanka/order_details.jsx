@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import "../../css/common.css";
 import "../../css/Thivanka/order_details.css";
 import NavBar from "../../Components/Thivanka/nav_bar";
@@ -172,10 +172,26 @@ function OrderDetails() {
 }
 
 function ProductDetails(props) {
+  const [data, setData] = useState({});
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/client/order/item/image/${props.id}`)
+      .then((res) => {
+        if (res.data.status === true) {
+          setData(res.data.details);
+        } else {
+          alert(res.data.message);
+        }
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  }, []);
+
   return (
     <div className="order-details-item-container">
       <div className="order-details-item-section-left">
-        <img src={Product} alt="Product" className="product-image" />
+        <img src={data.image} alt="Product" className="product-image" />
       </div>
       <div className="order-details-item-section-right">
         <div className="order-details-item-section-right-row">

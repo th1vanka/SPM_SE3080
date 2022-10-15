@@ -5,6 +5,7 @@ const item = {
   itemID: String,
   itemName: String,
   itemURL: String,
+  sellerID:String,
   qty: String,
   price: String,
   category:String
