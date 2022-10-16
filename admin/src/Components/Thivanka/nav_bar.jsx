@@ -8,12 +8,15 @@ import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import { NavLink } from "react-router-dom";
 import ReportIcon from "@mui/icons-material/Report";
 import TaskIcon from "@mui/icons-material/Task";
-
+import GroupIcon from "@mui/icons-material/Group";
+import AssessmentSharpIcon from "@mui/icons-material/AssessmentSharp";
 function NavBar() {
   return (
     <div className="nav_main_container ">
       <div className="nav_header">
-        <p className="nav_heading_text">Heading</p>
+        <p className="nav_heading_text">
+          Easy-Buy <span style={{fontSize:"13px", color: "rgb(205, 205, 205)"}}> Admin Panel</span>
+        </p>
       </div>
       {/* Dashboard start */}
       <div className="nav_body ">
@@ -68,6 +71,22 @@ function NavBar() {
       </div>
       {/* orders end */}
 
+      {/* customer details start */}
+
+      <div className="nav_body ">
+        <div className="nav_link_section ">
+          <BookmarkAddedIcon fontSize="small" />{" "}
+          <p className="nav_section_text">Customer</p>
+        </div>
+
+        <NavLink to="/customer/users" className="link_styles">
+          <div className="nav_link_wrapper">
+            <GroupIcon fontSize="small" style={{ marginLeft: "45px" }} />
+            <p className="nav_link clearfix">Users</p>
+          </div>
+        </NavLink>
+      </div>
+
       {/* seller details start */}
 
       <div className="nav_body ">
@@ -113,8 +132,8 @@ function NavBar() {
           </div>
   </NavLink> */}
       </div>
-      
-   {/* seller details end */}
+
+      {/* seller details end */}
 
       {/* reports start */}
       <div className="nav_body ">

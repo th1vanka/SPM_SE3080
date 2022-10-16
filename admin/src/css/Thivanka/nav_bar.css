@@ -7,6 +7,7 @@
   height: 100vh;
   background-color: rgb(3, 42, 62);
   color: white;
+   overflow: auto;
 }
 /* Hide scrollbar for Chrome, Safari and Opera */
 .nav_main_container::-webkit-scrollbar {
@@ -24,7 +25,7 @@
   margin-bottom: 40px;
 }
 .nav_heading_text {
-  font-size: 20px;
+  font-size: 25px;
 }
 .nav_body {
   width: 100%;

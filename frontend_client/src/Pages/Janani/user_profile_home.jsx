@@ -1,20 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../../Components/Thivanka/nav_bar";
 import HomeHeader from "../../Components/Thivanka/home_header";
 import Footter from "../../Components/Thivanka/footter";
 import "../../Css/Janani/user_profile_home.css";
 import Image from "../../Assets/Profile data.png";
 import axios from "axios";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 function UserProfileHome() {
-  const nav=useNavigate()
+  const nav = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState(localStorage.getItem("email"));
   const [country, setContry] = useState(localStorage.getItem("con"));
   const [mobile, setMobile] = useState(localStorage.getItem("mobile"));
   const [bdate, setBDate] = useState(localStorage.getItem("bdate"));
   const userName = localStorage.getItem("userName");
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    getUserDetails();
+  }, [email]);
+
+  const getUserDetails = () => {
+    axios
+      .get(`http://localhost:8000/user/details/get/${email}`)
+      .then((res) => {
+        setName(res.data?.name);
+        setBDate(res.data?.bdate);
+        setMobile(res.data?.mobile);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const updateHandler = () => {
     const data = {
@@ -25,10 +43,11 @@ function UserProfileHome() {
       bdate,
     };
     axios
-      .put(`http://localhost:8000/user/details/update/${userName}`, data)
+      .put(`http://localhost:8000/user/details/update/${data.email}`, data)
       .then((res) => {
         if (res.data.status === true) {
-          alert(res.data.message);
+          getUserDetails();
+          alert("User Details Updated !!");
         } else {
           alert(res.data.message);
         }
@@ -36,26 +55,30 @@ function UserProfileHome() {
       .catch((err) => {
         console.log(err);
       });
-  }
-  
-  const deleteHandler = () => {
-    axios
-      .get(`http://localhost:8000/user/details/remove/${email}`)
-      .then((res) => {
-        if (res.data) {
-          localStorage.clear()
-          alert("Done");
-          nav("/");
+  };
 
-        } else {
-          alert("Faild");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
- 
+  const deleteHandler = () => {
+    const confirmBox = window.confirm(
+      "Are you sure to deactivate this account?"
+    );
+    if (confirmBox === true) {
+      axios
+        .get(`http://localhost:8000/user/details/remove/${email}`)
+        .then((res) => {
+          if (res.data) {
+            localStorage.clear();
+            alert("Done");
+            nav("/");
+          } else {
+            alert("Failed");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
   return (
     <div className="site-main-container">
       <div>
@@ -69,14 +92,50 @@ function UserProfileHome() {
           {/* body start */}
           <div className="profile-home-container">
             <div className="profile-home-container-left-wrapper">
-              <h4>Hi,Janani Hansika</h4>
-              <h5 style={{ marginTop: "8px", color: "#CC8B86" }}>My Account</h5>
+              <p>
+                <h4
+                  style={{ marginTop: "8px", cursor: "pointer" }}
+                  onClick={() => navigate("/profile/nav")}
+                >
+                  My Account
+                </h4>
+              </p>
+
               <div className="profile-home-nav-bar">
-                <p style={{ marginBottom: "30px" }}>My Profile</p>
-                <p style={{ marginBottom: "30px" }}>Address Book</p>
-                <p style={{ marginBottom: "30px" }}>Payment</p>
-                <p style={{ marginBottom: "30px" }}>Orders</p>
-                <p style={{ marginBottom: "30px" }}>Reviews</p>
+                <p
+                  style={{
+                    marginBottom: "30px",
+                    color: "#CC8B86",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => navigate("/profile")}
+                >
+                  My Profile
+                </p>
+                <p
+                  style={{ marginBottom: "30px", cursor: "pointer" }}
+                  onClick={() => navigate("/profile/address-book")}
+                >
+                  Address Book
+                </p>
+                <p
+                  style={{ marginBottom: "30px", cursor: "pointer" }}
+                  onClick={() => navigate("/profile/payment")}
+                >
+                  Payment
+                </p>
+                <p
+                  style={{ marginBottom: "30px", cursor: "pointer" }}
+                  onClick={() => navigate("/order")}
+                >
+                  Orders
+                </p>
+                <p
+                  style={{ marginBottom: "30px", cursor: "pointer" }}
+                  onClick={() => navigate("/review")}
+                >
+                  Reviews
+                </p>
               </div>
             </div>
             <div className="profile-home-container-right-wrapper">
@@ -138,9 +197,17 @@ function UserProfileHome() {
                   }}
                 >
                   <option value={country}>{country}</option>
-                  <option value="IN">INDIA</option>
-                  <option value="US">USA</option>
+                  <option value="IN">India</option>
+                  <option value="US">America</option>
                   <option value="SL">Sri-Lanka</option>
+                  <option value="NZ">New Zealand</option>
+                  <option value="UK">UK</option>
+                  <option value="Ausi">Australia</option>
+                  <option value="Can">Canada</option>
+                  <option value="France">France</option>
+                  <option value="Japan">Japan</option>
+                  <option value="Rus">Russia</option>
+                  <option value="Italy">Italy</option>
                 </select>
                 <br />
                 <label
@@ -185,15 +252,20 @@ function UserProfileHome() {
                   style={{ display: "flex", gap: "10px", marginTop: "25px" }}
                 >
                   <button className="profile-btn" onClick={updateHandler}>
-                    Edit Profile
+                    EDIT PROFILE
                   </button>
-                  <button className="profile-btn">Edit Password</button>
+                  <button
+                    className="profile-btn"
+                    onClick={() => navigate("/profile/change-password")}
+                  >
+                    CHANGE PASSWORD
+                  </button>
                   <button
                     className="profile-btn"
                     style={{ backgroundColor: "red" }}
                     onClick={deleteHandler}
                   >
-                    Deactivate
+                    DEACTIVATE
                   </button>
                 </div>
               </div>

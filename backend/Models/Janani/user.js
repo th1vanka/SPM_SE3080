@@ -5,10 +5,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  username: {
-    type: String,
-    required: true,
-  },
+
   email: {
     type: String,
     required: true,
@@ -30,8 +27,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  createdDate: { type: Date, default: Date.now },
+  updatedDate: { type: Date, default: Date.now },
+  loginDate: { type: Date, default: Date.now },
 });
 
-const users = new mongoose.model("Users", userSchema);
+const users = new mongoose.model("Clients", userSchema);
 
 module.exports = users;

@@ -8,22 +8,33 @@ import Footter from "../../Components/Thivanka/footter";
 import axios from "axios";
 
 function Order() {
-  const [details,setDetails]=useState([])
+  const [details, setDetails] = useState([])
+  const [found, setFound] = useState("");
+  const Id = localStorage.getItem("id");
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/client/all/order/632a00b9829d7cae30825456`)
+      .get(`http://localhost:8000/client/all/order/${Id}`)
       .then((res) => {
         if (res.data.status === false) {
           alert(res.data.message);
         } else {
           setDetails(res.data.order);
+          
         }
       })
       .catch((err) => {
         alert(err.message);
       });
   },[])
+
+    const item = details.filter((data) => {
+      return (
+        data.product.productName.toLowerCase().includes(found.toLowerCase()) ||
+        data.oId.toLowerCase().includes(found.toLowerCase())
+      );
+    });
+
 
   return (
     <div className="site-main-container">
@@ -43,15 +54,23 @@ function Order() {
               <div className="client-orders-filter-wrapper">
                 <h3 style={{ marginLeft: "20px" }}>Orders</h3>
                 <br />
-                <input type="date" className="order-filter-inputs" />
+                <input
+                  type="text"
+                  className="order-filter-inputs"
+                  placeholder="Search..."
+                  onChange={(event) => {
+                    setFound(event.target.value);
+                  }}
+                />
               </div>
               <div className="client-orders-wrapper">
-                {details.map((detail, index) => (
+                {item.map((detail, index) => (
                   <OrderDetail
                     delete={false}
                     review={false}
                     status={detail.state}
                     pname={detail.product.productName}
+                    pid={detail.product.productId}
                     qty={detail.product.productQty}
                     price={detail.product.productPrice}
                     date={detail.orderDate}

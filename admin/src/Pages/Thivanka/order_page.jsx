@@ -1,29 +1,38 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 import "../../css/Thivanka/order.css";
 import "../../css/common.css";
 import "../../css/Thivanka/order_table.css";
-import NavBar from '../../Components/Thivanka/nav_bar';
-import axios from 'axios';
+import NavBar from "../../Components/Thivanka/nav_bar";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
- 
+
 function Orders() {
   const [details, setDetails] = useState([]);
+       const [found, setFound] = useState("");
 
   useEffect(() => {
-     axios
-       .get("http://localhost:8000/client/order/Pending")
-       .then((res) => {
-         if (res.data.status === false) {
-           alert(res.data.message);
-         } else {
-           setDetails(res.data.data);
-         }
-       })
-       .catch((err) => {
-         alert(err);
-       });
- },[])
-//  console.log(details)
+    axios
+      .get("http://localhost:8000/client/order/Pending")
+      .then((res) => {
+        if (res.data.status === false) {
+          alert(res.data.message);
+        } else {
+          setDetails(res.data.data);
+          console.log(res.data);
+        }
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }, []);
+
+    const item = details.filter((data) => {
+      return (
+        data._id.toLowerCase().includes(found.toLowerCase()) ||
+        data.customerContact.toLowerCase().includes(found.toLowerCase())
+      );
+    });
+  //  console.log(details)
 
   return (
     <div className="main-container">
@@ -46,7 +55,14 @@ function Orders() {
             </p>
           </div>
           <div className="order-section-one-right">
-            <input type="search" placeholder="Search" className="search-box" />
+            <input
+              type="search"
+              placeholder="Search"
+              className="search-box"
+              onChange={(e) => {
+                setFound(e.target.value);
+              }}
+            />
           </div>
         </div>
 
@@ -57,7 +73,7 @@ function Orders() {
           <div className="order-table-header-col-4">Contact Number</div>
         </div>
         <div className="order-section-three-container ">
-          {details.map((detail, index) => (
+          {item.map((detail, index) => (
             <TableRow
               id={detail._id}
               date={detail.orderDate}
@@ -72,13 +88,13 @@ function Orders() {
   );
 }
 
-
 function TableRow(props) {
   const navigate = useNavigate();
   const clickHandler = () => {
-    const state="To be shipped"
+    const state = "To be shipped";
     navigate(`/order/details/${props.id}/${state}`);
   };
+  
   return (
     <div className="order-table-row" onClick={clickHandler}>
       <div className="order-table-col-1">{props.id}</div>
@@ -89,4 +105,4 @@ function TableRow(props) {
   );
 }
 
-export default Orders
+export default Orders;
