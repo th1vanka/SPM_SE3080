@@ -11,7 +11,10 @@ router.route("/add").post((req, res) => {
     country,
     dateOfBirth,
     nic,
+    date
+    
   } = req.body;
+  
 
   const user = new User({
     username,
@@ -22,6 +25,7 @@ router.route("/add").post((req, res) => {
     country,
     dateOfBirth,
     nic,
+    date
   });
 
   user

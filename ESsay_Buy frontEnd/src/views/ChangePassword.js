@@ -66,7 +66,7 @@ function ChangePassword() {
             ReactSession.set("user", user);
             toast.success(res.data, {
               position: toast.POSITION.BOTTOM_RIGHT,
-              autoClose: 10000,
+              autoClose: 2000,
               hideProgressBar: false,
             });
           })
@@ -81,7 +81,7 @@ function ChangePassword() {
       } else {
         toast.error("Please re-enter your new password correctly!", {
           position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 10000,
+          autoClose: 2000,
           hideProgressBar: false,
         });
       }

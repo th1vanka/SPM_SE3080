@@ -33,7 +33,7 @@ newSellerSup.save()
 });
 
 //delete
-router.route('/:id').delete((req, res) => {
+router.route('/delete/:id').delete((req, res) => {
     SellerSup.findByIdAndDelete(req.params.id)
       .then(() => res.json('Seller support details deleted.'))
       .catch(err => res.status(400).json('Error: ' + err));

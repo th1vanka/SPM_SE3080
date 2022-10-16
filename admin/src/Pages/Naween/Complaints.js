@@ -52,12 +52,13 @@ function Complaints() {
 }, []);
    
 function onDelete(SellerSup){
-  if(
+  if( 
     window.confirm(
-      "Seller Complain" +SellerSup.sellerId+ "will be removed from the database"
+      "Seller Complain will be removed from the database"
     )
   )
-  axios.delete('http://localhost:8070/sellerSup/${SellerSup._id}').then((res)=>{
+  console.log(SellerSup._id)
+  axios.delete(`http://localhost:8070/sellerSup/delete/${SellerSup._id}`).then((res)=>{
     console.log(res);
     
 
@@ -65,16 +66,17 @@ function onDelete(SellerSup){
             console.log(err);
             alert("Error!");
         })
-        //window.location.reload();
+       // window.location.reload();
         setTimeout(()=>{
           window.location.reload();
-      } , 500)
-}
+      } , 1000) 
+} 
 
- 
+const navigate= useNavigate();
 
 
- let history = useNavigate();
+
+ //let history = useNavigate();
 
 
 
@@ -137,9 +139,12 @@ function onDelete(SellerSup){
                   
                   }
                 </table>
-                <Button href="/SellerReply"
+                <Button    //href="/SellerReply"
                 className={ComplStyles.btnBut}  style = {{float:'right' , margin : "30px" }}
-                
+                type="submit"
+                onClick={()=>{
+                  navigate("/SellerReply")
+                }}
                 >Reply to sellers</Button>
               </div>
 
