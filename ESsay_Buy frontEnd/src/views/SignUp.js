@@ -43,6 +43,7 @@ export default function SignUp(){
   const [nic, setNic]= useState("");
   const [dateOfBirth, setDateOfBirth]= useState("");
   const [password, setPassword]= useState("");
+  const [date, setDate]= useState("");
   const [usernameError , setError] = useState("");
 
   const countryList = [
@@ -277,7 +278,8 @@ export default function SignUp(){
           dateOfBirth,
           nic,
           username,
-          password
+          password,
+          date
           
           }
           axios.post("http://localhost:8070/users/add", user).then(()=>{
@@ -359,14 +361,25 @@ export default function SignUp(){
      onChange={(e)=>{
       setDateOfBirth(e.target.value);
      }} />
+
      <br/>
+
+
      <Label for="nic"><b>NIC</b></Label>
      <Input placeholder="Enter NIC Number" type="text" name="nic"
-     
      
      onChange={(e)=>{
       setNic(e.target.value);
      }} />
+
+     {/* added new label */}
+     <br/>
+     <Label for="dateOfReg"><b>Date Of Registration</b></Label>
+     <Input placeholder="Enter Date Of Registration" type="date" name="reg"
+     onChange={(e)=>{
+      setDate(e.target.value);
+     }} />
+
      <br/>
      <Label for="username"><b>Username</b></Label>
      <Input placeholder="Enter username" type="text" name="userName"

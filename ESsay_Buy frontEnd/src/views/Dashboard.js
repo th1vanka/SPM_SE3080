@@ -32,9 +32,9 @@ function Dashboard() {
 
   document.documentElement.classList.remove("nav-open");
 
-  const clickMyTours = () => {
+  const OrderData = () => {
     history.push({
-      pathname: "/my-tours",
+      pathname: "/orders",
     });
   };
   const clickUserProfile = () => {
@@ -42,9 +42,9 @@ function Dashboard() {
       pathname: "/user-profile",
     });
   };
-  const clickTourItineraries = () => {
+  const productsdata = () => {
     history.push({
-      pathname: "view-itineraries",
+      pathname: "/products",
     });
   };
   const clickComplaint = () => {
@@ -104,15 +104,15 @@ function Dashboard() {
                 <Card
                   className="dashboard-card"
                   id="card1"
-                  onClick={clickTourItineraries}
+                  onClick={clickUserProfile}clickUserProfile
                 >
                   <img
-                    src={require("assets/img/product.png").default}
+                    src={require("assets/img/userprofile.png").default}
                     className="dashboard-icon"
                   />
                   Product Details
                   <label className="dashboard-card-subtitle">
-                    Manage & View all the items you Added
+                  Manage your user profile.
                   </label>
                 </Card>
               </Col>
@@ -120,10 +120,10 @@ function Dashboard() {
                 <Card
                   className="dashboard-card"
                   id="card2"
-                  onClick={clickMyTours}
+                  onClick={sellerSup}
                 >
                   <img
-                    src={require("assets/img/order.png").default}
+                    src={require("assets/img/question.png").default}
                     className="dashboard-icon"
                   />
                   Order Details
@@ -140,10 +140,11 @@ function Dashboard() {
                 <Card
                   className="dashboard-card"
                   id="card3"
-                  onClick={sellerSup}
+                  onClick={OrderData}
                 >
+                  
                   <img
-                    src={require("assets/img/question.png").default}
+                    src={require("assets/img/order.png").default}
                     className="dashboard-icon"
                   />
                   Seller Support
@@ -172,15 +173,16 @@ function Dashboard() {
                 <Card
                   className="dashboard-card"
                   id="card5"
-                  onClick={clickUserProfile}
+                  onClick={productsdata}
                 >
+                  
                   <img
-                    src={require("assets/img/userprofile.png").default}
+                    src={require("assets/img/product.png").default}
                     className="dashboard-icon"
                   />
                   User Profile
                   <label className="dashboard-card-subtitle">
-                    Manage your user profile.
+                    Manage & View all the items you Added
                   </label>
                 </Card>
               </Col>

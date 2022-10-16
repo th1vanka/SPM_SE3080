@@ -293,7 +293,7 @@ function EditProfile() {
           ReactSession.set("user", updates);
           toast.success(res.data, {
             position: toast.POSITION.BOTTOM_RIGHT,
-            autoClose: 10000,
+            autoClose: 2000,
             hideProgressBar: false,
           });
           console.log(ReactSession.get("user").username);

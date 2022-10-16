@@ -124,9 +124,9 @@ function IndexNavbar() {
                   href="/user-dashboard"
                   title="Dashboard"
                 >
-                  Items
+                  Dashboard
                 </NavLink>
-              </NavItem>
+            </NavItem> 
             )}
 
             <NavItem>
@@ -142,10 +142,10 @@ function IndexNavbar() {
               <NavItem>
                 <NavLink
                   data-placement="bottom"
-                  href="/my-tours"
+                  href="/Add-item"
                   title="My Tours"
                 >
-                  Reviews
+                  Items 
                 </NavLink>
               </NavItem>
             )}
@@ -164,7 +164,7 @@ function IndexNavbar() {
             <NavItem>
               <NavLink
                 data-placement="bottom"
-                href="/contact-us"
+                href="/Seller-sup"
                 title="Contact Us"
               >
                 Seller Support

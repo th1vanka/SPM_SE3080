@@ -12,6 +12,7 @@ const usersSchema = new Schema({
     type: String,
   },
   dateOfBirth: { type: String },
+  date: { type: String },
   password: { type: String },
 });
 

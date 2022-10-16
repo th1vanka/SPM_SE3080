@@ -16,6 +16,8 @@ import ChangePassword from "views/ChangePassword";
 import Unregister from "views/Unregister";
 import Dashboard from "views/Dashboard";
 import SellerSup from "views/SelelerSup";
+import OrderData from "views/OrderData";
+import ProductData from "views/ProductData";
 
 //debo
 import AddItemsDash from "views/Debo/AddItem Dash";
@@ -73,6 +75,13 @@ function App() {
         <Route path="/Seller-sup" exat>
           <SellerSup></SellerSup>
           </Route>
+          <Route path="/orders" exat>
+          <OrderData></OrderData>
+          </Route>
+          <Route path="/products" exat>
+          <ProductData></ProductData>
+          </Route>
+
 
           {/* debo */}
           <Route path="/Add-item" exat>

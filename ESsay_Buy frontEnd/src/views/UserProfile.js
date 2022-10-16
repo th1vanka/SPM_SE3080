@@ -29,6 +29,7 @@ function UserProfile({}) {
   const [mobileNo, setmobileNo] = useState("");
   const [dateOfBirth, setdateOfBirth] = useState("");
   const [nic, setnic] = useState("");
+  const [date, setdate] = useState("");
   const [username, setusername] = useState("");
   document.documentElement.classList.remove("nav-open");
 
@@ -49,6 +50,7 @@ function UserProfile({}) {
       setmobileNo(ReactSession.get("user").mobileNo);
       setemail(ReactSession.get("user").email);
       setdateOfBirth(ReactSession.get("user").dateOfBirth);
+      setdate(ReactSession.get("user").date);
     }
     return function cleanup() {
       document.body.classList.remove("index");
@@ -108,7 +110,7 @@ function UserProfile({}) {
                           <label>Mobile No. : {mobileNo}</label>
                         </Col>
                       </Row>
-                      <br></br>
+                      
                       <br></br>
                       <Row>
                         <Col>
@@ -119,6 +121,11 @@ function UserProfile({}) {
                         </Col>
                       </Row>
                       <br></br>
+                      <Row>
+                        <Col>
+                        <label>Date Of Registration : {date}</label>
+                        </Col>
+                      </Row>
                       <br></br>
 
                       <Row>

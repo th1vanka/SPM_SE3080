@@ -3,7 +3,7 @@ import "../../css/Thivanka/to_be_shipped.css";
 import "../../css/common.css";
 import NavBar from "../../Components/Thivanka/nav_bar";
 
-import{ useHistory } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
@@ -31,9 +31,10 @@ import {
   } from "reactstrap";
 
 
+
 function SellerReply() {
  
-   
+  const navigate= useNavigate();
 
     
 
@@ -43,6 +44,8 @@ function SellerReply() {
         emailjs.sendForm("service_yka1l24","template_h4k90bs",e.target, "user_tFsjf2dJTs0g6ZYzrwN51").then(res=>{
             console.log(res);
         }).catch(err=> console.log(err));
+
+        navigate("/complaints")
         
       }
 
@@ -76,7 +79,7 @@ function SellerReply() {
               
 
               <div className= {styles.FormContainer}>
-            <Form onSubmit={sendEmail}>
+            <Form onSubmit={sendEmail} >
 
 
                 <div className={styles.hy} >
@@ -109,7 +112,8 @@ function SellerReply() {
                 <FormGroup >
                 <Button  className={styles.btn_seller}  type = "submit" 
                 onClick = {() =>{
-                  ;
+                 // navigate("/complaints")
+                  //;
                 }}
                 >submit</Button>
                 </FormGroup>
