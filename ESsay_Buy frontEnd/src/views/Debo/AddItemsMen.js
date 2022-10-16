@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom"
 import {v4 as uuid} from "uuid";
+import styles from "../../assets/css/Style-signin.module.css";
 
 import {
   Label,
@@ -86,22 +87,18 @@ export default function AddItemsMen() {
           alert("Fill all the data");
         } else{
             const newItem = {
-                image,
-                itemNo,
-                itemName,
-                quantity,
-                status,
-                price,
-                reviews,
-                category,
-                description,
-                sellerID,
-                sellerName,
-                ratings:{}
+              itemName,
+              quantity,
+              price,
+              reviews,
+              category,
+              description,
+              sellerID,
+              sellerName,
             }
     
           console.log(newItem);
-          axios.post(`http://localhost:8070/items/save`, newItem)
+          axios.post(`http://localhost:8070/items/items/save`, newItem)
           .then((res) => {
             console.log(res.data)
             alert("Item successfully saved!");
@@ -111,48 +108,42 @@ export default function AddItemsMen() {
     }
     return(
         <>
-              <div>
-                <form onSubmit={handleSubmit}>
-                  <h3><center>{category}</center></h3> <br/>
+          <div>
+            <h2><b>Add to Stock</b></h2> 
+            <br /><br />
+           
 
-                    <h4 style={{float: "left"}}><center>Add to Stock</center></h4> <br/><br/>
-                    <label>Upload Image</label> <br/>
-                    {previewSource && (
-                      <img 
-                        src={previewSource} 
-                        className="item-image"
-                      />
-                    )}
-                  <br/>
-                  <input type="file" name="image" onChange={handleFileInputChange} value={fileInputState}></input><br/>
+    <Form style={{ width: "80%" }} onSubmit={handleSubmit}>
+      <br />
+      <h3><center>{category}</center></h3> <br/>
 
-                    <label>Item Number</label> <br/>
+      <label>Item Number</label> <br/>
                     <p>{itemNo}</p> <br/>
 
-                    <label> Item Name </label><br />
-                    <input type="text" value={itemName} onChange={handleItemName}/> <br/> <br/>
+                    <Label> Item Name </Label><br />
+                    <Input type="text" value={itemName} onChange={handleItemName}/> <br/> <br/>
 
-                    <label> Quantity </label><br />
-                    <input type="text" value={quantity} onChange={handleQuantity}/> <br /><br />
+                    <Label> Quantity </Label><br />
+                    <Input type="text" value={quantity} onChange={handleQuantity}/> <br /><br />
                   
-                    <label> Price </label><br />
-                    <input type="text" value={price} onChange={handlePrice}/> <br /><br />
+                    <Label> Price </Label><br />
+                    <Input type="text" value={price} onChange={handlePrice}/> <br /><br />
 
-                    <label> Category </label> <br />
-                    <p>Men's Fashion</p> <br /><br />
+                    <Label> Category </Label> <br />
+                    <p>{category}</p> <br /><br />
                       
-                    <label> Description </label><br />
-                    <input type="text" value={description} onChange={handleDescription}/> <br /><br />
+                    <Label> Description </Label><br />
+                    <Input type="text" value={description} onChange={handleDescription}/> <br /><br />
 
-                    <label> Seller ID </label><br />
-                    <input type="text" value={sellerID} onChange={handleSellerId}/> <br /><br />
+                    <Label> Seller ID </Label><br />
+                    <Input type="text" value={sellerID} onChange={handleSellerId}/> <br /><br />
                 
-                    <label> Seller Name </label><br />
-                    <input type="text" value={sellerName} onChange={handleSellerName}/> <br /><br />                         
-
-                    <button type="submit">Save</button>
-                </form> <br/>
-            </div>
+                    <Label> Seller Name </Label><br />
+                    <Input type="text" value={sellerName} onChange={handleSellerName}/> <br /><br />                         
+      
+        <Button type="submit" value="send" className="btn btn-primary" >Submit </Button>
+      </Form>
+      </div>
         </>
     )
 }

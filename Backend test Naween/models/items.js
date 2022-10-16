@@ -10,10 +10,6 @@ const rating = new mongoose.Schema({
 
 //columns, properties of the schema
 const itemSchema = new mongoose.Schema({
-  image: {
-    type: String
-  },
-
   itemNo: {
     type: Number
   },

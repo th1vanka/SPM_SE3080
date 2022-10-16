@@ -20,12 +20,11 @@ import {
   InputGroupText,
 } from "reactstrap";
 
-export default class Items extends Component{
+export default class ViewItems extends Component{
     constructor(props){
         super(props);
     
          this.state={
-          image:"",
           itemNo:"",
           itemName:"",
           quantity:"",
@@ -49,7 +48,7 @@ export default class Items extends Component{
       }
     
       retrieveItemDetails(){
-        axios.get('http://localhost:8070/items/getItemDetails').then(res=>{
+        axios.get(`http://localhost:8070/items/getItemDetails`).then(res=>{
           if(res.data.success){
             this.setState({
               items:res.data.existingItems
@@ -75,24 +74,42 @@ export default class Items extends Component{
                     />
                 </center>
                 </div>
-                <div className="site-details-wrapper clearfix">
+                <div>
                 <center>
                 <div>
                     <table>
-                    <thead></thead>
-                    <tbody>
-                        {this.state.items.map((items, index) => (
+                    <thead>
+                    <tr>
+                      <th>Item Number</th>
+                      <th>Item Name</th>
+                      <th>Quantity</th>
+                      <th>Price</th>
+                      <th>Category</th>
+                      <th>Description</th>
+                      <th>Seller ID</th>
+                      <th>Seller Name</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {this.state.items.map((items, index) => (
                         <tr key={index}>
-                            <td><img src={items.Image} style={{width: '30%', height: '20%'}}/></td>
-                            <td>{items.ItemName}</td>
-                            <td>{items.ItemNo}</td>
-                            <td>{items.Category}</td>
-                        </tr>
-                        ))}
-                    </tbody>
+                        <td>{items.itemNo}</td>
+                        <td>{items.itemName}</td>
+                        <td>{items.quantity}</td>
+                        <td>{items.price}</td>
+                        <td>{items.category}</td>
+                        <td>{items.description}</td>
+                        <td>{items.sellerID}</td>
+                        <td>{items.sellerName}</td>
+                        <button style = {{textDecoration:'none',color:'white', backgroundColor:'blue'}} href={`/EditItem/${items.itemNo}`}>Edit</button>
+                        <button style = {{textDecoration:'none',color:'white', backgroundColor:'blue'}} href="/" onClick={() => this.onDelete(items.itemNo)}>Delete</button>
+                      </tr>
+                       ))}
+                  </tbody>
+                            <br></br>
                     </table>
                     </div>
-                </center>
+                    </center>
                 </div>
             </>
         )

@@ -20,8 +20,9 @@ import SellerSup from "views/SelelerSup";
 //debo
 import AddItemsMen from "views/Debo/AddItemsMen";
 import AddItemsBags from "views/Debo/AddItemBag";
-import ViewItems from "views/Items";
+import ViewItems from "views/Debo/ViewItem";
 import SelectCategory from "views/Debo/SelectCategory";
+import EditItem from "views/Debo/EditItem";
 
 import Login from "views/Login";
 import { ReactSession } from "react-client-session";
@@ -100,6 +101,9 @@ function App() {
           <SignUp user={user} setuser={setuser}></SignUp>
         </Route>
 
+        <Route path="/EditItem" exact>
+          <EditItem></EditItem>
+        </Route>
         
         <Redirect to="/index" />
       </Switch>

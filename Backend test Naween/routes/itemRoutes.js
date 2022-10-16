@@ -5,58 +5,29 @@ const router = express.Router();
 
 //to save item details
 router.post("/items/save", (req, res) => {
-  const paths = req.file.path;
-  const { name, category, quantity, price, status, description, sellerID } =
-    req.body;
+  const itemName = req.body.itemName;
+  const quantity = req.body.quantity;
+  const price = req.body.price;
+  const category = req.body.category;
+  const description = req.body.description;
+  const sellerID = req.body.sellerID;
+  const sellerName = req.body.sellerName;
 
-  cloudinary.uploader.upload(paths, function (error, result) {
-    if (error) {
-      console.log(error);
-    } else {
-      let link = result.secure_url;
-      saveData(
-        link,
-        name, 
-        category,
-        quantity,
-        price,
-        status,
-        description,
-        sellerID
-      );
-    }
-  });
-
-  function saveData(
-    link,
-    name,
-    category,
+  const details = new Items({
+    itemName,
     quantity,
     price,
-    status,
+    category,
     description,
-    sellerID
-  ) {
-    const details = new Items({
-      image: link,
-      name: name,
-      category: category,
-      quantity: quantity,
-      price: price,
-      status: status,
-      description: description, 
-      sellerID: sellerID
-    });
-    details
-      .save()
-      .then((data) => {
-        res.json(data);
-      })
-      .catch((err) => {
-        res.json(err);
-      });
+    sellerID,
+    sellerName
+  });
+    
+  details.save()
+  .then((data) => {res.json(data);})
+  .catch((err) => {res.json(err);});
   }
-});
+);
 
 //read all item details from database
 router.get("/getItemDetails", (req, res) => {
