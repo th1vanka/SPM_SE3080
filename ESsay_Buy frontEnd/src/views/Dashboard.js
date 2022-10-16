@@ -25,6 +25,7 @@ import { ReactSession } from "react-client-session";
 
 import NavBar from "components/Navbars/NewNavBar";
 import HomeHeader from "components/Headers/NewHeader";
+import SelectCategory from "./Debo/SelectCategory";
 
 
 function Dashboard() {
@@ -42,21 +43,19 @@ function Dashboard() {
       pathname: "/user-profile",
     });
   };
-  const clickTourItineraries = () => {
+
+  const clickViewItems = () => {
     history.push({
-      pathname: "view-itineraries",
+      pathname: "/items",
     });
   };
-  const clickComplaint = () => {
+
+  const clickSelectCategory = () => {
     history.push({
-      pathname: "/my-complaint",
+      pathname: "/selectCat",
     });
   };
-  const AddItemsDash = () => {
-    history.push({
-      pathname: "/Add-item",
-    });
-  };
+
   const sellerSup =() => {
     history.push({
       pathname: "Seller-sup",
@@ -88,11 +87,6 @@ function Dashboard() {
     <ProfilePageHeader></ProfilePageHeader>
       <IndexNavbar></IndexNavbar> 
 
-      
-      
-
-      
-
       <div className="main">
         <div className="edit-booking-content">
           <h2 align="center">Seller Dashboard</h2>
@@ -104,7 +98,7 @@ function Dashboard() {
                 <Card
                   className="dashboard-card"
                   id="card1"
-                  onClick={clickTourItineraries}
+                  onClick={clickViewItems}
                 >
                   <img
                     src={require("assets/img/product.png").default}
@@ -156,7 +150,7 @@ function Dashboard() {
                 <Card
                   className="dashboard-card"
                   id="card4"
-                  onClick={AddItemsDash}
+                  onClick={clickSelectCategory}
                 >
                   <img
                     src={require("assets/img/calendar.png").default}

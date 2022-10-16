@@ -31,17 +31,14 @@ connection.once("open", () => {
 const usersRouter = require("./routes/users.js");
 const unregUserRouter = require("./routes/unregisteredUsers");
 const sellerSup = require("./routes/SellerSup");
-
+const items = require("./routes/itemRoutes");
 
 const { connect } = require("mongodb");
-
-
-
 
 app.use("/users", usersRouter);
 app.use("/unregUser", unregUserRouter);
 app.use("/sellerSup",sellerSup);
-
+app.use("/items", items);
 
 app.listen(PORT, () => {
   console.log(`Server is up and running on port number ${PORT}`);

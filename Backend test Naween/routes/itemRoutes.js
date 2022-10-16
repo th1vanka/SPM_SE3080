@@ -6,7 +6,7 @@ const router = express.Router();
 //to save item details
 router.post("/items/save", (req, res) => {
   const paths = req.file.path;
-  const { name, category, quantity, price, status, Description, sellerID } =
+  const { name, category, quantity, price, status, description, sellerID } =
     req.body;
 
   cloudinary.uploader.upload(paths, function (error, result) {
@@ -21,7 +21,7 @@ router.post("/items/save", (req, res) => {
         quantity,
         price,
         status,
-        Description,
+        description,
         sellerID
       );
     }
@@ -34,7 +34,7 @@ router.post("/items/save", (req, res) => {
     quantity,
     price,
     status,
-    Description,
+    description,
     sellerID
   ) {
     const details = new Items({
@@ -44,8 +44,8 @@ router.post("/items/save", (req, res) => {
       quantity: quantity,
       price: price,
       status: status,
-      Description: Description,
-      sellerID: sellerID,
+      description: description, 
+      sellerID: sellerID
     });
     details
       .save()

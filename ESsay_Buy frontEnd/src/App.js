@@ -18,9 +18,10 @@ import Dashboard from "views/Dashboard";
 import SellerSup from "views/SelelerSup";
 
 //debo
-import AddItemsDash from "views/Debo/AddItem Dash";
-
-
+import AddItemsMen from "views/Debo/AddItemsMen";
+import AddItemsBags from "views/Debo/AddItemBag";
+import ViewItems from "views/Items";
+import SelectCategory from "views/Debo/SelectCategory";
 
 import Login from "views/Login";
 import { ReactSession } from "react-client-session";
@@ -75,14 +76,21 @@ function App() {
           </Route>
 
           {/* debo */}
-          <Route path="/Add-item" exat>
-          <AddItemsDash></AddItemsDash>
+          <Route path="/AddItemsMen" exat>
+          <AddItemsMen></AddItemsMen>
+          </Route>
+
+          <Route path="/AddItemsBags" exat>
+          <AddItemsBags></AddItemsBags>
           </Route>
         
-        
+          <Route path="/items" exat>
+          <ViewItems></ViewItems>
+          </Route>
 
-        
-
+          <Route path="/selectCat" exat>
+          <SelectCategory></SelectCategory>
+          </Route>
 
         <Route path="/login" exact>
           <Login user={user} setuser={setuser}></Login>

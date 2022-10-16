@@ -11,39 +11,49 @@ const rating = new mongoose.Schema({
 //columns, properties of the schema
 const itemSchema = new mongoose.Schema({
   image: {
-    type: String,
-    required: true,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-  category: {
-    type: String,
-    required: true,
+    type: String
   },
 
+  itemNo: {
+    type: Number
+  },
+
+  itemName: {
+    type: String
+  },
   quantity: {
-    type: String,
-    required: true,
+    type: String
   },
-  price: {
-    type: String,
-    required: true,
-  },
+  
   status: {
     type: String,
-    required: true,
   },
-  Description: {
-    type: String,
-    required: true,
+
+  price: {
+    type: String
   },
+
+  reviews: {
+    type: Number
+  },
+  
+  category: {
+    type: String
+  },
+
+  description: {
+    type: String
+  },
+
   sellerID: {
-    type: String,
-    required: true,
+    type: String
   },
-  ratings: [rating],
+
+  sellerName: {
+    type: String
+  },
+
+  ratings: [rating]
 });
 
 module.exports = mongoose.model("Items", itemSchema);
