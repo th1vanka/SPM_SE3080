@@ -12,8 +12,7 @@
 
 ## Project Description:
 
-Easy-Buy is an online store which is dedicated to serve customers by making purchasing goods as simple as one click away and helps sellers to advertise their goods and makes selling easier. This store mainly targets foreign customers. The seller is a registered user who can add, search, remove or update items to the system and add his details to the system, search his details and update his details. The seller must first get permission from the system admin before posting items, the seller sends a request to add the item to the list and the admin may accept the request. The customer can add ratings, delete ratings, and see the posts that are uploaded by the seller. The customer may add items to the cart before proceeding with the payment, update the items added to the cart and remove items from the cart. The customer can manage their profile and edit their information. After making the payment the customer can track the order, the web page will display whether the order is processing, confirmed or delivered. This system consists of four main functions which are item management, customer management, seller management and order & rating management. ABC stores requested for an online system to help both the buyer and the seller to buy and sell goods. Therefore, it was decided to develop a web application using MERN stack where the frontend is developed using React, the backend using Express JS, NodeJS and MongoDB as the database.  
-
+Easy-Buy is an online store which is dedicated to serve customers by making purchasing goods as simple as one click away and helps sellers to advertise their goods and makes selling easier. This store mainly targets foreign customers. The seller is a registered user who can add, search, remove or update items to the system and add his details to the system, search his details and update his details. The seller must first get permission from the system admin before posting items, the seller sends a request to add the item to the list and the admin may accept the request. The customer can add ratings, delete ratings, and see the posts that are uploaded by the seller. The customer may add items to the cart before proceeding with the payment, update the items added to the cart and remove items from the cart. The customer can manage their profile and edit their information. After making the payment the customer can track the order, the web page will display whether the order is processing, confirmed or delivered. This system consists of four main functions which are item management, customer management, seller management and order & rating management. ABC stores requested for an online system to help both the buyer and the seller to buy and sell goods. 
 ## Technologies:
 ###### MERN Stack
 - Frontend : React
@@ -33,9 +32,18 @@ Easy-Buy is an online store which is dedicated to serve customers by making purc
 1.	Download a zip folder of this project and unzip or clone the repository.
 2.	Open the project in vs code
 3.	Open a new terminal.
-4.	Navigate to backend folder -> cd Backend
+4.	Navigate to backend folder -> cd backend
 5.	Type ‘npm install’ and click enter
 6.	After the node modules getting downloaded, type ‘npm start’ and click enter.
-7.	Navigate to frontend folder -> cd Frontend
+7.	Navigate to client frontend folder -> cd frontend_client
+8.	Type ‘npm install’ and click enter
+9.	After the node modules getting downloaded, type ‘npm start’ and click enter.
+10. Navigate to admin folder -> cd admin
+8.	Type ‘npm install’ and click enter
+9.	After the node modules getting downloaded, type ‘npm start’ and click enter.
+10. Navigate to seller frontend folder -> cd Backend test Naween
+8.	Type ‘npm install’ and click enter
+9.	After the node modules getting downloaded, type ‘npm start’ and click enter.
+10. Navigate to seller backend folder -> cd ESsay_Buy frontEnd
 8.	Type ‘npm install’ and click enter
 9.	After the node modules getting downloaded, type ‘npm start’ and click enter.
