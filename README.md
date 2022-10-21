@@ -38,12 +38,12 @@ Easy-Buy is an online store which is dedicated to serve customers by making purc
 7.	Navigate to client frontend folder -> cd frontend_client
 8.	Type ‘npm install’ and click enter
 9.	After the node modules getting downloaded, type ‘npm start’ and click enter.
-10. Navigate to admin folder -> cd admin
+10. Navigate to admin frontend folder -> cd admin
 8.	Type ‘npm install’ and click enter
 9.	After the node modules getting downloaded, type ‘npm start’ and click enter.
-10. Navigate to seller frontend folder -> cd Backend test Naween
+10. Navigate to seller frontend folder -> cd ESsay_Buy frontEnd
 8.	Type ‘npm install’ and click enter
 9.	After the node modules getting downloaded, type ‘npm start’ and click enter.
-10. Navigate to seller backend folder -> cd ESsay_Buy frontEnd
+10. Navigate to seller backend folder -> cd Backend test Naween
 8.	Type ‘npm install’ and click enter
 9.	After the node modules getting downloaded, type ‘npm start’ and click enter.
